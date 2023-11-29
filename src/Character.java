@@ -1,6 +1,7 @@
+import java.util.Comparator;
 import java.util.List;
 
-public class Character {
+public class Character implements Comparable<Character> {
     private String name;
 
     private int maxHealth;
@@ -11,6 +12,13 @@ public class Character {
     private int power;
     private int speed;
 
+    private boolean isPlayable;
+
+    @Override
+    public int compareTo(Character o){
+        return Integer.compare(o.speed, this.speed);
+    }
+
     public Character(String name){
         this.name = name;
         power = 10;
@@ -19,9 +27,10 @@ public class Character {
         health = maxHealth;
         maxMana = 20;
         mana = maxMana;
+        isPlayable = false;
     }
 
-    public Character(String name, int maxHealth, int maxMana, int power, int speed) {
+    public Character(String name, int maxHealth, int maxMana, int power, int speed, boolean isPlayable) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.power = power;
@@ -29,6 +38,7 @@ public class Character {
         health = maxHealth;
         this.maxMana = maxMana;
         mana = maxMana;
+        this.isPlayable = isPlayable;
     }
 
     public void currentDetails(){
@@ -46,5 +56,9 @@ public class Character {
 
     public String toString(){
         return name;
+    }
+
+    public boolean isPlayable(){
+        return isPlayable;
     }
 }
