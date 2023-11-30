@@ -39,8 +39,9 @@ public abstract class Character implements Comparable<Character> {
         );
     }
 
-    public void attack(Character character){
+    public int attack(Character character){
         character.takeDamage(power);
+        return power;
     }
 
     public void takeDamage(int damage){
