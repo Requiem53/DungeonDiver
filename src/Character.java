@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.List;
 
-public class Character implements Comparable<Character> {
+public abstract class Character implements Comparable<Character> {
     private String name;
 
     private int maxHealth;
@@ -13,24 +13,14 @@ public class Character implements Comparable<Character> {
     private int speed;
 
     private boolean isPlayable;
+    private Weapon weapon;
 
     @Override
     public int compareTo(Character o){
         return Integer.compare(o.speed, this.speed);
     }
 
-    public Character(String name){
-        this.name = name;
-        power = 10;
-        speed = 10;
-        maxHealth = 20;
-        health = maxHealth;
-        maxMana = 20;
-        mana = maxMana;
-        isPlayable = false;
-    }
-
-    public Character(String name, int maxHealth, int maxMana, int power, int speed, boolean isPlayable) {
+    public Character(String name, int maxHealth, int maxMana, int power, int speed) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.power = power;
@@ -38,7 +28,6 @@ public class Character implements Comparable<Character> {
         health = maxHealth;
         this.maxMana = maxMana;
         mana = maxMana;
-        this.isPlayable = isPlayable;
     }
 
     public void currentDetails(){
@@ -50,6 +39,10 @@ public class Character implements Comparable<Character> {
         );
     }
 
+    public void attack(Character character){
+        character.takeDamage(power);
+    }
+
     public void takeDamage(int damage){
         health = Math.max(0, health-damage);
     }
@@ -58,7 +51,27 @@ public class Character implements Comparable<Character> {
         return name;
     }
 
-    public boolean isPlayable(){
-        return isPlayable;
+    public void setPlayable(boolean isPlayable){
+        this.isPlayable = isPlayable;
+    }
+
+    public void equipWeapon(Weapon weapon){
+        this.weapon = weapon;
+        power += weapon.getPower();
+        maxMana += weapon.getMagicPower();
+    }
+
+    public static class Ally extends Character{
+        public Ally(String name, int maxHealth, int maxMana, int power, int speed) {
+            super(name, maxHealth, maxMana, power, speed);
+            setPlayable(true);
+        }
+    }
+
+    public static class Enemy extends Character{
+        public Enemy(String name, int maxHealth, int maxMana, int power, int speed) {
+            super(name, maxHealth, maxMana, power, speed);
+            setPlayable(false);
+        }
     }
 }
