@@ -1,7 +1,9 @@
-import java.util.Comparator;
-import java.util.List;
-
 public abstract class Character implements Comparable<Character> {
+    //pun an guro spells pero I guess sakto na ang weapons
+    //simple only
+    //Add AI to enemy too
+    //simply only as well
+
     private String name;
 
     private int maxHealth;
@@ -13,6 +15,7 @@ public abstract class Character implements Comparable<Character> {
     private int speed;
 
     private boolean isPlayable;
+
     private Weapon weapon;
 
     @Override
@@ -54,6 +57,9 @@ public abstract class Character implements Comparable<Character> {
 
     public void setPlayable(boolean isPlayable){
         this.isPlayable = isPlayable;
+    }
+    public boolean isAlive(){
+        return health > 0;
     }
 
     public void equipWeapon(Weapon weapon){
