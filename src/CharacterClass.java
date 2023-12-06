@@ -1,4 +1,4 @@
-public class CharacterClass {
+public abstract class CharacterClass {
     private int maxHealth;
     private int power;
     private int speed;
