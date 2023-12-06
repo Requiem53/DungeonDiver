@@ -188,14 +188,16 @@ public abstract class State {
           @Override
           public void Start() {
                deadValidate();
+               /*
                System.out.println(getCurrChar() + " is wondering about what they " +
                        "will do next....");
+                */
 
 
                Character target = allies.get(0);
                Character currEnemy = getCurrChar();
 
-               actionsMgr.addAction(new AttackAction(target));
+               actionsMgr.addAction(new AttackAction(target, currEnemy));
 
                System.out.println(currEnemy + " attacks " + target +
                        " for " + currEnemy.getPower() + " damage.");

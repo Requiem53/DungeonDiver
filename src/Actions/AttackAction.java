@@ -5,17 +5,15 @@ import Characters.Character;
 public class AttackAction implements I_Action{
 
     private final Character target;
+    private final Character attacker;
 
-    // TEST VARIABLES
-    // to add parameter sa character nga ni use sa attack (?)
-    private final int dmg = 5;
-
-    public AttackAction(Character target) {
+    public AttackAction(Character target, Character attacker) {
         this.target = target;
+        this.attacker = attacker;
     }
 
     @Override
     public void execute() {
-        target.takeDamage(dmg);
+        target.takeDamage(attacker.getPower());
     }
 }
