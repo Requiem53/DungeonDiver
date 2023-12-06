@@ -1,3 +1,5 @@
+import Actions.ActionsManager;
+import Actions.AttackAction;
 import Characters.Character;
 
 import java.util.ArrayList;
@@ -11,9 +13,13 @@ public abstract class State {
      protected static List<Character> allies = new ArrayList<>();
      protected static List<Character> enemies = new ArrayList<>();
 
+     ActionsManager actionsMgr;
+
      public State(BattleSystem bs){
           this.bs = bs;
           sc = new Scanner(System.in);
+
+          actionsMgr = new ActionsManager();
      }
 
      protected Character getCurrChar(){
@@ -184,6 +190,16 @@ public abstract class State {
                deadValidate();
                System.out.println(getCurrChar() + " is wondering about what they " +
                        "will do next....");
+
+
+               Character target = allies.get(0);
+               Character currEnemy = getCurrChar();
+
+               actionsMgr.addAction(new AttackAction(target));
+
+               System.out.println(currEnemy + " attacks " + target +
+                       " for " + currEnemy.getPower() + " damage.");
+
                newTurn();
           }
      }
