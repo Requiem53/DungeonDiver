@@ -4,6 +4,8 @@ import Equipment.Armor;
 import Equipment.EquippableBuilder;
 import Equipment.Weapon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,11 +14,19 @@ public class Main {
 
         //Add character creator
         Character.Ally char1 = new Character.Ally("Maurice", new CharacterClass.Warrior());
+        Character.Enemy en1 = new Character.Enemy("RODEN", new CharacterClass.Warrior());
+
+        List<Character> entities = new ArrayList<>();
+        entities.add(char1);
+        entities.add(en1);
+
+        BattleSystem bs = new BattleSystem(entities);
+
 
         String input;
 
         //test
-
+        /*
         do{
             System.out.println("What do: ");
             input = sc.nextLine();
@@ -47,5 +57,6 @@ public class Main {
                     break;
             }
         } while (!input.equals("DONE"));
+        */
     }
 }
