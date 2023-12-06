@@ -5,15 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class State {
-
      protected BattleSystem bs;
      protected String option;
      protected Scanner sc;
      protected static List<Character> allies = new ArrayList<>();
      protected static List<Character> enemies = new ArrayList<>();
+
+     public State(BattleSystem bs){
+          this.bs = bs;
+          sc = new Scanner(System.in);
+     }
+
      protected Character getCurrChar(){
           return bs.getCharacters().get(bs.getCurrentTurn());
      }
+
      protected void newTurn(){
           bs.setState(new Turn(bs));
      }
@@ -25,10 +31,6 @@ public abstract class State {
           }
      }
 
-     public State(BattleSystem bs){
-          this.bs = bs;
-          sc = new Scanner(System.in);
-     }
 
      public BattleSystem getBs() {
           return bs;
