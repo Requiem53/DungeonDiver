@@ -1,7 +1,8 @@
 package Characters;
 
 import Equipment.Equipment;
-import Weapons.Weapon;
+import Equipment.Weapon;
+import Equipment.Armor;
 
 public abstract class Character implements Comparable<Character> {
     //pun an guro spells pero I guess sakto na ang weapons
@@ -48,11 +49,21 @@ public abstract class Character implements Comparable<Character> {
         charClass.heal(amount);
     }
 
-    //Mabuhat beyond sa battle
+    //Equip Stuff
     public void equipWeapon(Weapon weapon){
         equipment.equipWeapon(weapon);
     }
-    public void unequipWeapon(){equipment.unequipWeapon();}
+    public void unequipWeapon(){
+        equipment.unequipWeapon();
+    }
+
+    public void equipArmor(Armor armor){
+        equipment.equipArmor(armor);
+    }
+
+    public void unequipArmor(){
+        equipment.unequipArmor();
+    }
 
     //Getters
     public String toString(){
@@ -95,6 +106,7 @@ public abstract class Character implements Comparable<Character> {
     public int getBonusMaxHealth(){
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getMaxHealth();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getMaxHealth();
 
         return total;
     }
@@ -102,6 +114,7 @@ public abstract class Character implements Comparable<Character> {
     public int getBonusPower(){
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getPower();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getPower();
 
         return total;
     }
@@ -109,6 +122,7 @@ public abstract class Character implements Comparable<Character> {
     public int getBonusSpeed(){
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getSpeed();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getSpeed();
 
         return total;
     }
@@ -116,6 +130,7 @@ public abstract class Character implements Comparable<Character> {
     public int getBonusDefense(){
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getDefense();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getDefense();
 
         return total;
     }
@@ -123,6 +138,7 @@ public abstract class Character implements Comparable<Character> {
     public int getBonusMagicPower(){
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getMagicPower();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getMagicPower();
 
         return total;
     }
