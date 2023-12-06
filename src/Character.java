@@ -4,81 +4,84 @@ public abstract class Character implements Comparable<Character> {
     //Add AI to enemy too
     //simply only as well
 
+
+    //Wa pa ni equipment shit
     private String name;
+    private CharacterClass charClass;
 
-    private int maxHealth;
-    private int maxMana;
-
-    private int health;
-    private int mana;
-    private int power;
-    private int speed;
-
-    private boolean isPlayable;
-
-    private Weapon weapon;
-
-    @Override
-    public int compareTo(Character o){
-        return Integer.compare(o.speed, this.speed);
-    }
-
-    public Character(String name, int maxHealth, int maxMana, int power, int speed) {
+    public Character(String name, CharacterClass charClass) {
         this.name = name;
-        this.maxHealth = maxHealth;
-        this.power = power;
-        this.speed = speed;
-        health = maxHealth;
-        this.maxMana = maxMana;
-        mana = maxMana;
+        this.charClass = charClass;
     }
 
     public void currentDetails(){
         System.out.println(name + "\n"
-        + "Health: " + " (" + health + "/" + maxHealth + ") \n"
-        + "Mana: "  + " (" + mana + "/" + maxMana + ") \n"
-        + "Power: " + power + "\n"
-        + "Speed: " + speed + "\n"
+        + "Health: " + " (" + getCurrHealth() + "/" + getMaxHealth() + ") \n"
+        + "Mana: "  + " (" + getCurrMana() + "/" + getMagicPower() + ") \n"
+        + "Power: " + getPower() + "\n"
+        + "Speed: " + getSpeed() + "\n"
+        + "Defense: " + getDefense() + "\n"
         );
     }
 
     public int attack(Character character){
-        character.takeDamage(power);
-        return power;
+        return charClass.attack(character);
     }
 
     public void takeDamage(int damage){
-        health = Math.max(0, health-damage);
+        charClass.takeDamage(damage);
     }
 
     public String toString(){
         return name;
     }
 
-    public void setPlayable(boolean isPlayable){
-        this.isPlayable = isPlayable;
-    }
     public boolean isAlive(){
-        return health > 0;
+        return getCurrHealth() > 0;
     }
 
-    public void equipWeapon(Weapon weapon){
-        this.weapon = weapon;
-        power += weapon.getPower();
-        maxMana += weapon.getMagicPower();
+    public int getMaxHealth() {
+        return charClass.getMaxHealth();
+    }
+
+    public int getPower() {
+        return charClass.getPower();
+    }
+
+    public int getSpeed() {
+        return charClass.getSpeed();
+    }
+
+    public int getDefense() {
+        return charClass.getDefense();
+    }
+
+    public int getMagicPower() {
+        return charClass.getMagicPower();
+    }
+
+    public int getCurrHealth() {
+        return charClass.getCurrHealth();
+    }
+
+    public int getCurrMana(){
+        return charClass.getCurrMana();
+    }
+
+    @Override
+    public int compareTo(Character o){
+        return Integer.compare(o.getSpeed(), this.getSpeed());
     }
 
     public static class Ally extends Character{
-        public Ally(String name, int maxHealth, int maxMana, int power, int speed) {
-            super(name, maxHealth, maxMana, power, speed);
-            setPlayable(true);
+        public Ally(String name, CharacterClass charClass) {
+            super(name, charClass);
         }
     }
 
     public static class Enemy extends Character{
-        public Enemy(String name, int maxHealth, int maxMana, int power, int speed) {
-            super(name, maxHealth, maxMana, power, speed);
-            setPlayable(false);
+        public Enemy(String name, CharacterClass charClass) {
+            super(name, charClass);
         }
     }
 }
