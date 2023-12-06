@@ -52,17 +52,17 @@ public abstract class Weapon{
     }
 
     public static class Dagger extends Weapon{
-        Dagger(WeaponBuilder builder) {
+        public Dagger(WeaponBuilder builder) {
             super(builder);
         }
     }
     public static class Wand extends Weapon{
-        Wand(WeaponBuilder builder) {
+        public Wand(WeaponBuilder builder) {
             super(builder);
         }
     }
     public static class Staff extends Weapon{
-        Staff(WeaponBuilder builder) {
+        public Staff(WeaponBuilder builder) {
             super(builder);
         }
     }

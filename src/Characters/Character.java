@@ -8,7 +8,6 @@ public abstract class Character implements Comparable<Character> {
     //simple only
     //Add AI to enemy too
     //simply only as well
-
     private String name;
     private CharacterClass charClass;
     private Equipment equipment;
