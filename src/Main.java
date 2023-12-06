@@ -25,8 +25,7 @@ public class Main {
 
         String input;
 
-        //test
-        //test commit
+        // fixing intellij commit
         /*
         do{
             System.out.println("What do: ");
