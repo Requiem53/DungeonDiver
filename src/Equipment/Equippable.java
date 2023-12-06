@@ -1,6 +1,6 @@
-package Weapons;
+package Equipment;
 
-public abstract class Weapon{
+public class Equippable {
     protected String name;
     protected int maxHealth;
     protected int power;
@@ -8,7 +8,7 @@ public abstract class Weapon{
     protected int defense;
     protected int magicPower;
 
-    Weapon(WeaponBuilder builder){
+    Equippable(EquippableBuilder builder){
         name = builder.getName();
         maxHealth = builder.getMaxHealth();
         power = builder.getPower();
@@ -43,27 +43,5 @@ public abstract class Weapon{
 
     public int getMagicPower() {
         return magicPower;
-    }
-
-    public static class Sword extends Weapon{
-        public Sword(WeaponBuilder builder) {
-            super(builder.setName("Sword").setPower(10));
-        }
-    }
-
-    public static class Dagger extends Weapon{
-        public Dagger(WeaponBuilder builder) {
-            super(builder);
-        }
-    }
-    public static class Wand extends Weapon{
-        public Wand(WeaponBuilder builder) {
-            super(builder);
-        }
-    }
-    public static class Staff extends Weapon{
-        public Staff(WeaponBuilder builder) {
-            super(builder);
-        }
     }
 }

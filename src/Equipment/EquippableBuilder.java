@@ -1,6 +1,6 @@
-package Weapons;
+package Equipment;
 
-public class WeaponBuilder {
+public class EquippableBuilder {
     private String name;
     private int maxHealth;
     private int power;
@@ -8,8 +8,8 @@ public class WeaponBuilder {
     private int defense;
     private int magicPower;
 
-    public WeaponBuilder(){ //set everything to 0 default
-        name = "MissingWeapon";
+    public EquippableBuilder(){ //set everything to 0 default
+        name = "MissingEquipment";
         maxHealth = 0;
         power = 0;
         speed = 0;
@@ -36,28 +36,28 @@ public class WeaponBuilder {
         return magicPower;
     }
 
-    WeaponBuilder setName(String name){
+    EquippableBuilder setName(String name){
         this.name = name;
         return this;
     }
 
-    WeaponBuilder setMaxHealth(int maxHealth){
+    EquippableBuilder setMaxHealth(int maxHealth){
         this.maxHealth = maxHealth;
         return this;
     }
-    WeaponBuilder setPower(int power){
+    EquippableBuilder setPower(int power){
         this.power = power;
         return this;
     }
-    WeaponBuilder setSpeed(int speed){
+    EquippableBuilder setSpeed(int speed){
         this.speed = speed;
         return this;
     }
-    WeaponBuilder setDefense(int defense){
+    EquippableBuilder setDefense(int defense){
         this.defense = defense;
         return this;
     }
-    WeaponBuilder setMagicPower(int magicPower){
+    EquippableBuilder setMagicPower(int magicPower){
         this.magicPower = magicPower;
         return this;
     }
