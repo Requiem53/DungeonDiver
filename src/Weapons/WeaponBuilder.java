@@ -7,8 +7,9 @@ public class WeaponBuilder {
     private int speed;
     private int defense;
     private int magicPower;
-    WeaponBuilder(String name){ //set everything to 0 default
-        this.name = name;
+
+    public WeaponBuilder(){ //set everything to 0 default
+        name = "MissingWeapon";
         maxHealth = 0;
         power = 0;
         speed = 0;
@@ -33,6 +34,11 @@ public class WeaponBuilder {
     }
     public int getMagicPower() {
         return magicPower;
+    }
+
+    WeaponBuilder setName(String name){
+        this.name = name;
+        return this;
     }
 
     WeaponBuilder setMaxHealth(int maxHealth){

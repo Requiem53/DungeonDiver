@@ -1,21 +1,26 @@
 package Characters;
 
+import Equipment.Equipment;
+import Weapons.Weapon;
+
 public abstract class Character implements Comparable<Character> {
     //pun an guro spells pero I guess sakto na ang weapons
     //simple only
     //Add AI to enemy too
     //simply only as well
 
-
-    //Wa pa ni equipment shit
     private String name;
     private CharacterClass charClass;
+    private Equipment equipment;
 
     public Character(String name, CharacterClass charClass) {
         this.name = name;
         this.charClass = charClass;
+
+        equipment = new Equipment();
     }
 
+    //Debug Methods
     public void currentDetails(){
         System.out.println(name + "\n"
         + "Health: " + " (" + getCurrHealth() + "/" + getMaxHealth() + ") \n"
@@ -26,10 +31,17 @@ public abstract class Character implements Comparable<Character> {
         );
     }
 
+    public void printCurrWeapon(){
+        System.out.println(name);
+
+        if(equipment.getWeapon() == null) System.out.println("You have no weapons equipped!");
+        else System.out.println(equipment.getWeapon());
+    }
+
+    //Actions
     public int attack(Character character){
         return charClass.attack(character);
     }
-
     public void takeDamage(int damage){
         charClass.takeDamage(damage);
     }
@@ -37,6 +49,13 @@ public abstract class Character implements Comparable<Character> {
         charClass.heal(amount);
     }
 
+    //Mabuhat beyond sa battle
+    public void equipWeapon(Weapon weapon){
+        equipment.equipWeapon(weapon);
+    }
+    public void unequipWeapon(){equipment.unequipWeapon();}
+
+    //Getters
     public String toString(){
         return name;
     }
@@ -46,23 +65,23 @@ public abstract class Character implements Comparable<Character> {
     }
 
     public int getMaxHealth() {
-        return charClass.getMaxHealth();
+        return charClass.getMaxHealth() + getBonusMaxHealth();
     }
 
     public int getPower() {
-        return charClass.getPower();
+        return charClass.getPower() + getBonusPower();
     }
 
     public int getSpeed() {
-        return charClass.getSpeed();
+        return charClass.getSpeed() + getBonusSpeed();
     }
 
     public int getDefense() {
-        return charClass.getDefense();
+        return charClass.getDefense() + getBonusDefense();
     }
 
     public int getMagicPower() {
-        return charClass.getMagicPower();
+        return charClass.getMagicPower() + getBonusMagicPower();
     }
 
     public int getCurrHealth() {
@@ -71,6 +90,42 @@ public abstract class Character implements Comparable<Character> {
 
     public int getCurrMana(){
         return charClass.getCurrMana();
+    }
+
+    //Bonus from buffs and equipments
+    public int getBonusMaxHealth(){
+        int total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getMaxHealth();
+
+        return total;
+    }
+
+    public int getBonusPower(){
+        int total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getPower();
+
+        return total;
+    }
+
+    public int getBonusSpeed(){
+        int total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getSpeed();
+
+        return total;
+    }
+
+    public int getBonusDefense(){
+        int total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getDefense();
+
+        return total;
+    }
+
+    public int getBonusMagicPower(){
+        int total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getMagicPower();
+
+        return total;
     }
 
     @Override

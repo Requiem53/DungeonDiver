@@ -7,6 +7,7 @@ public abstract class Weapon{
     protected int speed;
     protected int defense;
     protected int magicPower;
+
     Weapon(WeaponBuilder builder){
         name = builder.getName();
         maxHealth = builder.getMaxHealth();
@@ -16,22 +17,51 @@ public abstract class Weapon{
         magicPower = builder.getMagicPower();
     }
 
-    public class Sword extends Weapon{
-        Sword(WeaponBuilder builder) {
-            super(builder);
+    public String toString(){
+        return getName();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getMagicPower() {
+        return magicPower;
+    }
+
+    public static class Sword extends Weapon{
+        public Sword(WeaponBuilder builder) {
+            super(builder.setName("Sword").setPower(10));
         }
     }
-    public class Dagger extends Weapon{
+
+    public static class Dagger extends Weapon{
         Dagger(WeaponBuilder builder) {
             super(builder);
         }
     }
-    public class Wand extends Weapon{
+    public static class Wand extends Weapon{
         Wand(WeaponBuilder builder) {
             super(builder);
         }
     }
-    public class Staff extends Weapon{
+    public static class Staff extends Weapon{
         Staff(WeaponBuilder builder) {
             super(builder);
         }
