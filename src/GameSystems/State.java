@@ -1,3 +1,5 @@
+package GameSystems;
+
 import Characters.Character;
 
 import java.util.ArrayList;
@@ -6,6 +8,7 @@ import java.util.Scanner;
 
 public abstract class State {
 
+     public User user;
      protected BattleSystem bs;
      protected String option;
      protected Scanner sc;
@@ -26,6 +29,7 @@ public abstract class State {
      }
 
      public State(BattleSystem bs){
+          user = new User("Jorosh");
           this.bs = bs;
           sc = new Scanner(System.in);
      }

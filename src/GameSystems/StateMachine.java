@@ -1,3 +1,5 @@
+package GameSystems;
+
 public class StateMachine {
     protected State state;
 
