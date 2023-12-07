@@ -1,25 +1,26 @@
 package Spells;
 
 import Characters.Character;
+import Characters.CharacterClass;
 import Interfaces.*;
 import Statuses.*;
 
 public abstract class Spell {
-    Character user;
-    String name;
+    CharacterClass user;
+    public String name;
     int manaCost;
-    Spell(Character user, String name, int manaCost){
+    Spell(CharacterClass user, String name, int manaCost){
         this.user = user;
         this.name = name;
         this.manaCost = manaCost;
     }
 
-    public class DamagingSpell extends Spell implements Damaging {
+    public static class DamagingSpell extends Spell implements Damaging {
 
         int baseDamage; //actually in percent like baseDamage of 100 is actually 100% of a character's attack or
                         //magic power, not actual damage number
 
-        DamagingSpell(SpellBuilder builder) {
+        public DamagingSpell(SpellBuilder builder) {
             super(builder.getUser(), builder.getName(), builder.getManaCost());
             this.baseDamage = builder.getBaseDamage();
         }
@@ -30,9 +31,9 @@ public abstract class Spell {
         }
     }
 
-    public class HealingSpell extends Spell implements Healing {
+    public static class HealingSpell extends Spell implements Healing {
         int baseAmount;
-        HealingSpell(SpellBuilder builder) {
+        public HealingSpell(SpellBuilder builder) {
             super(builder.getUser(), builder.getName(), builder.getManaCost());
             this.baseAmount = builder.getBaseAmount();
         }
@@ -43,10 +44,10 @@ public abstract class Spell {
         }
     }
 
-    public class StatusSpell extends Spell implements StatusInflicting {
+    public static class StatusSpell extends Spell implements StatusInflicting {
 
         Status status;
-        StatusSpell(SpellBuilder builder) {
+        public StatusSpell(SpellBuilder builder) {
             super(builder.getUser(), builder.getName(), builder.getManaCost());
             this.status = builder.getStatus();
         }

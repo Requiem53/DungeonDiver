@@ -6,19 +6,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class BattleSystem extends StateMachine{
+    public User user;
     private List<Character> characters;
-
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
     private int currentTurn = -1;
 
     public BattleSystem(List<Character> characters){
         this.characters = characters;
-        setState(new State.BattleStart(this));
+        setState(new State.EnterName(this));
     }
-
+    public List<Character> getCharacters() {
+        return characters;
+    }
+    public User getUser(){
+        return user;
+    }
     public void turnOrder(){
         Collections.sort(characters);
         System.out.println("Current turn order: ");

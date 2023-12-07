@@ -5,10 +5,10 @@ import java.awt.*;
 import GameSystems.*;
 
 public class Window extends JFrame {
-    State state;
-    Window(State state){
+    BattleSystem bs;
+    Window(BattleSystem bs){
         super("Slumm RPG");
-        this.state = state;
+        this.bs = bs;
         JPanel display = new JPanel();
         display.setBackground(Color.BLACK);
         display.setPreferredSize(new Dimension(100, 100));
@@ -18,7 +18,7 @@ public class Window extends JFrame {
         bottomPanel.setBackground(Color.WHITE);
 
 
-        ActionPanel actionPanel = new ActionPanel(state, 575, 150);
+        ActionPanel actionPanel = new ActionPanel(bs, 575, 150);
         bottomPanel.add(actionPanel);
 
         //Self Default

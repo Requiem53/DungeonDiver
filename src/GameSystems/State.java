@@ -1,6 +1,9 @@
+package GameSystems;
+
 import Actions.ActionsManager;
 import Actions.AttackAction;
 import Characters.Character;
+import GameSystems.BattleSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,26 @@ public abstract class State {
      public abstract void Start();
 
      //States
+     public static class EnterName extends State{
+          public EnterName(BattleSystem bs) {
+               super(bs);
+          }
+
+          @Override
+          public void Start() {
+               String name = null;
+               while(true){
+                    System.out.print("Enter your name: ");
+                    name = sc.nextLine();
+                    if(name.equals("")){
+                         System.out.println("You did not enter anything...");
+                    }else break;
+               }
+               bs.user = new User(name);
+               bs.setState(new BattleStart(bs));
+
+          }
+     }
      public static class BattleStart extends State{
           public BattleStart(BattleSystem bs) {
                super(bs);

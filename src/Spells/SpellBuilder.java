@@ -1,17 +1,17 @@
 package Spells;
 
-import Characters.Character;
+import Characters.*;
 import Statuses.*;
 
 public class SpellBuilder {
     private String name;
-    private Character user;
+    private CharacterClass user;
     private int manaCost;
     private int baseDamage;
     private int baseAmount;
     private Status status;
 
-    SpellBuilder(String name){
+    public SpellBuilder(String name){
         user = null;
         manaCost = 0;
         baseDamage = 0;
@@ -22,7 +22,7 @@ public class SpellBuilder {
     public String getName() {
         return name;
     }
-    public Character getUser() {
+    public CharacterClass getUser() {
         return user;
     }
     public int getManaCost() {
@@ -38,23 +38,27 @@ public class SpellBuilder {
         return status;
     }
 
-    SpellBuilder setUser(Character user){
+    public SpellBuilder setName(String name){
+        this.name = name;
+        return this;
+    }
+    public SpellBuilder setUser(CharacterClass user){
         this.user = user;
         return this;
     }
-    SpellBuilder setManaCost(int manaCost){
+    public SpellBuilder setManaCost(int manaCost){
         this.manaCost = manaCost;
         return this;
     }
-    SpellBuilder setBaseDamage(int baseDamage){
+    public SpellBuilder setBaseDamage(int baseDamage){
         this.baseDamage = baseDamage;
         return this;
     }
-    SpellBuilder setBaseAmount(int baseAmount){
+    public SpellBuilder setBaseAmount(int baseAmount){
         this.baseAmount = baseAmount;
         return this;
     }
-    SpellBuilder setStatus(Status status){
+    public SpellBuilder setStatus(Status status){
         this.status = status;
         return this;
     }

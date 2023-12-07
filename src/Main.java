@@ -3,6 +3,7 @@ import Characters.CharacterClass;
 import Equipment.Armor;
 import Equipment.EquippableBuilder;
 import Equipment.Weapon;
+import GameSystems.*;
 
 import java.util.ArrayList;
 import java.util.List;

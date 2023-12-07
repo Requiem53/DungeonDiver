@@ -7,4 +7,7 @@ public class StateMachine {
         this.state = state;
         state.Start();
     }
+    public State getState(){
+        return state;
+    }
 }

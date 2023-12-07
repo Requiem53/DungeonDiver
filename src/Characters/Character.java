@@ -3,6 +3,9 @@ package Characters;
 import Equipment.Equipment;
 import Equipment.Weapon;
 import Equipment.Armor;
+import Spells.*;
+
+import java.util.ArrayList;
 
 public abstract class Character implements Comparable<Character> {
     //pun an guro spells pero I guess sakto na ang weapons
@@ -74,6 +77,9 @@ public abstract class Character implements Comparable<Character> {
         return getCurrHealth() > 0;
     }
 
+    public String getName() {
+        return name;
+    }
     public int getMaxHealth() {
         return charClass.getMaxHealth() + getBonusMaxHealth();
     }
@@ -100,6 +106,16 @@ public abstract class Character implements Comparable<Character> {
 
     public int getCurrMana(){
         return charClass.getCurrMana();
+    }
+    public ArrayList<Spell> getSpells(){
+        return charClass.getSpells();
+    }
+    public String toStringSpells(){
+        String string = name + "'s spells: ";
+        for(int i=0; i<getSpells().size(); i++){
+            string += "[" + getSpells().get(i)+1 + ".] " + getSpells().get(1).name;
+        }
+        return string;
     }
 
     //Bonus from buffs and equipments
