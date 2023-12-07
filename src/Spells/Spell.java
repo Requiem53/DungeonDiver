@@ -27,7 +27,10 @@ public abstract class Spell {
 
         @Override
         public void damage(Character receiver) {
-            receiver.takeDamage(user.getMagicPower() * (baseDamage/100));
+            int damageTaken = (int)(user.getMagicPower() * (baseDamage/100f));
+            System.out.println(user.chara.getName() + " used " + name);
+            System.out.println(receiver.getName() + " received " + damageTaken + " magic damage");
+            receiver.takeDamage(damageTaken);
         }
     }
 

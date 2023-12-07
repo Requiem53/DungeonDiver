@@ -6,6 +6,7 @@ import Statuses.*;
 import java.util.ArrayList;
 
 public abstract class CharacterClass {
+    public Character chara;
     private int maxHealth;
     private int power;
     private int speed;
@@ -17,6 +18,7 @@ public abstract class CharacterClass {
     private ArrayList<Spell> spells;
 
     public CharacterClass(int maxHealth, int power, int speed, int defense, int magicPower) {
+
         this.maxHealth = maxHealth;
         this.power = power;
         this.speed = speed;
@@ -71,6 +73,9 @@ public abstract class CharacterClass {
     public ArrayList<Spell> getSpells(){
         return spells;
     }
+    public void setChara(Character chara){
+        this.chara = chara;
+    }
 
     public void addSpell(Spell spell) {
         spells.add(spell);
@@ -87,9 +92,9 @@ public abstract class CharacterClass {
 
         public Mage() {
             super(10, 5, 10, 10, 20);
-            SpellBuilder spellBuilder = new SpellBuilder("Meteors").setUser(this).setManaCost(5).setBaseDamage(10);
+            SpellBuilder spellBuilder = new SpellBuilder("Meteors").setUser(this).setManaCost(5).setBaseDamage(90);
             addSpell(new Spell.DamagingSpell(spellBuilder));
-            spellBuilder.setName("Ice beam").setUser(this).setManaCost(5).setBaseDamage(15);
+            spellBuilder.setName("Ice beam").setUser(this).setManaCost(5).setBaseDamage(90);
             addSpell(new Spell.DamagingSpell(spellBuilder));
         }
     }

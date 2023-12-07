@@ -1,6 +1,7 @@
 package Spells;
 
-import Characters.*;
+import Characters.Character;
+import Characters.CharacterClass;
 import Statuses.*;
 
 public class SpellBuilder {

@@ -18,6 +18,7 @@ public abstract class Character implements Comparable<Character> {
 
     public Character(String name, CharacterClass charClass) {
         this.name = name;
+        charClass.setChara(this);
         this.charClass = charClass;
 
         equipment = new Equipment();
@@ -113,7 +114,7 @@ public abstract class Character implements Comparable<Character> {
     public String toStringSpells(){
         String string = name + "'s spells: ";
         for(int i=0; i<getSpells().size(); i++){
-            string += "[" + getSpells().get(i)+1 + ".] " + getSpells().get(1).name;
+            string += "[" + (i+1) + "] " + getSpells().get(1).name + " ";
         }
         return string;
     }
@@ -158,7 +159,6 @@ public abstract class Character implements Comparable<Character> {
 
         return total;
     }
-
     @Override
     public int compareTo(Character o){
         return Integer.compare(o.getSpeed(), this.getSpeed());

@@ -2,10 +2,13 @@ package GameSystems;
 
 import Actions.ActionsManager;
 import Actions.AttackAction;
+import Actions.CastSpellAction;
 import Characters.Character;
 import GameSystems.BattleSystem;
+import Spells.Spell;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -196,6 +199,48 @@ public abstract class State {
                          }
                          newTurn();
                          break;
+                    case "Spell":
+                         int spellChoice = 0;
+                         Scanner sc = new Scanner(System.in);
+                         System.out.println("What spells do " + getCurrChar().getName() + " want to use? Choose: ");
+                         System.out.println(getCurrChar().toStringSpells());
+                         try{
+                              while(true){
+                                   spellChoice = sc.nextInt();
+                                   sc.nextLine();
+                                   if(spellChoice > getCurrChar().getSpells().size()){
+                                        System.out.println("Choice is out of bounds");
+                                   }else break;
+                              }
+                         }catch(InputMismatchException e){
+                              System.out.println("Since you didn't enter a number, we will use the first choice >:)");
+                              spellChoice = 0;
+                         }
+                         Spell spellUsed = getCurrChar().getSpells().get(spellChoice);
+                         System.out.println("Use on who?");
+                         int spellTargetInd = 0;
+                         Character spellTarget;
+                         if(spellUsed instanceof Spell.DamagingSpell){
+                              for(int i=0; i< enemies.size(); i++){
+                                   if(enemies.get(i).isAlive()){
+                                        System.out.println(i+1 + ". " + enemies.get(i));
+                                   }
+                              }
+                              System.out.println("Enter number: ");
+                              spellTargetInd = sc.nextInt();
+                              spellTarget = enemies.get(spellTargetInd - 1);
+                         }else{
+                              for(int i=0; i< allies.size(); i++){
+                                   if(allies.get(i).isAlive()){
+                                        System.out.println(i+1 + ". " + allies.get(i));
+                                   }
+                              }
+                              System.out.println("Enter number: ");
+                              spellTargetInd = sc.nextInt();
+                              spellTarget = allies.get(spellTargetInd - 1);
+                         }
+
+                         actionsMgr.addAction(new CastSpellAction(spellUsed, spellTarget));
                     default:
                          newTurn();
                          break;

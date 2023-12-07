@@ -14,7 +14,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         //Add character creator
-        Character.Ally char1 = new Character.Ally("Maurice", new CharacterClass.Warrior());
+        Character.Ally char1 = new Character.Ally("Maurice", new CharacterClass.Mage());
         Character.Enemy en1 = new Character.Enemy("RODEN", new CharacterClass.Warrior());
 
         List<Character> entities = new ArrayList<>();
