@@ -7,7 +7,7 @@ import java.util.*;
 
 public class BattleSystem extends StateMachine{
     public User user;
-    private final List<Character> characters;
+    private List<Character> characters;
     private int currentTurn = -1;
     List<Action> actions = new ArrayList<>();
     Queue<Action> actionsSorted;
@@ -15,6 +15,33 @@ public class BattleSystem extends StateMachine{
     public BattleSystem(List<Character> characters){
         this.characters = characters;
         setState(new State.EnterName(this));
+    }
+    public List<Character> getCharacters() {
+        return characters;
+    }
+    public User getUser(){
+        return user;
+    }
+//    public void turnOrder(){
+//        Collections.sort(characters);
+//        System.out.println("Current turn order: ");
+//        int list = 1;
+//        for(Character chara : characters){
+//            System.out.println(list + ". " + chara);
+//            list++;
+//        }
+//        list = 1;
+//    }
+
+    public void incrementTurn(){
+        currentTurn++;
+    }
+    public void resetTurn(){
+        currentTurn = 0;
+    }
+
+    public int getCurrentTurn(){
+        return currentTurn;
     }
 
     public void addAction(Action action){
@@ -30,33 +57,4 @@ public class BattleSystem extends StateMachine{
         }
         return actionsSorted.remove();
     }
-
-    public List<Character> getCharacters() {
-        return characters;
-    }
-    public User getUser(){
-        return user;
-    }
-
-    public void incrementTurn(){
-        currentTurn++;
-    }
-    public void resetTurn(){
-        currentTurn = 0;
-    }
-
-    public int getCurrentTurn(){
-        return currentTurn;
-    }
-
-    //    public void turnOrder(){
-    //        Collections.sort(characters);
-    //        System.out.println("Current turn order: ");
-    //        int list = 1;
-    //        for(Character chara : characters){
-    //            System.out.println(list + ". " + chara);
-    //            list++;
-    //        }
-    //        list = 1;
-    //    }
 }
