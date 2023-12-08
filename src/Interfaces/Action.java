@@ -12,7 +12,8 @@ public class Action implements Comparable<Action>{
         this.target = target;
     }
     public void execute(){
-        actionable.doAction(actor, target);
+        if(actionable != null)actionable.doAction(actor, target);
+        else System.out.println("Null action");
     }
     public Actionable getActionable(){
         return actionable;
@@ -26,6 +27,6 @@ public class Action implements Comparable<Action>{
 
     @Override
     public int compareTo(Action o) {
-        return Integer.compare(o.getActor().getSpeed(), this.actor.getSpeed());
+        return Integer.compare(o.getActor().getSpeed() + getActionable().getSpeed(), this.actor.getSpeed() + getActionable().getSpeed());
     }
 }

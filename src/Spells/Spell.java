@@ -32,6 +32,11 @@ public abstract class Spell{
             System.out.println(target.getName() + " received " + damageTaken + " magic damage");
             target.takeDamage(damageTaken);
         }
+
+        @Override
+        public int getSpeed() {
+            return 0;
+        }
     }
 
     public static class HealingSpell extends Spell implements Healing {
@@ -48,6 +53,11 @@ public abstract class Spell{
             System.out.println(target.getName() + " was healed by " + healingTaken + " points.");
             target.heal(healingTaken);
         }
+
+        @Override
+        public int getSpeed() {
+            return 0;
+        }
     }
 
     public static class StatusSpell extends Spell implements StatusInflicting {
@@ -61,6 +71,11 @@ public abstract class Spell{
         @Override
         public void inflictStatus(Character actor, Character target) {
             //Implement after Statuses and CharacterClass
+        }
+
+        @Override
+        public int getSpeed() {
+            return 0;
         }
     }
 }

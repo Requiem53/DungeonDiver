@@ -2,6 +2,7 @@ package Interfaces;
 
 import java.util.Queue;
 
+//USELESS FOR NOW
 public class ActionExecutor {
     public void executeAction(Action action){
         action.execute();

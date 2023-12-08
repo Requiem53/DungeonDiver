@@ -124,9 +124,15 @@ public abstract class State {
                     if(option.equalsIgnoreCase("Exit") ||
                          option.equalsIgnoreCase("List Allies") ||
                          option.equalsIgnoreCase("Attack") ||
+                         option.equalsIgnoreCase("Strong Attack") ||
                          option.equalsIgnoreCase("Spell")) break;
                }
                option = option.toLowerCase();
+
+               int list = 1;
+               int target;
+               Character attackTarget;
+
                switch (option){
                     case "exit":
                          break;
@@ -150,9 +156,6 @@ public abstract class State {
                          break;
                     case "attack":
                          System.out.println("Attack who?");
-                         int list = 1;
-                         int target;
-
                          for(Character enemy : enemies){
                               if(enemy.isAlive()){
                                    System.out.println(list + ". " + enemy);
@@ -162,8 +165,23 @@ public abstract class State {
                          System.out.println("Enter number: ");
                          target = sc.nextInt();
 
-                         Character attackTarget = enemies.get(target-1);
-                         bs.addAction(new Action(new NormalAttack(), getCurrChar(), attackTarget));
+                         attackTarget = enemies.get(target-1);
+                         bs.addAction(new Action(new NormalAttack(new AttackBuilder()), getCurrChar(), attackTarget));
+                         newChoiceTurn();
+                         break;
+                    case "strong attack":
+                         System.out.println("Attack who?");
+                         for(Character enemy : enemies){
+                              if(enemy.isAlive()){
+                                   System.out.println(list + ". " + enemy);
+                                   list++;
+                              }
+                         }
+                         System.out.println("Enter number: ");
+                         target = sc.nextInt();
+
+                         attackTarget = enemies.get(target-1);
+                         bs.addAction(new Action(new StrongAttack(new AttackBuilder()), getCurrChar(), attackTarget));
                          newChoiceTurn();
                          break;
                     case "spell":
@@ -225,7 +243,7 @@ public abstract class State {
                Character allyTarget = allies.get(random.nextInt(allies.size()));
                Character currEnemy = getCurrChar();
 
-               bs.addAction(new Action(new NormalAttack(), currEnemy, allyTarget));
+               bs.addAction(new Action(new NormalAttack(new AttackBuilder()), currEnemy, allyTarget));
                newChoiceTurn();
           }
      }
