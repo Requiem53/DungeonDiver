@@ -263,12 +263,12 @@ public abstract class State {
 
 
                Character target = allies.get(0);
-               Character currEnemy = getCurrChar();
+               Character currActor = getCurrChar();
 
-               actionsMgr.addAction(new AttackAction(target, currEnemy));
+               actionsMgr.addAction(new AttackAction(currActor, target));
 
-               System.out.println(currEnemy + " attacks " + target +
-                       " for " + currEnemy.getPower() + " damage.");
+               System.out.println(currActor + " attacks " + target +
+                       " for " + currActor.getPower() + " damage.");
 
                newTurn();
           }
