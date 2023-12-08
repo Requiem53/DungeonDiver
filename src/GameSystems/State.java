@@ -259,6 +259,7 @@ public abstract class State {
                if(currentAction == null){
                     newChoiceTurn();
                }
+               assert currentAction != null;
                currentAction.execute();
                boolean victory = false;
                boolean defeat = false;
