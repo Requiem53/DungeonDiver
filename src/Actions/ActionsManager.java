@@ -1,19 +1,22 @@
 package Actions;
 
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // class to store actions made
 // can be used to automate set of moves sa usa ka enemy
+
+
 public class ActionsManager {
-    private Stack<I_Action> actionList;
+    private List<I_Action> actionList;
 
     public ActionsManager() {
-        actionList = new Stack<>();
+        actionList = new ArrayList<>();
     }
 
     public void addAction(I_Action newAction) {
         newAction.execute();
-        actionList.push(newAction);
+        actionList.add(newAction);
     }
 }
