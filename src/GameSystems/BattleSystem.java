@@ -2,6 +2,7 @@ package GameSystems;
 
 import Characters.Character;
 import Interfaces.*;
+import States.*;
 
 import java.util.*;
 
@@ -14,7 +15,7 @@ public class BattleSystem extends StateMachine{
 
     public BattleSystem(List<Character> characters){
         this.characters = characters;
-        setState(new State.EnterName(this));
+        setState(new EnterName(this));
     }
 
     public void addAction(Action action){
@@ -30,9 +31,17 @@ public class BattleSystem extends StateMachine{
         }
         return actionsSorted.remove();
     }
+    public void actionListsReset(){
+        actions.clear();
+        actionsSorted.clear();
+        currentTurn = -1;
+    }
 
     public List<Character> getCharacters() {
         return characters;
+    }
+    public Character getCurrChar(){
+        return characters.get(getCurrentTurn());
     }
     public User getUser(){
         return user;
@@ -40,9 +49,6 @@ public class BattleSystem extends StateMachine{
 
     public void incrementTurn(){
         currentTurn++;
-    }
-    public void resetTurn(){
-        currentTurn = 0;
     }
 
     public int getCurrentTurn(){

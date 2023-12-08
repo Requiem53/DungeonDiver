@@ -1,13 +1,12 @@
 package Attacks;
 
-import Characters.Character;
 import Interfaces.Damaging;
 
 //Normal attack that does as much power as your power
 public class NormalAttack extends Attack implements Damaging {
 
-    public NormalAttack(AttackBuilder builder){
-        super(builder.setName("Normal Attack"));
+    public NormalAttack(){
+        super(new AttackBuilder().setName("Normal Attack"));
     }
 
     @Override

@@ -5,14 +5,14 @@ import Statuses.Status;
 public class AttackBuilder {
     private String name;
     private int baseDamage;
-    private float baseMultiDamage; //for multiplying amplifier for attack
+    private int flatAttackBonus;
     private int speed;
     private Status status;
 
     public AttackBuilder(){
         name = "MissingAttack";
-        baseDamage = 0;
-        baseMultiDamage = 1;
+        baseDamage = 100;
+        flatAttackBonus = 0;
         speed = 0;
         status = null;
     }
@@ -23,8 +23,8 @@ public class AttackBuilder {
     public int getBaseDamage() {
         return baseDamage;
     }
-    public float getBaseMultiDamage() {
-        return baseMultiDamage;
+    public int getFlatAttackBonus() {
+        return flatAttackBonus;
     }
 
     public int getSpeed() {
@@ -43,8 +43,8 @@ public class AttackBuilder {
         this.baseDamage = baseDamage;
         return this;
     }
-    public AttackBuilder setBaseMultiDamage(float baseMultiDamage){
-        this.baseMultiDamage = baseMultiDamage;
+    public AttackBuilder getFlatAttackBonus(int flatAttackBonus){
+        this.flatAttackBonus = flatAttackBonus;
         return this;
     }
     public AttackBuilder setSpeed(int speed){

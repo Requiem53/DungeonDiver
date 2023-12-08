@@ -3,6 +3,8 @@ package Interfaces;
 import Characters.Character;
 
 public interface Actionable {
-    int getSpeed();
+    default int getSpeed(){
+        return 0;
+    }
     void doAction(Character actor, Character target);
 }

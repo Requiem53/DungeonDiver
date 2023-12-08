@@ -1,9 +1,7 @@
 package GameSystems;
 
 import Characters.Character;
-import Spells.Spell;
 import Interfaces.*;
-import Attacks.*;
 import States.ChoiceTurn;
 
 import java.util.*;
@@ -29,7 +27,8 @@ public abstract class State {
 
      //Potential Useless
      protected Character getCurrChar(){
-          return bs.getCharacters().get(bs.getCurrentTurn());
+//          return bs.getCharacters().get(bs.getCurrentTurn());
+          return bs.getCurrChar();
      }
 
      protected void newChoiceTurn(){

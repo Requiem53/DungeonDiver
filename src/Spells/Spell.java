@@ -27,15 +27,10 @@ public abstract class Spell{
             if(!actor.decreaseMana(manaCost)){
                 System.out.println("No more mana"); //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
             }
-            int damageTaken = (int)(actor.getMagicPower() * (baseDamage/100f));
+            int damageTaken = (int)Math.ceil(actor.getMagicPower() * (baseDamage/100f));
             System.out.println(actor.getName() + " used " + name);
             System.out.println(target.getName() + " received " + damageTaken + " magic damage");
             target.takeDamage(damageTaken);
-        }
-
-        @Override
-        public int getSpeed() {
-            return 0;
         }
     }
 
@@ -48,15 +43,10 @@ public abstract class Spell{
 
         @Override
         public void heal(Character actor, Character target) {
-            int healingTaken = (int)(actor.getMagicPower() * (baseAmount/100f));
+            int healingTaken = (int)Math.ceil(actor.getMagicPower() * (baseAmount/100f));
             System.out.println(actor.getName() + " used " + name);
             System.out.println(target.getName() + " was healed by " + healingTaken + " points.");
             target.heal(healingTaken);
-        }
-
-        @Override
-        public int getSpeed() {
-            return 0;
         }
     }
 
@@ -71,11 +61,6 @@ public abstract class Spell{
         @Override
         public void inflictStatus(Character actor, Character target) {
             //Implement after Statuses and CharacterClass
-        }
-
-        @Override
-        public int getSpeed() {
-            return 0;
         }
     }
 }

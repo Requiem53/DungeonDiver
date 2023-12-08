@@ -165,7 +165,7 @@ public class ActionPanel extends JLayeredPane {
         int buttonCount, btnX = 0, btnY = 0;
         switch(moveType){
             case FIGHT:
-                buttonCount = bs.getUser().attacks.length;
+                buttonCount = bs.getCurrChar().getAttacks().size();
                 for(int i=0; i<buttonCount; i++){
                     btnX = i % 2 == 0 ? width/2 + 50/2 : width/2 - 100 - 50/2;
                     if(buttonCount > 2){
@@ -176,7 +176,7 @@ public class ActionPanel extends JLayeredPane {
                         }
                     }else btnY = (height/2) - ((height/2)-30)/2;
 
-                    moveButtons[i].setText(bs.getUser().attacks[i]);
+                    moveButtons[i].setText(bs.getCurrChar().getAttacks().get(i).getName());
                     moveButtons[i].setBounds(btnX, btnY, 100, 30);
                     moveButtons[i].addActionListener(new ActionListener() {
                         @Override
@@ -187,11 +187,11 @@ public class ActionPanel extends JLayeredPane {
                 }
                 break;
             case SPELL:
-                buttonCount = bs.getUser().spells.length;
+                buttonCount = bs.getCurrChar().getSpells().size();
             case PARRY:
 //                game.currChara.parryState();
             case ITEM:
-                buttonCount = bs.getUser().items.size();
+                buttonCount = bs.getCurrChar().getItems().size();
 
         }
     }

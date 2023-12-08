@@ -1,8 +1,6 @@
 package States;
 
-import Attacks.AttackBuilder;
-import Attacks.NormalAttack;
-import Attacks.StrongAttack;
+import Attacks.*;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import GameSystems.State;
@@ -57,6 +55,12 @@ public class PlayerChoiceTurn extends State {
                 newChoiceTurn();
                 break;
             case "attack":
+                System.out.println("What attack?");
+                for(int i=0; i<getCurrChar().getAttacks().size(); i++){
+                    System.out.println(i+1 + ". " + getCurrChar().getAttacks().get(i).getName());
+                }
+                int attackChoice = sc.nextInt();
+                Attack attackUsed = getCurrChar().getAttacks().get(attackChoice - 1);
                 System.out.println("Attack who?");
                 for(Character enemy : enemies){
                     if(enemy.isAlive()){
@@ -68,7 +72,7 @@ public class PlayerChoiceTurn extends State {
                 target = sc.nextInt();
 
                 attackTarget = enemies.get(target-1);
-                bs.addAction(new Action(new NormalAttack(new AttackBuilder()), getCurrChar(), attackTarget));
+                bs.addAction(new Action(attackUsed, getCurrChar(), attackTarget));
                 newChoiceTurn();
                 break;
             case "strong attack":
@@ -83,7 +87,7 @@ public class PlayerChoiceTurn extends State {
                 target = sc.nextInt();
 
                 attackTarget = enemies.get(target-1);
-                bs.addAction(new Action(new StrongAttack(new AttackBuilder()), getCurrChar(), attackTarget));
+                bs.addAction(new Action(new StrongAttack(), getCurrChar(), attackTarget));
                 newChoiceTurn();
                 break;
             case "spell":

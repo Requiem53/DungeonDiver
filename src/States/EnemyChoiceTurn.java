@@ -1,14 +1,13 @@
 package States;
 
-import Attacks.AttackBuilder;
 import Attacks.NormalAttack;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import GameSystems.State;
 import Interfaces.Action;
 
-public class EnemyTurn extends State {
-    public EnemyTurn(BattleSystem bs) {
+public class EnemyChoiceTurn extends State{
+    public EnemyChoiceTurn(BattleSystem bs) {
         super(bs);
     }
 
@@ -17,7 +16,8 @@ public class EnemyTurn extends State {
         Character allyTarget = allies.get(random.nextInt(allies.size()));
         Character currEnemy = getCurrChar();
 
-        bs.addAction(new Action(new NormalAttack(new AttackBuilder()), currEnemy, allyTarget));
+        //add timer in Strong attacks so enemies can use it but utilize random
+        bs.addAction(new Action(new NormalAttack(), currEnemy, allyTarget));
         newChoiceTurn();
     }
 }

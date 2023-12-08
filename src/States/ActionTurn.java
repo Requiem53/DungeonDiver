@@ -14,6 +14,7 @@ public class ActionTurn extends State {
     public void Start() {
         Action currentAction = bs.dequeueActionsSorted();
         if(currentAction == null){
+            bs.actionListsReset();
             newChoiceTurn();
         }
         assert currentAction != null;

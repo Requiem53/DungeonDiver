@@ -12,16 +12,14 @@ public class ChoiceTurn extends State {
     @Override
     public void Start() {
         bs.incrementTurn();
-        if(bs.getCurrentTurn() >= bs.getCharacters().size()){  //currentTurn becomes currentChoiceTurn
-            bs.resetTurn();                                   //just didn't change the names
+        if(bs.getCurrentTurn() >= bs.getCharacters().size()){
             bs.sortActions();
             bs.setState(new ActionTurn(bs));
         }
-
-        if(!(getCurrChar() instanceof Character.Enemy)){
+        if(!(bs.getCurrChar() instanceof Character.Enemy)){
             bs.setState(new PlayerChoiceTurn(bs));
         } else {
-            bs.setState(new EnemyTurn(bs));
+            bs.setState(new EnemyChoiceTurn(bs));
         }
 
     }

@@ -4,6 +4,8 @@ import Equipment.Equipment;
 import Equipment.Weapon;
 import Equipment.Armor;
 import Spells.*;
+import Attacks.*;
+import Items.*;
 
 import java.util.ArrayList;
 
@@ -107,9 +109,16 @@ public abstract class Character implements Comparable<Character> {
     public int getCurrMana(){
         return charClass.getCurrMana();
     }
+    public ArrayList<Attack> getAttacks(){
+        return charClass.getAttacks();
+    }
     public ArrayList<Spell> getSpells(){
         return charClass.getSpells();
     }
+    public ArrayList<Item> getItems(){
+        return charClass.getItems();
+    }
+
     public String toStringSpells(){
         String string = name + "'s spells: ";
         for(int i=0; i<getSpells().size(); i++){
