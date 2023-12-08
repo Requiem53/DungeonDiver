@@ -178,7 +178,7 @@ public abstract class State {
                               System.out.println("Since you didn't enter a number, we will use the first choice >:)");
                               spellChoice = 0;
                          }
-                         Spell spellUsed = getCurrChar().getSpells().get(spellChoice);
+                         Spell spellUsed = getCurrChar().getSpells().get(spellChoice - 1);
                          System.out.println("Use on who?");
                          int spellTargetInd = 0;
                          Character spellTarget;
