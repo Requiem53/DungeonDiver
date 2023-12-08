@@ -90,42 +90,9 @@ public abstract class State {
 
           @Override
           public void Start() {
-//               boolean victory = false;
-//               boolean defeat = false;
-//
-//               for(Character enemy : enemies){
-//                    if(enemy.isAlive()){
-//                         victory = false;
-//                         break;
-//                    }
-//                    victory = true;
-//               }
-//
-//               for(Character ally : allies){
-//                    if(ally.isAlive()){
-//                         defeat = false;
-//                         break;
-//                    }
-//                    defeat = true;
-//               }
-//
-//               if(victory){
-//                    System.out.println("You have won the battle!");
-//                    //Add new battle diri ug file handling para record sa number of battles won niya sa
-//                    //characters gigamit
-//                    return;
-//               }
-//
-//               if(defeat){
-//                    System.out.println("You have lost the battle!");
-//                    //Add new battle diri ug file handling para record sa number of battles won niya sa
-//                    //characters gigamit
-//                    return;
-//               }
-
                bs.incrementTurn();
-               if(bs.getCurrentTurn() >= bs.getCharacters().size()){
-                    bs.resetTurn();
+               if(bs.getCurrentTurn() >= bs.getCharacters().size()){  //currentTurn becomes currentChoiceTurn
+                    bs.resetTurn();                                   //just didn't change the names
                     bs.sortActions();
                     bs.setState(new ActionTurn(bs));
                }
@@ -192,13 +159,6 @@ public abstract class State {
 
                          Character attackTarget = enemies.get(target-1);
                          bs.addAction(new Action(new Attack(), getCurrChar(), attackTarget));
-
-//                         System.out.println(getCurrChar() + " dealt " + getCurrChar().attack(targeted) + " damage to "
-//                                 + targeted + "!");
-//                         if(!targeted.isAlive()){
-//                              System.out.println(targeted + " died from the blow!");
-//                              enemies.remove(targeted);
-//                         }
                          newChoiceTurn();
                          break;
                     case "spell":
@@ -257,22 +217,10 @@ public abstract class State {
 
           @Override
           public void Start() {
-//               deadValidate();
-               /*
-               System.out.println(getCurrChar() + " is wondering about what they " +
-                       "will do next....");
-                */
-
                Character allyTarget = allies.get(random.nextInt(allies.size()));
                Character currEnemy = getCurrChar();
 
                bs.addAction(new Action(new Attack(), currEnemy, allyTarget));
-
-//               actionsMgr.addAction(new AttackAction(target, currEnemy));
-
-//               System.out.println(currEnemy + " attacks " + target +
-//                       " for " + currEnemy.getPower() + " damage.");
-
                newChoiceTurn();
           }
      }
