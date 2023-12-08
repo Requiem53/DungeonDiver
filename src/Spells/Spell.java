@@ -1,16 +1,13 @@
 package Spells;
 
 import Characters.Character;
-import Characters.CharacterClass;
 import Interfaces.*;
 import Statuses.*;
 
-public abstract class Spell {
-    CharacterClass user;
+public abstract class Spell{
     public String name;
     int manaCost;
-    Spell(CharacterClass user, String name, int manaCost){
-        this.user = user;
+    Spell(String name, int manaCost) {
         this.name = name;
         this.manaCost = manaCost;
     }
@@ -21,29 +18,35 @@ public abstract class Spell {
                         //magic power, not actual damage number
 
         public DamagingSpell(SpellBuilder builder) {
-            super(builder.getUser(), builder.getName(), builder.getManaCost());
+            super(builder.getName(), builder.getManaCost());
             this.baseDamage = builder.getBaseDamage();
         }
 
         @Override
-        public void damage(Character receiver) {
-            int damageTaken = (int)(user.getMagicPower() * (baseDamage/100f));
-            System.out.println(user.chara.getName() + " used " + name);
-            System.out.println(receiver.getName() + " received " + damageTaken + " magic damage");
-            receiver.takeDamage(damageTaken);
+        public void damage(Character actor, Character target) {       //Damaging Override
+            if(!actor.decreaseMana(manaCost)){
+                System.out.println("No more mana"); //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
+            }
+            int damageTaken = (int)(actor.getMagicPower() * (baseDamage/100f));
+            System.out.println(actor.getName() + " used " + name);
+            System.out.println(target.getName() + " received " + damageTaken + " magic damage");
+            target.takeDamage(damageTaken);
         }
     }
 
     public static class HealingSpell extends Spell implements Healing {
         int baseAmount;
         public HealingSpell(SpellBuilder builder) {
-            super(builder.getUser(), builder.getName(), builder.getManaCost());
+            super(builder.getName(), builder.getManaCost());
             this.baseAmount = builder.getBaseAmount();
         }
 
         @Override
-        public void heal(Character receiver) {
-            receiver.heal(user.getMagicPower() * (baseAmount/100));
+        public void heal(Character actor, Character target) {
+            int healingTaken = (int)(actor.getMagicPower() * (baseAmount/100f));
+            System.out.println(actor.getName() + " used " + name);
+            System.out.println(target.getName() + " was healed by " + healingTaken + " points.");
+            target.heal(healingTaken);
         }
     }
 
@@ -51,12 +54,12 @@ public abstract class Spell {
 
         Status status;
         public StatusSpell(SpellBuilder builder) {
-            super(builder.getUser(), builder.getName(), builder.getManaCost());
+            super(builder.getName(), builder.getManaCost());
             this.status = builder.getStatus();
         }
 
         @Override
-        public void inflictStatus(Character receiver) {
+        public void inflictStatus(Character actor, Character target) {
             //Implement after Statuses and CharacterClass
         }
     }

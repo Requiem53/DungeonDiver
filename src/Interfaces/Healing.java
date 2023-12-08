@@ -2,10 +2,11 @@ package Interfaces;
 
 import Characters.Character;
 
-public interface Healing extends Move{
+public interface Healing extends Actionable{
     @Override
-    default void doMove(Character receiver){
-        this.heal(receiver);
+    default void doAction(Character actor, Character target){
+        heal(actor, target);
     }
-    void heal(Character receiver);
+
+    void heal(Character actor, Character target);
 }

@@ -18,6 +18,6 @@ public class CastSpellAction implements I_Action{
 
     @Override
     public void execute() {
-        ((Move)spell).doMove(target);
+//        ((Actionable)spell.doMove(target);
     }
 }

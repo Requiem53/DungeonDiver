@@ -6,7 +6,6 @@ import Statuses.*;
 import java.util.ArrayList;
 
 public abstract class CharacterClass {
-    public Character chara;
     private int maxHealth;
     private int power;
     private int speed;
@@ -70,11 +69,11 @@ public abstract class CharacterClass {
     public int getCurrMana() {
         return currMana;
     }
+    public void decreaseMana(int amount){
+        currMana -= amount;
+    }
     public ArrayList<Spell> getSpells(){
         return spells;
-    }
-    public void setChara(Character chara){
-        this.chara = chara;
     }
 
     public void addSpell(Spell spell) {
@@ -83,18 +82,18 @@ public abstract class CharacterClass {
 
     public static class Warrior extends CharacterClass{
         public Warrior() {
-            super(10, 10, 10, 10, 10);
+            super(50, 25, 10, 10, 10);
             SpellBuilder spellBuilder = new SpellBuilder("Loyalty Hymn").setStatus(new Buff());
-            super.addSpell(new Spell.DamagingSpell(spellBuilder));
+            addSpell(new Spell.DamagingSpell(spellBuilder));
         }
     }
     public static class Mage extends CharacterClass{
 
         public Mage() {
-            super(10, 5, 10, 10, 20);
-            SpellBuilder spellBuilder = new SpellBuilder("Meteors").setUser(this).setManaCost(5).setBaseDamage(90);
+            super(40, 10, 15, 10, 25);
+            SpellBuilder spellBuilder = new SpellBuilder("Meteors").setManaCost(5).setBaseDamage(90);
             addSpell(new Spell.DamagingSpell(spellBuilder));
-            spellBuilder.setName("Ice beam").setUser(this).setManaCost(5).setBaseDamage(90);
+            spellBuilder.setName("Ice beam").setManaCost(5).setBaseDamage(90);
             addSpell(new Spell.DamagingSpell(spellBuilder));
         }
     }

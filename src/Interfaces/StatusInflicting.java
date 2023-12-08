@@ -2,10 +2,11 @@ package Interfaces;
 
 import Characters.Character;
 
-public interface StatusInflicting extends Move{
+public interface StatusInflicting extends Actionable{
     @Override
-    default void doMove(Character receiver){
-        this.inflictStatus(receiver);
+    default void doAction(Character actor, Character target){
+        inflictStatus(actor, target);
     }
-    void inflictStatus(Character receiver);
+
+    void inflictStatus(Character actor, Character target);
 }

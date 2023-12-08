@@ -15,9 +15,11 @@ public class Main {
 
         //Add character creator
         Character.Ally char1 = new Character.Ally("Maurice", new CharacterClass.Mage());
+        Character.Ally char2 = new Character.Ally("Slamm", new CharacterClass.Warrior());
         Character.Enemy en1 = new Character.Enemy("RODEN", new CharacterClass.Warrior());
 
         List<Character> entities = new ArrayList<>();
+        entities.add(char2);
         entities.add(char1);
         entities.add(en1);
 

@@ -1,45 +1,38 @@
 package GameSystems;
 
-import Actions.ActionsManager;
-import Actions.AttackAction;
-import Actions.CastSpellAction;
 import Characters.Character;
-import GameSystems.BattleSystem;
 import Spells.Spell;
+import Interfaces.*;
+import Attacks.*;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class State {
      protected BattleSystem bs;
      protected String option;
      protected Scanner sc;
+     protected Random random;
      protected static List<Character> allies = new ArrayList<>();
      protected static List<Character> enemies = new ArrayList<>();
-
-     ActionsManager actionsMgr;
 
      public State(BattleSystem bs){
           this.bs = bs;
           sc = new Scanner(System.in);
-
-          actionsMgr = new ActionsManager();
+          random = new Random();
      }
 
      protected Character getCurrChar(){
           return bs.getCharacters().get(bs.getCurrentTurn());
      }
 
-     protected void newTurn(){
-          bs.setState(new Turn(bs));
+     protected void newChoiceTurn(){
+          bs.setState(new ChoiceTurn(bs));
      }
 
      protected void deadValidate(){
           if(!getCurrChar().isAlive()){
                System.out.println(getCurrChar() + " is already dead!");
-               newTurn();
+               newChoiceTurn();
           }
      }
 
@@ -68,7 +61,6 @@ public abstract class State {
                }
                bs.user = new User(name);
                bs.setState(new BattleStart(bs));
-
           }
      }
      public static class BattleStart extends State{
@@ -79,7 +71,6 @@ public abstract class State {
           @Override
           public void Start() {
                System.out.println("The battle is starting....");
-               bs.turnOrder();
                for(Character chara : bs.getCharacters()){
                     if(chara instanceof Character.Enemy){
                          enemies.add(chara);
@@ -87,55 +78,60 @@ public abstract class State {
                          allies.add(chara);
                     }
                }
-               newTurn();
+               newChoiceTurn();
           }
      }
 
 
-     public static class Turn extends State{
-          public Turn(BattleSystem bs) {
+     public static class ChoiceTurn extends State{
+          public ChoiceTurn(BattleSystem bs) {
                super(bs);
           }
 
           @Override
           public void Start() {
-               boolean victory = false;
-               boolean defeat = false;
-
-               for(Character enemy : enemies){
-                    if(enemy.isAlive()){
-                         victory = false;
-                         break;
-                    }
-                    victory = true;
-               }
-
-               for(Character ally : allies){
-                    if(ally.isAlive()){
-                         defeat = false;
-                         break;
-                    }
-                    defeat = true;
-               }
-
-               if(victory){
-                    System.out.println("You have won the battle!");
-                    //Add new battle diri ug file handling para record sa number of battles won niya sa
-                    //characters gigamit
-                    return;
-               }
-
-               if(defeat){
-                    System.out.println("You have lost the battle!");
-                    //Add new battle diri ug file handling para record sa number of battles won niya sa
-                    //characters gigamit
-                    return;
-               }
+//               boolean victory = false;
+//               boolean defeat = false;
+//
+//               for(Character enemy : enemies){
+//                    if(enemy.isAlive()){
+//                         victory = false;
+//                         break;
+//                    }
+//                    victory = true;
+//               }
+//
+//               for(Character ally : allies){
+//                    if(ally.isAlive()){
+//                         defeat = false;
+//                         break;
+//                    }
+//                    defeat = true;
+//               }
+//
+//               if(victory){
+//                    System.out.println("You have won the battle!");
+//                    //Add new battle diri ug file handling para record sa number of battles won niya sa
+//                    //characters gigamit
+//                    return;
+//               }
+//
+//               if(defeat){
+//                    System.out.println("You have lost the battle!");
+//                    //Add new battle diri ug file handling para record sa number of battles won niya sa
+//                    //characters gigamit
+//                    return;
+//               }
 
                bs.incrementTurn();
+               if(bs.getCurrentTurn() >= bs.getCharacters().size()){
+                    bs.resetTurn();
+                    bs.sortActions();
+                    bs.setState(new ActionTurn(bs));
+               }
 
                if(!(getCurrChar() instanceof Character.Enemy)){
-                    bs.setState(new PlayerTurn(bs));
+                    bs.setState(new PlayerChoiceTurn(bs));
                } else {
                     bs.setState(new EnemyTurn(bs));
                }
@@ -143,21 +139,26 @@ public abstract class State {
           }
      }
 
-     public static class PlayerTurn extends State{
-          public PlayerTurn(BattleSystem bs) {
+     public static class PlayerChoiceTurn extends State{
+          public PlayerChoiceTurn(BattleSystem bs) {
                super(bs);
           }
 
           @Override
           public void Start() {
-               deadValidate();
-
-               System.out.println("What will " + getCurrChar() + " do?");
-               option = sc.nextLine();
+               while(true){
+                    System.out.println("What will " + getCurrChar() + " do?");
+                    option = sc.nextLine();
+                    if(option.equalsIgnoreCase("Exit") ||
+                         option.equalsIgnoreCase("List Allies") ||
+                         option.equalsIgnoreCase("Attack") ||
+                         option.equalsIgnoreCase("Spell")) break;
+               }
+               option = option.toLowerCase();
                switch (option){
-                    case "Exit":
+                    case "exit":
                          break;
-                    case "List Allies":
+                    case "list allies":
                          System.out.println("Allies: ");
                          for(Character chara : allies){
                               System.out.println(chara);
@@ -167,15 +168,15 @@ public abstract class State {
                          for(Character chara : enemies){
                               System.out.println(chara);
                          }
-                         newTurn();
+                         newChoiceTurn();
                          break;
-                    case "Details":
+                    case "details":
                          for(Character chara : bs.getCharacters()){
                               chara.currentDetails();
                          }
-                         newTurn();
+                         newChoiceTurn();
                          break;
-                    case "Attack":
+                    case "attack":
                          System.out.println("Attack who?");
                          int list = 1;
                          int target;
@@ -189,17 +190,18 @@ public abstract class State {
                          System.out.println("Enter number: ");
                          target = sc.nextInt();
 
-                         Character targeted = enemies.get(target-1);
+                         Character attackTarget = enemies.get(target-1);
+                         bs.addAction(new Action(new Attack(), getCurrChar(), attackTarget));
 
-                         System.out.println(getCurrChar() + " dealt " + getCurrChar().attack(targeted) + " damage to "
-                                 + targeted + "!");
-                         if(!targeted.isAlive()){
-                              System.out.println(targeted + " died from the blow!");
-                              enemies.remove(targeted);
-                         }
-                         newTurn();
+//                         System.out.println(getCurrChar() + " dealt " + getCurrChar().attack(targeted) + " damage to "
+//                                 + targeted + "!");
+//                         if(!targeted.isAlive()){
+//                              System.out.println(targeted + " died from the blow!");
+//                              enemies.remove(targeted);
+//                         }
+                         newChoiceTurn();
                          break;
-                    case "Spell":
+                    case "spell":
                          int spellChoice = 0;
                          Scanner sc = new Scanner(System.in);
                          System.out.println("What spells do " + getCurrChar().getName() + " want to use? Choose: ");
@@ -239,10 +241,10 @@ public abstract class State {
                               spellTargetInd = sc.nextInt();
                               spellTarget = allies.get(spellTargetInd - 1);
                          }
-
-                         actionsMgr.addAction(new CastSpellAction(spellUsed, spellTarget));
+                         bs.addAction(new Action((Actionable)spellUsed, getCurrChar(), spellTarget));
+                         newChoiceTurn();
                     default:
-                         newTurn();
+                         newChoiceTurn();
                          break;
                }
           }
@@ -255,23 +257,72 @@ public abstract class State {
 
           @Override
           public void Start() {
-               deadValidate();
+//               deadValidate();
                /*
                System.out.println(getCurrChar() + " is wondering about what they " +
                        "will do next....");
                 */
 
-
-               Character target = allies.get(0);
+               Character allyTarget = allies.get(random.nextInt(allies.size()));
                Character currEnemy = getCurrChar();
 
-               actionsMgr.addAction(new AttackAction(target, currEnemy));
+               bs.addAction(new Action(new Attack(), currEnemy, allyTarget));
 
-               System.out.println(currEnemy + " attacks " + target +
-                       " for " + currEnemy.getPower() + " damage.");
+//               actionsMgr.addAction(new AttackAction(target, currEnemy));
 
-               newTurn();
+//               System.out.println(currEnemy + " attacks " + target +
+//                       " for " + currEnemy.getPower() + " damage.");
+
+               newChoiceTurn();
           }
      }
 
+     public static class ActionTurn extends State{
+          public ActionTurn(BattleSystem bs) {
+               super(bs);
+          }
+
+          @Override
+          public void Start() {
+               Action currentAction = bs.dequeueActionsSorted();
+               if(currentAction == null){
+                    newChoiceTurn();
+               }
+               currentAction.execute();
+               boolean victory = false;
+               boolean defeat = false;
+
+               for(Character enemy : enemies){
+                    if(enemy.isAlive()){
+                         victory = false;
+                         break;
+                    }
+                    victory = true;
+               }
+
+               for(Character ally : allies){
+                    if(ally.isAlive()){
+                         defeat = false;
+                         break;
+                    }
+                    defeat = true;
+               }
+
+               if(victory){
+                    System.out.println("You have won the battle!");
+                    //Add new battle diri ug file handling para record sa number of battles won niya sa
+                    //characters gigamit
+                    return;
+               }
+
+               if(defeat){
+                    System.out.println("You have lost the battle!");
+                    //Add new battle diri ug file handling para record sa number of battles won niya sa
+                    //characters gigamit
+                    return;
+               }
+               System.out.println("-----------------------------");
+               bs.setState(new ActionTurn(bs));
+          }
+     }
 }

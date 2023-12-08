@@ -1,19 +1,16 @@
 package Spells;
 
-import Characters.Character;
-import Characters.CharacterClass;
 import Statuses.*;
 
 public class SpellBuilder {
     private String name;
-    private CharacterClass user;
     private int manaCost;
     private int baseDamage;
     private int baseAmount;
     private Status status;
 
     public SpellBuilder(String name){
-        user = null;
+        this.name = name;
         manaCost = 0;
         baseDamage = 0;
         baseAmount = 0;
@@ -22,9 +19,6 @@ public class SpellBuilder {
 
     public String getName() {
         return name;
-    }
-    public CharacterClass getUser() {
-        return user;
     }
     public int getManaCost() {
         return manaCost;
@@ -41,10 +35,6 @@ public class SpellBuilder {
 
     public SpellBuilder setName(String name){
         this.name = name;
-        return this;
-    }
-    public SpellBuilder setUser(CharacterClass user){
-        this.user = user;
         return this;
     }
     public SpellBuilder setManaCost(int manaCost){

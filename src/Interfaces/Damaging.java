@@ -2,10 +2,11 @@ package Interfaces;
 
 import Characters.Character;
 
-public interface Damaging extends Move{
+public interface Damaging extends Actionable{
     @Override
-    default void doMove(Character receiver){
-        this.damage(receiver);
+    default void doAction(Character actor, Character target){
+        damage(actor, target);
     }
-    void damage(Character receiver);
+
+    void damage(Character actor, Character target);
 }
