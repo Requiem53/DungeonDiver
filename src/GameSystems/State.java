@@ -12,15 +12,21 @@ public abstract class State {
      protected String option;
      protected Scanner sc;
      protected Random random;
+
      protected static List<Character> allies = new ArrayList<>();
      protected static List<Character> enemies = new ArrayList<>();
 
+     protected ActionExecutor executor;
+
      public State(BattleSystem bs){
           this.bs = bs;
+          executor = new ActionExecutor();
+
           sc = new Scanner(System.in);
           random = new Random();
      }
 
+     //Potential Useless
      protected Character getCurrChar(){
           return bs.getCharacters().get(bs.getCurrentTurn());
      }
@@ -35,7 +41,6 @@ public abstract class State {
                newChoiceTurn();
           }
      }
-
 
      public BattleSystem getBs() {
           return bs;
@@ -158,7 +163,7 @@ public abstract class State {
                          target = sc.nextInt();
 
                          Character attackTarget = enemies.get(target-1);
-                         bs.addAction(new Action(new Attack(), getCurrChar(), attackTarget));
+                         bs.addAction(new Action(new NormalAttack(), getCurrChar(), attackTarget));
                          newChoiceTurn();
                          break;
                     case "spell":
@@ -220,7 +225,7 @@ public abstract class State {
                Character allyTarget = allies.get(random.nextInt(allies.size()));
                Character currEnemy = getCurrChar();
 
-               bs.addAction(new Action(new Attack(), currEnemy, allyTarget));
+               bs.addAction(new Action(new NormalAttack(), currEnemy, allyTarget));
                newChoiceTurn();
           }
      }

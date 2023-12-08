@@ -3,7 +3,8 @@ package Attacks;
 import Characters.Character;
 import Interfaces.Damaging;
 
-public class Attack implements Damaging {
+//Normal attack that does as much power as your power
+public class NormalAttack implements Damaging {
     @Override
     public void damage(Character actor, Character target) {
         int damageTaken = actor.getPower();
