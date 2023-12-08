@@ -25,7 +25,6 @@ public class Main {
 
         BattleSystem bs = new BattleSystem(entities);
 
-
         String input;
 
         // fixing intellij commit
