@@ -12,9 +12,8 @@ public abstract class Attack implements Damaging {
     public Attack(AttackBuilder builder) {
         this.builder = builder;
         String name = builder.getName();
-        int baseDamage = builder.getBaseDamage();
+        float basePower = builder.getBasePower();
         int speed = builder.getSpeed();
-        //for multiplying amplifier for attack
         int flatAttackBonus = builder.getFlatAttackBonus();
         Status status = builder.getStatus();
     }
@@ -22,15 +21,16 @@ public abstract class Attack implements Damaging {
     @Override
     public void damage(Character actor, Character target) {
         System.out.println(flavorText(actor, target));
-        System.out.println(target.getName() + " received " + doAttack(actor, target) + " points of damage");
-    }
-
-    public int doAttack(Character actor, Character target){
-        int damageTaken = (int) Math.ceil((actor.getPower() + (builder.getBaseDamage())/100f)) + builder.getFlatAttackBonus();
+        int damageTaken = (int) Math.ceil(actor.getPower() + builder.getBasePower()) + builder.getFlatAttackBonus();
         target.takeDamage(damageTaken);
-
-        return damageTaken;
     }
+
+//    public int doAttack(Character actor, Character target){  //transfered functionality into damage() above
+//        int damageTaken = (int) Math.ceil(actor.getPower() + builder.getBasePower()) + builder.getFlatAttackBonus();
+//        target.takeDamage(damageTaken);
+//
+//        return damageTaken;
+//    }
 
     public AttackBuilder getBuilder(){
         return builder;
@@ -58,7 +58,7 @@ public abstract class Attack implements Damaging {
 
     public static class StrongAttack extends Attack{
         public StrongAttack(){
-            super(new AttackBuilder().setName("Strong Attack").setBaseDamage(150).setSpeed(-20));
+            super(new AttackBuilder().setName("Strong Attack").setBasePower(1.5f).setSpeed(-20));
         }
         @Override
         public int getSpeed() {

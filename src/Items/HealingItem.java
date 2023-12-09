@@ -18,8 +18,8 @@ public abstract class HealingItem extends Item implements Healing {
     }
 
     public static class HealingPotion extends HealingItem{
-        public HealingPotion(ItemBuilder builder) {
-            super(builder.setName("Health Potion").setAmount(50));
+        public HealingPotion() {
+            super(new ItemBuilder().setName("Health Potion").setAmount(50));
         }
         @Override
         public String flavorText(Character actor, Character target) {

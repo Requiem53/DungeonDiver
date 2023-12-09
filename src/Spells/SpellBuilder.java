@@ -5,14 +5,14 @@ import Statuses.*;
 public class SpellBuilder {
     private String name;
     private int manaCost;
-    private int baseDamage;
+    private float basePower;
     private int baseAmount;
     private Status status;
 
     public SpellBuilder(){
         name = "MissingSpell";
         manaCost = 0;
-        baseDamage = 0;
+        basePower = 0;
         baseAmount = 0;
         status = null;
     }
@@ -23,8 +23,8 @@ public class SpellBuilder {
     public int getManaCost() {
         return manaCost;
     }
-    public int getBaseDamage() {
-        return baseDamage;
+    public float getBasePower() {
+        return basePower;
     }
     public int getBaseAmount() {
         return baseAmount;
@@ -41,8 +41,8 @@ public class SpellBuilder {
         this.manaCost = manaCost;
         return this;
     }
-    public SpellBuilder setBaseDamage(int baseDamage){
-        this.baseDamage = baseDamage;
+    public SpellBuilder setBasePower(float basePower){
+        this.basePower = basePower;
         return this;
     }
     public SpellBuilder setBaseAmount(int baseAmount){

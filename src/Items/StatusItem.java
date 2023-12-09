@@ -14,12 +14,23 @@ public abstract class StatusItem extends Item implements StatusInflicting {
 
     @Override
     public void inflictStatus(Character actor, Character target) {
-        //To be implemented
+        if(actor == target){
+            System.out.println(actor.getName() + " used " + name + " onto himself");
+        }else{
+            System.out.println(actor.getName() + " used " + name + " onto " + target.getName());
+        }
+
+        if(status instanceof Buff){
+            System.out.println(target.getName() + " was blessed with " + status);
+        }else{
+            System.out.println(target.getName() + " was inflicted with " + status);
+        }
+        target.addStatus(status.clone());
     }
 
     public static class SmokeBomb extends StatusItem{
-        public SmokeBomb(ItemBuilder builder) {
-            super(builder.setName("Smoke Bomb").setStatus(new Buff()));
+        public SmokeBomb() {
+            super(new ItemBuilder().setName("Smoke Bomb").setStatus(new Buff.Shrouded()));
         }
 
         @Override

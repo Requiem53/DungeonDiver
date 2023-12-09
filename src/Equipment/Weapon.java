@@ -6,14 +6,14 @@ public abstract class Weapon extends Equippable{
     }
 
     public static class Sword extends Weapon{
-        public Sword(EquippableBuilder builder) {
-            super(builder.setName("Sword").setPower(10));
+        public Sword() {
+            super(new EquippableBuilder().setName("Sword").setPower(10)); //inani style paghimo
         }
     }
 
     public static class Dagger extends Weapon{
-        public Dagger(EquippableBuilder builder) {
-            super(builder);
+        public Dagger() {
+            super(new EquippableBuilder().setName("Dagger").setPower(5).setSpeed(5));
         }
     }
     public static class Wand extends Weapon{

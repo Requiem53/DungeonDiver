@@ -7,6 +7,7 @@ public class Equippable {
     protected int speed;
     protected int defense;
     protected int magicPower;
+    protected float evasion;
 
     Equippable(EquippableBuilder builder){
         name = builder.getName();
@@ -15,6 +16,7 @@ public class Equippable {
         speed = builder.getSpeed();
         defense = builder.getDefense();
         magicPower = builder.getMagicPower();
+        evasion = builder.getEvasion();
     }
 
     public String toString(){
@@ -43,5 +45,9 @@ public class Equippable {
 
     public int getMagicPower() {
         return magicPower;
+    }
+
+    public float getEvasion() {
+        return evasion;
     }
 }

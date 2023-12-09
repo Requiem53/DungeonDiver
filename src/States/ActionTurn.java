@@ -14,6 +14,9 @@ public class ActionTurn extends State {
         Action currentAction = bs.dequeueActionsSorted();
         if(currentAction == null){
             bs.actionListsReset();
+            for(Character character : bs.getCharacters()){
+                character.decrementStatusDuration();
+            }
             newChoiceTurn();
         }
         assert currentAction != null;

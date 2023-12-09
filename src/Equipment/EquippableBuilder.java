@@ -7,6 +7,7 @@ public class EquippableBuilder {
     private int speed;
     private int defense;
     private int magicPower;
+    private float evasion;
 
     public EquippableBuilder(){ //set everything to 0 default
         name = "MissingEquipment";
@@ -15,25 +16,30 @@ public class EquippableBuilder {
         speed = 0;
         defense = 0;
         magicPower = 0;
+        evasion = 0;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
-    public int getMaxHealth() {
+    int getMaxHealth() {
         return maxHealth;
     }
-    public int getPower() {
+    int getPower() {
         return power;
     }
-    public int getSpeed() {
+    int getSpeed() {
         return speed;
     }
-    public int getDefense() {
+    int getDefense() {
         return defense;
     }
-    public int getMagicPower() {
+    int getMagicPower() {
         return magicPower;
+    }
+
+    public float getEvasion() {
+        return evasion;
     }
 
     EquippableBuilder setName(String name){
@@ -59,6 +65,11 @@ public class EquippableBuilder {
     }
     EquippableBuilder setMagicPower(int magicPower){
         this.magicPower = magicPower;
+        return this;
+    }
+
+    EquippableBuilder setEvasion(float evasion) {
+        this.evasion = evasion;
         return this;
     }
 }

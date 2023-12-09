@@ -6,8 +6,8 @@ public abstract class Armor extends Equippable{
     }
 
     public static class ClothArmor extends Armor{
-        public ClothArmor(EquippableBuilder builder) {
-            super(builder.setName("Cloth Armor").setDefense(10));
+        public ClothArmor() {
+            super(new EquippableBuilder().setName("Cloth Armor").setDefense(10));
         }
     }
 }

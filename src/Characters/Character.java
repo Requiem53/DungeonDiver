@@ -4,11 +4,13 @@ import CharacterComponents.DoableActions;
 import Equipment.Equipment;
 import Equipment.Weapon;
 import Equipment.Armor;
+import Statuses.*;
 import Spells.*;
 import Attacks.*;
 import Items.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Character implements Comparable<Character> {
     //pun an guro spells pero I guess sakto na ang weapons
@@ -51,7 +53,13 @@ public abstract class Character implements Comparable<Character> {
         return charClass.attack(character);
     }
     public void takeDamage(int damage){
-        charClass.takeDamage(damage);
+        Random random = new Random();
+        if(random.nextFloat() < getEvasion()){
+            charClass.takeDamage(damage);
+            System.out.println(name + " received " + damage + " pts of damage");
+        }else{
+            System.out.println(name + " evaded the hit!");
+        }
     }
     public void heal(int amount){
         charClass.heal(amount);
@@ -106,6 +114,9 @@ public abstract class Character implements Comparable<Character> {
     public int getMagicPower() {
         return charClass.getMagicPower() + getBonusMagicPower();
     }
+    public float getEvasion(){
+        return charClass.getEvasion() + getBonusEvasion();
+    }
 
     public int getCurrHealth() {
         return charClass.getCurrHealth();
@@ -139,7 +150,12 @@ public abstract class Character implements Comparable<Character> {
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getMaxHealth();
         if(equipment.getArmor() != null) total += equipment.getArmor().getMaxHealth();
-
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.HEALTH){
+                if(status instanceof Buff) total += status.getChangeAmount() * charClass.getMaxHealth();
+                else total -= status.getChangeAmount() * charClass.getMaxHealth();
+            }
+        }
         return total;
     }
 
@@ -147,7 +163,12 @@ public abstract class Character implements Comparable<Character> {
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getPower();
         if(equipment.getArmor() != null) total += equipment.getArmor().getPower();
-
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.POWER){
+                if(status instanceof Buff) total += status.getChangeAmount() * charClass.getPower();
+                else total -= status.getChangeAmount() * charClass.getPower();
+            }
+        }
         return total;
     }
 
@@ -155,7 +176,12 @@ public abstract class Character implements Comparable<Character> {
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getSpeed();
         if(equipment.getArmor() != null) total += equipment.getArmor().getSpeed();
-
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.SPEED){
+                if(status instanceof Buff) total += status.getChangeAmount() * charClass.getSpeed();
+                else total -= status.getChangeAmount() * charClass.getSpeed();
+            }
+        }
         return total;
     }
 
@@ -163,7 +189,12 @@ public abstract class Character implements Comparable<Character> {
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getDefense();
         if(equipment.getArmor() != null) total += equipment.getArmor().getDefense();
-
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.DEFENSE){
+                if(status instanceof Buff) total += status.getChangeAmount() * charClass.getDefense();
+                else total -= status.getChangeAmount() * charClass.getDefense();
+            }
+        }
         return total;
     }
 
@@ -171,7 +202,24 @@ public abstract class Character implements Comparable<Character> {
         int total = 0;
         if(equipment.getWeapon() != null) total += equipment.getWeapon().getMagicPower();
         if(equipment.getArmor() != null) total += equipment.getArmor().getMagicPower();
-
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.MAGIC_POWER){
+                if(status instanceof Buff) total += status.getChangeAmount() * charClass.getMagicPower();
+                else total -= status.getChangeAmount() * charClass.getMagicPower();
+            }
+        }
+        return total;
+    }
+    public float getBonusEvasion(){
+        float total = 0;
+        if(equipment.getWeapon() != null) total += equipment.getWeapon().getEvasion();
+        if(equipment.getArmor() != null) total += equipment.getArmor().getEvasion();
+        for(Status status : charClass.getStatuses()){
+            if(status.getStatusStat() == StatusStat.EVASION){
+                if(status instanceof Buff) total += status.getChangeAmount();
+                else total -= status.getChangeAmount();
+            }
+        }
         return total;
     }
     public boolean decreaseMana(int amount){        //returns boolean for spell usage checking
@@ -180,6 +228,12 @@ public abstract class Character implements Comparable<Character> {
         }
         charClass.decreaseMana(amount);
         return true;
+    }
+    public void addStatus(Status status){
+        charClass.addStatus(status);
+    }
+    public void decrementStatusDuration(){
+        charClass.decrementStatusDuration();
     }
     @Override
     public int compareTo(Character o){

@@ -4,14 +4,14 @@ import Statuses.Status;
 
 public class AttackBuilder {
     private String name;
-    private int baseDamage;
+    private float basePower;
     private int flatAttackBonus;
     private int speed;
     private Status status;
 
     public AttackBuilder(){
         name = "MissingAttack";
-        baseDamage = 100;
+        basePower = 1f;
         flatAttackBonus = 0;
         speed = 0;
         status = null;
@@ -20,8 +20,8 @@ public class AttackBuilder {
     public String getName() {
         return name;
     }
-    public int getBaseDamage() {
-        return baseDamage;
+    public float getBasePower() {
+        return basePower;
     }
     public int getFlatAttackBonus() {
         return flatAttackBonus;
@@ -39,8 +39,8 @@ public class AttackBuilder {
         this.name = name;
         return this;
     }
-    public AttackBuilder setBaseDamage(int baseDamage){
-        this.baseDamage = baseDamage;
+    public AttackBuilder setBasePower(float basePower){
+        this.basePower = basePower;
         return this;
     }
     public AttackBuilder getFlatAttackBonus(int flatAttackBonus){

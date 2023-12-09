@@ -2,16 +2,14 @@ package Spells;
 
 import Characters.Character;
 import Interfaces.Damaging;
-import Statuses.Buff;
 
 public abstract class DamagingSpell extends Spell implements Damaging {
 
-    int baseDamage; //actually in percent like baseDamage of 100 is actually 100% of a character's attack or
-    //magic power, not actual damage number
+    float basePower; //multiplier for the caster's MagicPower to determine damage
 
     public DamagingSpell(SpellBuilder builder) {
         super(builder.getName(), builder.getManaCost());
-        this.baseDamage = builder.getBaseDamage();
+        this.basePower = builder.getBasePower();
     }
 
     @Override
@@ -19,27 +17,15 @@ public abstract class DamagingSpell extends Spell implements Damaging {
         if(!actor.decreaseMana(manaCost)){
             System.out.println("No more mana"); //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
         }
-        int damageTaken = (int)Math.ceil(actor.getMagicPower() * (baseDamage/100f));
+        int damageTaken = (int)Math.ceil(actor.getMagicPower() * basePower);
 //        System.out.println(actor.getName() + " used " + name);
         System.out.println(flavorText(actor, target));
-        System.out.println(target.getName() + " received " + damageTaken + " magic damage");
         target.takeDamage(damageTaken);
     }
 
-    public static class LoyaltyHymn extends DamagingSpell{
-        public LoyaltyHymn(SpellBuilder builder) {
-            super(builder.setName("Loyalty Hymn").setStatus(new Buff()));
-        }
-
-        @Override
-        public String flavorText(Character actor, Character target) {
-            return actor + " used " + name + " to ambot!"; // wa ko kahibaw sa effect sorry
-        }
-    }
-
     public static class Meteors extends DamagingSpell{
-        public Meteors(SpellBuilder builder){
-            super(builder.setName("Meteors").setManaCost(5).setBaseDamage(90));
+        public Meteors(){
+            super(new SpellBuilder().setName("Meteors").setManaCost(10).setBasePower(1.2f));
         }
 
         @Override
@@ -49,8 +35,8 @@ public abstract class DamagingSpell extends Spell implements Damaging {
     }
 
     public static class IceBeam extends DamagingSpell{
-        public IceBeam(SpellBuilder builder){
-            super(builder.setName("Ice beam").setManaCost(5).setBaseDamage(90));
+        public IceBeam(){
+            super(new SpellBuilder().setName("Ice beam").setManaCost(5).setBasePower(0.9f));
         }
         @Override
         public String flavorText(Character actor, Character target) {
