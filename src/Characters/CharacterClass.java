@@ -1,5 +1,6 @@
 package Characters;
 
+import CharacterComponents.DoableActions;
 import Spells.*;
 import Statuses.*;
 import Attacks.*;
@@ -16,9 +17,8 @@ public abstract class CharacterClass {
 
     private int currHealth;
     private int currMana;
-    private ArrayList<Spell> spells;
-    private ArrayList<Attack> attacks;
-    private ArrayList<Item> items;
+
+    private final DoableActions initialActions;
 
     public CharacterClass(int maxHealth, int power, int speed, int defense, int magicPower) {
 
@@ -30,12 +30,20 @@ public abstract class CharacterClass {
 
         this.currHealth = maxHealth;
         this.currMana = magicPower;
-        attacks = new ArrayList<>(){{
+
+        ArrayList<Attack> attacks = new ArrayList<>(){{
             add(new NormalAttack());
             add(new StrongAttack());
         }};
-        spells = new ArrayList<>();
-        items = new ArrayList<>();
+
+        ArrayList<Spell> spells = new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
+
+        initialActions = new DoableActions(attacks, spells, items);
+    }
+
+    public DoableActions getInitialActions(){
+        return initialActions;
     }
 
     public void takeDamage(int damage){
@@ -81,20 +89,12 @@ public abstract class CharacterClass {
     public void decreaseMana(int amount){
         currMana -= amount;
     }
-    public ArrayList<Spell> getSpells(){
-        return spells;
-    }
-    public ArrayList<Item> getItems(){
-        return items;
-    }
-    public ArrayList<Attack> getAttacks(){
-        return attacks;
-    }
+
     public void addSpell(Spell spell) {
-        spells.add(spell);
+        initialActions.addSpell(spell);
     }
     public void addItem(Item item){
-        items.add(item);
+        initialActions.addItem(item);
     }
 
     public static class Warrior extends CharacterClass{

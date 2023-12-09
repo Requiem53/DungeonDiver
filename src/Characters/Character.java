@@ -1,5 +1,6 @@
 package Characters;
 
+import CharacterComponents.DoableActions;
 import Equipment.Equipment;
 import Equipment.Weapon;
 import Equipment.Armor;
@@ -17,6 +18,7 @@ public abstract class Character implements Comparable<Character> {
     private String name;
     private CharacterClass charClass;
     private Equipment equipment;
+    private DoableActions doableActions;
 
     public Character(String name, CharacterClass charClass) {
         this.name = name;
@@ -82,6 +84,8 @@ public abstract class Character implements Comparable<Character> {
     public String getName() {
         return name;
     }
+
+    //Character Class
     public int getMaxHealth() {
         return charClass.getMaxHealth() + getBonusMaxHealth();
     }
@@ -109,14 +113,16 @@ public abstract class Character implements Comparable<Character> {
     public int getCurrMana(){
         return charClass.getCurrMana();
     }
+
+    //Doable Actions
     public ArrayList<Attack> getAttacks(){
-        return charClass.getAttacks();
+        return doableActions.getAttacks();
     }
     public ArrayList<Spell> getSpells(){
-        return charClass.getSpells();
+        return doableActions.getSpells();
     }
     public ArrayList<Item> getItems(){
-        return charClass.getItems();
+        return doableActions.getItems();
     }
 
     public String toStringSpells(){
