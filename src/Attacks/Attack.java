@@ -25,8 +25,6 @@ public abstract class Attack implements Damaging {
         System.out.println(target.getName() + " received " + doAttack(actor, target) + " points of damage");
     }
 
-    public abstract String flavorText(Character actor, Character target);
-
     public int doAttack(Character actor, Character target){
         int damageTaken = (int) Math.ceil((actor.getPower() + (builder.getBaseDamage())/100f)) + builder.getFlatAttackBonus();
         target.takeDamage(damageTaken);

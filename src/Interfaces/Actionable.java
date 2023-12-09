@@ -7,4 +7,5 @@ public interface Actionable {
         return 0;
     }
     void doAction(Character actor, Character target);
+    String flavorText(Character actor, Character target);
 }

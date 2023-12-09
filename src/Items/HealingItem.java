@@ -11,7 +11,8 @@ public abstract class HealingItem extends Item implements Healing {
     }
     @Override
     public void heal(Character actor, Character target) {
-        System.out.println(actor.getName() + " used " + name);
+//        System.out.println(actor.getName() + " used " + name);
+        System.out.println(flavorText(actor, target));
         System.out.println(target.getName() + " was healed by " + amount + " points.");
         target.heal(amount);
     }
@@ -19,6 +20,10 @@ public abstract class HealingItem extends Item implements Healing {
     public static class HealingPotion extends HealingItem{
         public HealingPotion(ItemBuilder builder) {
             super(builder.setName("Health Potion").setAmount(50));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " used their health pot to heal " + target;
         }
     }
 }

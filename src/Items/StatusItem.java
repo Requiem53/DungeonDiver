@@ -21,5 +21,10 @@ public abstract class StatusItem extends Item implements StatusInflicting {
         public SmokeBomb(ItemBuilder builder) {
             super(builder.setName("Smoke Bomb").setStatus(new Buff()));
         }
+
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " threw the smoke bomb on the ground!";
+        }
     }
 }

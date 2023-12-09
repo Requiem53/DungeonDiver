@@ -11,34 +11,4 @@ public abstract class Spell{
         this.name = name;
         this.manaCost = manaCost;
     }
-
-    public static class HealingSpell extends Spell implements Healing {
-        int baseAmount;
-        public HealingSpell(SpellBuilder builder) {
-            super(builder.getName(), builder.getManaCost());
-            this.baseAmount = builder.getBaseAmount();
-        }
-
-        @Override
-        public void heal(Character actor, Character target) {
-            int healingTaken = (int)Math.ceil(actor.getMagicPower() * (baseAmount/100f));
-            System.out.println(actor.getName() + " used " + name);
-            System.out.println(target.getName() + " was healed by " + healingTaken + " points.");
-            target.heal(healingTaken);
-        }
-    }
-
-    public static class StatusSpell extends Spell implements StatusInflicting {
-
-        Status status;
-        public StatusSpell(SpellBuilder builder) {
-            super(builder.getName(), builder.getManaCost());
-            this.status = builder.getStatus();
-        }
-
-        @Override
-        public void inflictStatus(Character actor, Character target) {
-            //Implement after Statuses and CharacterClass
-        }
-    }
 }
