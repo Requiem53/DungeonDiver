@@ -7,8 +7,8 @@ public class ItemBuilder {
     int damage;
     int amount;
     Status status;
-    public ItemBuilder(String name){
-        this.name = name;
+    public ItemBuilder(){
+        name = "MissingItem";
         damage = 0;
         amount = 0;
         status = null;

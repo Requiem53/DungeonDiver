@@ -100,25 +100,19 @@ public abstract class CharacterClass {
     public static class Warrior extends CharacterClass{
         public Warrior() {
             super(50, 25, 10, 10, 10);
-            SpellBuilder spellBuilder = new SpellBuilder("Loyalty Hymn").setStatus(new Buff());
-            addSpell(new Spell.DamagingSpell(spellBuilder));
-            ItemBuilder itemBuilder = new ItemBuilder("Health Potion").setAmount(50);
-            addItem(new Item.HealingItem(itemBuilder));
-            addItem(new Item.HealingItem(itemBuilder));
+            addSpell(new DamagingSpell.LoyaltyHymn(new SpellBuilder()));
+            addItem(new HealingItem.HealingPotion(new ItemBuilder()));
+            addItem(new HealingItem.HealingPotion(new ItemBuilder()));
         }
     }
     public static class Mage extends CharacterClass{
 
         public Mage() {
             super(40, 10, 15, 10, 25);
-            SpellBuilder spellBuilder = new SpellBuilder("Meteors").setManaCost(5).setBaseDamage(90);
-            addSpell(new Spell.DamagingSpell(spellBuilder));
-            spellBuilder.setName("Ice beam").setManaCost(5).setBaseDamage(90);
-            addSpell(new Spell.DamagingSpell(spellBuilder));
-            ItemBuilder itemBuilder = new ItemBuilder("Health Potion").setAmount(50);
-            addItem(new Item.HealingItem(itemBuilder));
-            itemBuilder.setName("Smoke bomb").setStatus(new Buff());
-            addItem(new Item.StatusItem(itemBuilder));
+            addSpell(new DamagingSpell.Meteors(new SpellBuilder()));
+            addSpell(new DamagingSpell.IceBeam(new SpellBuilder()));
+            addItem(new HealingItem.HealingPotion(new ItemBuilder()));
+            addItem(new StatusItem.SmokeBomb(new ItemBuilder()));
         }
     }
 }

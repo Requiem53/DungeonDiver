@@ -9,8 +9,8 @@ public class SpellBuilder {
     private int baseAmount;
     private Status status;
 
-    public SpellBuilder(String name){
-        this.name = name;
+    public SpellBuilder(){
+        name = "MissingSpell";
         manaCost = 0;
         baseDamage = 0;
         baseAmount = 0;

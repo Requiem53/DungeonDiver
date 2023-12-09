@@ -5,6 +5,7 @@ import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
 import Interfaces.Actionable;
+import Spells.DamagingSpell;
 import Spells.Spell;
 
 import java.util.InputMismatchException;
@@ -72,11 +73,53 @@ public class PlayerChoiceTurn extends State {
 
             attackTarget = enemies.get(target-1);
             bs.addAction(new Action(attackUsed, getCurrChar(), attackTarget));
+
             newChoiceTurn();
     }
 
     private void spellSequence(){
+        int spellChoice = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What spells do " + getCurrChar().getName() + " want to use? Choose: ");
+        System.out.println(getCurrChar().toStringSpells());
+        try{
+            while(true){
+                spellChoice = sc.nextInt();
+                sc.nextLine();
+                if(spellChoice > getCurrChar().getSpells().size()){
+                    System.out.println("Choice is out of bounds");
+                }else break;
+            }
+        }catch(InputMismatchException e){
+            System.out.println("Since you didn't enter a number, we will use the first choice >:)");
+            spellChoice = 0;
+        }
+        Spell spellUsed = getCurrChar().getSpells().get(spellChoice - 1);
+        System.out.println("Use on who?");
+        int spellTargetInd = 0;
+        Character spellTarget;
+        if(spellUsed instanceof DamagingSpell){
+            for(int i=0; i< enemies.size(); i++){
+                if(enemies.get(i).isAlive()){
+                    System.out.println(i+1 + ". " + enemies.get(i));
+                }
+            }
+            System.out.println("Enter number: ");
+            spellTargetInd = sc.nextInt();
+            spellTarget = enemies.get(spellTargetInd - 1);
+        }else{
+            for(int i=0; i< allies.size(); i++){
+                if(allies.get(i).isAlive()){
+                    System.out.println(i+1 + ". " + allies.get(i));
+                }
+            }
+            System.out.println("Enter number: ");
+            spellTargetInd = sc.nextInt();
+            spellTarget = allies.get(spellTargetInd - 1);
+        }
+        bs.addAction(new Action((Actionable)spellUsed, getCurrChar(), spellTarget));
 
+        newChoiceTurn();
     }
 
     private void itemSequence(){
