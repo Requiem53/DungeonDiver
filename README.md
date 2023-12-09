@@ -1,5 +1,5 @@
 # DungeonDiver
-Uses GameSystems.State Pattern:
+Uses States.State Pattern:
 (butang diri)
 Uses Builder Pattern:
 (butang diri)

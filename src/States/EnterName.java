@@ -1,7 +1,6 @@
 package States;
 
 import GameSystems.BattleSystem;
-import GameSystems.State;
 import GameSystems.User;
 
 public class EnterName extends State {

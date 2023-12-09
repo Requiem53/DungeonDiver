@@ -25,6 +25,7 @@ public abstract class Character implements Comparable<Character> {
         this.charClass = charClass;
 
         equipment = new Equipment();
+        doableActions = charClass.getInitialActions();
     }
 
     //Debug Methods
@@ -122,7 +123,7 @@ public abstract class Character implements Comparable<Character> {
         return doableActions.getSpells();
     }
     public ArrayList<Item> getItems(){
-        return doableActions.getItems();
+        return doableActions.getInventory();
     }
 
     public String toStringSpells(){

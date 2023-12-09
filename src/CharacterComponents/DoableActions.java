@@ -9,19 +9,19 @@ import Spells.Spell;
 public class DoableActions {
     private ArrayList<Attack> attacks;
     private ArrayList<Spell> spells;
-    private ArrayList<Item> items;
+    private ArrayList<Item> inventory;
 
-    public DoableActions(ArrayList<Attack> attacks, ArrayList<Spell> spells, ArrayList<Item> items) {
+    public DoableActions(ArrayList<Attack> attacks, ArrayList<Spell> spells, ArrayList<Item> inventory) {
         this.attacks = attacks;
         this.spells = spells;
-        this.items = items;
+        this.inventory = inventory;
     }
 
     public void addSpell(Spell spell) {
         spells.add(spell);
     }
     public void addItem(Item item){
-        items.add(item);
+        inventory.add(item);
     }
 
     public ArrayList<Attack> getAttacks() {
@@ -33,8 +33,8 @@ public class DoableActions {
     }
 
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
 }

@@ -2,7 +2,6 @@ package States;
 
 import Characters.Character;
 import GameSystems.BattleSystem;
-import GameSystems.State;
 
 public class BattleStart extends State {
     public BattleStart(BattleSystem bs) {

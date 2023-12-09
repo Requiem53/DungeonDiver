@@ -2,7 +2,6 @@ package States;
 
 import Characters.Character;
 import GameSystems.BattleSystem;
-import GameSystems.State;
 
 public class ChoiceTurn extends State {
     public ChoiceTurn(BattleSystem bs) {

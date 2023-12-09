@@ -2,7 +2,6 @@ package States;
 
 import Characters.Character;
 import GameSystems.BattleSystem;
-import GameSystems.State;
 import Interfaces.Action;
 
 public class ActionTurn extends State {

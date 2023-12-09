@@ -1,5 +1,7 @@
 package GameSystems;
 
+import States.State;
+
 public class StateMachine {
     protected State state;
 
