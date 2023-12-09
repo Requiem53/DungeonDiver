@@ -9,7 +9,7 @@ import Statuses.Status;
 public abstract class Attack implements Damaging {
     private final AttackBuilder builder;
 
-    public Attack(AttackBuilder builder){
+    public Attack(AttackBuilder builder) {
         this.builder = builder;
         String name = builder.getName();
         int baseDamage = builder.getBaseDamage();
@@ -18,19 +18,27 @@ public abstract class Attack implements Damaging {
         int flatAttackBonus = builder.getFlatAttackBonus();
         Status status = builder.getStatus();
     }
-    public String getName(){
-        return builder.getName();
-    }
 
     @Override
     public void damage(Character actor, Character target) {
+        System.out.println(flavorText(actor, target));
+        System.out.println(target.getName() + " received " + doAttack(actor, target) + " points of damage");
+    }
+
+    public abstract String flavorText(Character actor, Character target);
+
+    public int doAttack(Character actor, Character target){
         int damageTaken = (int) Math.ceil((actor.getPower() + (builder.getBaseDamage())/100f)) + builder.getFlatAttackBonus();
-        System.out.println(actor.getName() + " attacked");
-        System.out.println(target.getName() + " received " + damageTaken + " points of damage");
         target.takeDamage(damageTaken);
+
+        return damageTaken;
     }
 
     public AttackBuilder getBuilder(){
         return builder;
+    }
+
+    public String getName(){
+        return builder.getName();
     }
 }
