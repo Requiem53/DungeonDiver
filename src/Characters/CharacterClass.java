@@ -32,8 +32,8 @@ public abstract class CharacterClass {
         this.currMana = magicPower;
 
         ArrayList<Attack> attacks = new ArrayList<>(){{
-            add(new NormalAttack());
-            add(new StrongAttack());
+            add(new Attack.NormalAttack());
+            add(new Attack.StrongAttack());
         }};
 
         ArrayList<Spell> spells = new ArrayList<>();

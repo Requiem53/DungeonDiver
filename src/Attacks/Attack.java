@@ -39,4 +39,35 @@ public abstract class Attack implements Damaging {
     public String getName(){
         return builder.getName();
     }
+
+    public static class NormalAttack extends Attack{
+        public NormalAttack(){
+            super(new AttackBuilder().setName("Normal Attack"));
+        }
+
+        @Override
+        public int getSpeed() {
+            return getBuilder().getSpeed();
+        }
+
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " struck " + target + "!";
+        }
+    }
+
+    public static class StrongAttack extends Attack{
+        public StrongAttack(){
+            super(new AttackBuilder().setName("Strong Attack").setBaseDamage(150).setSpeed(-20));
+        }
+        @Override
+        public int getSpeed() {
+            return getBuilder().getSpeed();
+        }
+
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " lunges forward to deal a heavy blow!";
+        }
+    }
 }

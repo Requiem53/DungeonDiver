@@ -1,6 +1,6 @@
 package States;
 
-import Attacks.NormalAttack;
+import Attacks.Attack;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
@@ -16,7 +16,7 @@ public class EnemyChoiceTurn extends State{
         Character currEnemy = getCurrChar();
 
         //add timer in Strong attacks so enemies can use it but utilize random
-        bs.addAction(new Action(new NormalAttack(), currEnemy, allyTarget));
+        bs.addAction(new Action(new Attack.NormalAttack(), currEnemy, allyTarget));
         newChoiceTurn();
     }
 }
