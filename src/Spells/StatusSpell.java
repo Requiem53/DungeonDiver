@@ -9,8 +9,12 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
 
     Status status;
     public StatusSpell(SpellBuilder builder) {
-        super(builder.getName(), builder.getManaCost());
+        super(builder);
         this.status = builder.getStatus();
+    }
+
+    public void doAction(Character actor, Character target){
+        inflictStatus(actor, target);
     }
 
     @Override
@@ -27,6 +31,10 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
             System.out.println(target.getName() + " was inflicted with " + status);
         }
         target.addStatus(status.clone());
+    }
+
+    public boolean isBuff(){
+        return this.status instanceof Buff;
     }
 
     public static class LoyaltyHymn extends StatusSpell{

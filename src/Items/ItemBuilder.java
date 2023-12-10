@@ -3,10 +3,11 @@ package Items;
 import Statuses.*;
 
 public class ItemBuilder {
-    String name;
-    int damage;
-    int amount;
-    Status status;
+    private String name;
+    private int damage;
+    private int amount;
+    private Status status;
+
     public ItemBuilder(){
         name = "MissingItem";
         damage = 0;

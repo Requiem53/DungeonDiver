@@ -1,6 +1,6 @@
 package Equipment;
 
-public class Equippable {
+public abstract class Equippable {
     protected String name;
     protected int maxHealth;
     protected int power;

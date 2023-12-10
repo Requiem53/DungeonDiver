@@ -39,6 +39,12 @@ public class BattleSystem extends StateMachine{
         return enemies;
     }
 
+    public static void outputCharacters(List<Character> characters){
+        for(int i=0; i < characters.size(); i++){
+            System.out.println(i+1 + ". " + characters.get(i));
+        }
+    }
+
     public void addAction(Action action){
         actions.add(action);
     }

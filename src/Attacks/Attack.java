@@ -3,46 +3,44 @@ package Attacks;
 import java.lang.Math;
 
 import Characters.Character;
+import Interfaces.Actionable;
 import Interfaces.Damaging;
 import Statuses.Status;
 
-public abstract class Attack implements Damaging {
+public abstract class Attack extends Actionable implements Damaging {
     private final AttackBuilder builder;
+
+    float basePower;
+    int speed;
+    int flatAttackBonus;
+    Status status;
 
     public Attack(AttackBuilder builder) {
         this.builder = builder;
-        String name = builder.getName();
-        float basePower = builder.getBasePower();
-        int speed = builder.getSpeed();
-        int flatAttackBonus = builder.getFlatAttackBonus();
-        Status status = builder.getStatus();
+        name = builder.getName();
+        basePower = builder.getBasePower();
+        speed = builder.getSpeed();
+        flatAttackBonus = builder.getFlatAttackBonus();
+        status = builder.getStatus();
+    }
+
+    public void doAction(Character actor, Character target){
+        damage(actor, target);
     }
 
     @Override
     public void damage(Character actor, Character target) {
         System.out.println(flavorText(actor, target));
-        //TEST
-        int damageTaken = (int) Math.ceil(actor.getPower() + builder.getBasePower()) + builder.getFlatAttackBonus();
+        int damageTaken = totalPower(actor);
         target.takeDamage(damageTaken);
     }
-
-    public String toString(){
-        return getName();
-    }
-
-//    public int doAttack(Character actor, Character target){  //transfered functionality into damage() above
-//        int damageTaken = (int) Math.ceil(actor.getPower() + builder.getBasePower()) + builder.getFlatAttackBonus();
-//        target.takeDamage(damageTaken);
-//
-//        return damageTaken;
-//    }
 
     public AttackBuilder getBuilder(){
         return builder;
     }
 
-    public String getName(){
-        return builder.getName();
+    public int totalPower(Character actor){
+        return (int) Math.ceil((actor.getPower() + builder.getFlatAttackBonus()) * builder.getBasePower());
     }
 
     public static class NormalAttack extends Attack{
@@ -52,7 +50,7 @@ public abstract class Attack implements Damaging {
 
         @Override
         public int getSpeed() {
-            return getBuilder().getSpeed();
+            return speed;
         }
 
         @Override
@@ -67,7 +65,7 @@ public abstract class Attack implements Damaging {
         }
         @Override
         public int getSpeed() {
-            return getBuilder().getSpeed();
+            return speed;
         }
 
         @Override

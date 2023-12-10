@@ -3,23 +3,23 @@ package Interfaces;
 import Characters.Character;
 
 public class Action implements Comparable<Action>{
-    ActionType actionType;
+    Actionable actionable;
     Character actor;
     Character target;
     int actionSpeed;
 
-    public Action(ActionType actionType, Character actor, Character target){
-        this.actionType = actionType;
+    public Action(Actionable action, Character actor, Character target){
+        this.actionable = action;
         this.actor = actor;
         this.target = target;
         actionSpeed = getActor().getSpeed() + getActionable().getSpeed();
     }
     public void execute(){
-        if(actionType != null) actionType.doAction(actor, target);
+        if(actionable != null) actionable.doAction(actor, target);
         else System.out.println("Null action"); //not work. try catch soon
     }
-    public ActionType getActionable(){
-        return actionType;
+    public Actionable getActionable(){
+        return actionable;
     }
     public Character getActor() {
         return actor;

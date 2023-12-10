@@ -3,9 +3,5 @@ package Interfaces;
 import Characters.Character;
 
 public interface ActionType {
-    default int getSpeed(){
-        return 0;
-    }
-    void doAction(Character actor, Character target);
     String flavorText(Character actor, Character target);
 }

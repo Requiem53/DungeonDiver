@@ -5,10 +5,16 @@ import Interfaces.Healing;
 
 public abstract class HealingItem extends Item implements Healing {
     int amount;         //flat amount
+
     public HealingItem(ItemBuilder builder) {
-        super(builder.getName());
+        super(builder);
         this.amount = builder.getAmount();
     }
+
+    public void doAction(Character actor, Character target){
+        heal(actor, target);
+    }
+
     @Override
     public void heal(Character actor, Character target) {
 //        System.out.println(actor.getName() + " used " + name);

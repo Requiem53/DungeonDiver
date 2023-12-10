@@ -39,6 +39,14 @@ public abstract class State {
           State.enemies = bs.getEnemies();
      }
 
+     public static List<Character> getAllies() {
+          return allies;
+     }
+
+     public static List<Character> getEnemies() {
+          return enemies;
+     }
+
      protected void loopStart(){
           loopBreaker = 1;
      }

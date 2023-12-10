@@ -6,8 +6,12 @@ import Interfaces.Healing;
 public abstract class HealingSpell extends Spell implements Healing {
     int baseAmount;
     public HealingSpell(SpellBuilder builder) {
-        super(builder.getName(), builder.getManaCost());
+        super(builder);
         this.baseAmount = builder.getBaseAmount();
+    }
+
+    public void doAction(Character actor, Character target) {
+        heal(actor, target);
     }
 
     @Override

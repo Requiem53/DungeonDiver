@@ -6,7 +6,7 @@ import Interfaces.Damaging;
 public abstract class DamagingItem extends Item implements Damaging { //In case naa
     int damage;
     DamagingItem(ItemBuilder builder) {
-        super(builder.getName());
+        super(builder);
         this.damage = builder.getDamage();
     }
     @Override

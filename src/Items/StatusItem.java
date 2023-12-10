@@ -8,8 +8,12 @@ import Statuses.Status;
 public abstract class StatusItem extends Item implements StatusInflicting {
     Status status;
     public StatusItem(ItemBuilder builder) {
-        super(builder.getName());
+        super(builder);
         this.status = builder.getStatus();
+    }
+
+    public void doAction(Character actor, Character target){
+        inflictStatus(actor, target);
     }
 
     @Override
@@ -26,6 +30,10 @@ public abstract class StatusItem extends Item implements StatusInflicting {
             System.out.println(target.getName() + " was inflicted with " + status);
         }
         target.addStatus(status.clone());
+    }
+
+    public boolean isBuff(){
+        return this.status instanceof Buff;
     }
 
     public static class SmokeBomb extends StatusItem{
