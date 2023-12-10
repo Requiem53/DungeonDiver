@@ -53,9 +53,9 @@ public class PlayerChoiceTurn extends State {
     }
 
     private void attackSequence(){
-        System.out.println("What attack?");
-        System.out.println("Enter number: ");
+        System.out.println("What attack does " + getCurrChar().getName() + " want to use? Choose: ");
         getCurrChar().listAttacks();
+        System.out.println("Enter number: ");
         Attack attackUsed = (Attack) chooseAction(new ArrayList<>(getCurrChar().getAttacks()));
 
         System.out.println("Attack who?");
@@ -67,7 +67,7 @@ public class PlayerChoiceTurn extends State {
     }
 
     private void spellSequence(){
-        System.out.println("What spells do " + getCurrChar().getName() + " want to use? Choose: ");
+        System.out.println("What spell does " + getCurrChar().getName() + " want to use? Choose: ");
         getCurrChar().listSpells();
         Spell spellUsed = (Spell) chooseAction(new ArrayList<>(getCurrChar().getSpells()));
 
