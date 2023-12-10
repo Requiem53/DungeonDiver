@@ -9,8 +9,6 @@ import java.util.*;
 
 public abstract class State {
      protected BattleSystem bs;
-     protected int numOption;
-     protected String option;
      protected Scanner sc;
      protected Random random;
      protected int loopBreaker;
@@ -54,6 +52,26 @@ public abstract class State {
 
      protected boolean invalidChoice(){
           return loopBreaker == 0;
+     }
+
+     protected void listAllies(){
+          int list = 1;
+          for(Character enemy : enemies){
+               if(enemy.isAlive()){
+                    System.out.println(list + ". " + enemy);
+                    list++;
+               }
+          }
+     }
+
+     protected void listEnemies(){
+          for(Character enemy : enemies){
+               int list = 1;
+               if(enemy.isAlive()){
+                    System.out.println(list + ". " + enemy);
+                    list++;
+               }
+          }
      }
 
      //Potential Useless

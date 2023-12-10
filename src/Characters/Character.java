@@ -137,12 +137,28 @@ public abstract class Character implements Comparable<Character> {
         return doableActions.getInventory();
     }
 
-    public String toStringSpells(){
-        String string = name + "'s spells: ";
-        for(int i=0; i<getSpells().size(); i++){
-            string += "[" + (i+1) + "] " + getSpells().get(i).name + " ";
+    public String listAttacks(){
+        StringBuilder string = new StringBuilder(name + "'s attacks: ");
+        for(int i=0; i<getAttacks().size(); i++){
+            string.append("[").append(i + 1).append("] ").append(getAttacks().get(i)).append(" ");
         }
-        return string;
+        return string.toString();
+    }
+
+    public String listSpells(){
+        StringBuilder string = new StringBuilder(name + "'s spells: ");
+        for(int i=0; i<getSpells().size(); i++){
+            string.append("[").append(i + 1).append("] ").append(getSpells().get(i)).append(" ");
+        }
+        return string.toString();
+    }
+
+    public String listItems(){
+        StringBuilder string = new StringBuilder(name + "'s items: ");
+        for(int i=0; i<getItems().size(); i++){
+            string.append("[").append(i + 1).append("] ").append(getItems().get(i)).append(" ");
+        }
+        return string.toString();
     }
 
     //Bonus from buffs and equipments

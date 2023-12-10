@@ -27,9 +27,12 @@ public class DoableActions {
     public ArrayList<Attack> getAttacks() {
         return attacks;
     }
+
     public ArrayList<Spell> getSpells() {
         return spells;
     }
+
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }

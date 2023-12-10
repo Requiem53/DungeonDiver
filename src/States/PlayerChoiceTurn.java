@@ -1,7 +1,6 @@
 package States;
 
 import Attacks.*;
-import CharacterComponents.DoableActions;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
@@ -11,17 +10,16 @@ import Spells.Spell;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
 
 public class PlayerChoiceTurn extends State {
     public PlayerChoiceTurn(BattleSystem bs) {
         super(bs);
     }
 
-    int list = 1;
-    int target;
-    Character attackTarget;
+    int targetIndex;
+    Character target;
+
+    int actionChoice;
 
     @Override
     public void Start() {
@@ -37,9 +35,9 @@ public class PlayerChoiceTurn extends State {
             );
 
             System.out.println("Type number: ");
-            numOption = sc.nextInt();
+            actionChoice = sc.nextInt();
 
-            switch (numOption) {
+            switch (actionChoice) {
                 case 1 -> attackSequence();
                 case 2 -> spellSequence();
                 case 3 -> itemSequence();
@@ -51,77 +49,34 @@ public class PlayerChoiceTurn extends State {
             }
         }while (invalidChoice());
 
-        option = sc.nextLine();
-        option = option.toLowerCase();
-
         newChoiceTurn();
     }
 
     private void attackSequence(){
         System.out.println("What attack?");
-//            for(int i=0; i<getCurrChar().getAttacks().size(); i++){
-//                System.out.println(i+1 + ". " + getCurrChar().getAttacks().get(i).getName());
-//            }
-            listActions(getCurrChar().getAttacks());
-            int attackChoice = sc.nextInt();
-            Attack attackUsed = getCurrChar().getAttacks().get(attackChoice - 1);
-            System.out.println("Attack who?");
-            for(Character enemy : enemies){
-                if(enemy.isAlive()){
-                    System.out.println(list + ". " + enemy);
-                    list++;
-                }
-            }
-            System.out.println("Enter number: ");
-            target = sc.nextInt();
+        System.out.println("Enter number: ");
+        System.out.println(getCurrChar().listAttacks());
+        Attack attackUsed = chooseAttack();
 
-            attackTarget = enemies.get(target-1);
-            bs.addAction(new Action(attackUsed, getCurrChar(), attackTarget));
+        System.out.println("Attack who?");
+        listEnemies();
+        System.out.println("Enter number: ");
+        target = chooseTarget();
 
-            newChoiceTurn();
+        bs.addAction(new Action(attackUsed, getCurrChar(), target));
+
+        newChoiceTurn();
     }
 
     private void spellSequence(){
-        int spellChoice = 0;
-        Scanner sc = new Scanner(System.in);
         System.out.println("What spells do " + getCurrChar().getName() + " want to use? Choose: ");
-        System.out.println(getCurrChar().toStringSpells());
-        try{
-            while(true){
-                spellChoice = sc.nextInt();
-                sc.nextLine();
-                if(spellChoice > getCurrChar().getSpells().size()){
-                    System.out.println("Choice is out of bounds");
-                }else break;
-            }
-        }catch(InputMismatchException e){
-            System.out.println("Since you didn't enter a number, we will use the first choice >:)");
-            spellChoice = 0;
-        }
-        Spell spellUsed = getCurrChar().getSpells().get(spellChoice - 1);
+        System.out.println(getCurrChar().listSpells());
+        Spell spellUsed = chooseSpell();
+
         System.out.println("Use on who?");
-        int spellTargetInd = 0;
-        Character spellTarget;
-        if(spellUsed instanceof DamagingSpell){
-            for(int i=0; i< enemies.size(); i++){
-                if(enemies.get(i).isAlive()){
-                    System.out.println(i+1 + ". " + enemies.get(i));
-                }
-            }
-            System.out.println("Enter number: ");
-            spellTargetInd = sc.nextInt();
-            spellTarget = enemies.get(spellTargetInd - 1);
-        }else{
-            for(int i=0; i< allies.size(); i++){
-                if(allies.get(i).isAlive()){
-                    System.out.println(i+1 + ". " + allies.get(i));
-                }
-            }
-            System.out.println("Enter number: ");
-            spellTargetInd = sc.nextInt();
-            spellTarget = allies.get(spellTargetInd - 1);
-        }
-        bs.addAction(new Action((Actionable)spellUsed, getCurrChar(), spellTarget));
+        target = chooseSpellTarget(spellUsed);
+
+        bs.addAction(new Action((Actionable)spellUsed, getCurrChar(), target));
 
         newChoiceTurn();
     }
@@ -134,11 +89,55 @@ public class PlayerChoiceTurn extends State {
 
     }
 
-    private void listActions(ArrayList<Actionable> actions){
-        for(int i=0; i < actions.size(); i++){
-            System.out.println(i+1 + ". " + actions.get(i));
+    public Character chooseTarget(){
+        targetIndex = sc.nextInt();
+        return enemies.get(targetIndex -1);
+    }
+
+    public Character chooseSpellTarget(Spell spellUsed){
+        if(spellUsed instanceof DamagingSpell){
+            for(int i=0; i< enemies.size(); i++){
+                if(enemies.get(i).isAlive()){
+                    System.out.println(i+1 + ". " + enemies.get(i));
+                }
+            }
+            System.out.println("Enter number: ");
+            actionChoice = sc.nextInt();
+            return enemies.get(actionChoice - 1);
+        }else{
+            for(int i=0; i< allies.size(); i++){
+                if(allies.get(i).isAlive()){
+                    System.out.println(i+1 + ". " + allies.get(i));
+                }
+            }
+            System.out.println("Enter number: ");
+            actionChoice = sc.nextInt();
+            return allies.get(actionChoice - 1);
         }
     }
+
+    public Attack chooseAttack(){
+        actionChoice = sc.nextInt();
+        return getCurrChar().getAttacks().get(actionChoice - 1);
+    }
+
+    public Spell chooseSpell(){
+        try{
+            while(true){
+                actionChoice = sc.nextInt();
+                sc.nextLine();
+                if(actionChoice > getCurrChar().getSpells().size()){
+                    System.out.println("Choice is out of bounds");
+                }else break;
+            }
+        }catch(InputMismatchException e){
+            System.out.println("Since you didn't enter a number, we will use the first choice >:)");
+            actionChoice = 0;
+        }
+        return getCurrChar().getSpells().get(actionChoice - 1);
+    }
+
+
 }
 
 //package States;
