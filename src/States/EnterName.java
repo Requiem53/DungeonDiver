@@ -11,7 +11,7 @@ public class EnterName extends State {
     @Override
     public void Start() {
         enterName();
-        bs.setState(new InitializeBattlers(bs));
+        bs.setState(new CreateParty(bs));
     }
 
     private void enterName(){

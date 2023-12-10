@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CharacterClass {
+    private String name;
+
     private int maxHealth;
     private int power;
     private int speed;
@@ -22,7 +24,8 @@ public abstract class CharacterClass {
     private final DoableActions initialActions;
     private List<Status> statuses;
 
-    public CharacterClass(int maxHealth, int power, int speed, int defense, int magicPower) {
+    public CharacterClass(String name, int maxHealth, int power, int speed, int defense, int magicPower) {
+        this.name = name;
 
         this.maxHealth = maxHealth;
         this.power = power;
@@ -119,22 +122,8 @@ public abstract class CharacterClass {
         }
         statuses.removeAll(toBeRemoved);
     }
-    public static class Warrior extends CharacterClass{
-        public Warrior() {
-            super(50, 25, 10, 10, 10);
-            addSpell(new StatusSpell.LoyaltyHymn());
-            addItem(new HealingItem.HealingPotion());
-            addItem(new HealingItem.HealingPotion());
-        }
-    }
-    public static class Mage extends CharacterClass{
 
-        public Mage() {
-            super(40, 10, 15, 10, 25);
-            addSpell(new DamagingSpell.Meteors());
-            addSpell(new DamagingSpell.IceBeam());
-            addItem(new HealingItem.HealingPotion());
-            addItem(new StatusItem.SmokeBomb());
-        }
+    public String toString(){
+        return name;
     }
 }

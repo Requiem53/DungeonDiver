@@ -1,3 +1,4 @@
+import Characters.AllyClass;
 import Characters.Character;
 import Characters.CharacterClass;
 import Equipment.Armor;
@@ -14,9 +15,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         //Add character creator
-        Character.Ally char1 = new Character.Ally("Maurice", new CharacterClass.Mage());
-        Character.Ally char2 = new Character.Ally("Slamm", new CharacterClass.Warrior());
-        Character.Enemy en1 = new Character.Enemy("RODEN", new CharacterClass.Warrior());
+        Character.Ally char1 = new Character.Ally("Maurice", new AllyClass.Mage());
+        Character.Ally char2 = new Character.Ally("Slamm", new AllyClass.Warrior());
+        Character.Enemy en1 = new Character.Enemy("RODEN", new AllyClass.Warrior());
 
         List<Character> entities = new ArrayList<>();
         entities.add(char2);
