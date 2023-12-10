@@ -21,8 +21,13 @@ public abstract class Attack implements Damaging {
     @Override
     public void damage(Character actor, Character target) {
         System.out.println(flavorText(actor, target));
+        //TEST
         int damageTaken = (int) Math.ceil(actor.getPower() + builder.getBasePower()) + builder.getFlatAttackBonus();
         target.takeDamage(damageTaken);
+    }
+
+    public String toString(){
+        return getName();
     }
 
 //    public int doAttack(Character actor, Character target){  //transfered functionality into damage() above

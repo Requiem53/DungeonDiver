@@ -34,6 +34,16 @@ public abstract class State {
           bs.setState(new ChoiceTurn(bs));
      }
 
+     public abstract void Start();
+
+     public void initializeAllies(){
+          State.allies = bs.getAllies();
+     }
+
+     public void initializeEnemies(){
+          State.enemies = bs.getEnemies();
+     }
+
      protected void loopStart(){
           loopBreaker = 1;
      }
@@ -52,8 +62,6 @@ public abstract class State {
           return bs.getCurrChar();
      }
 
-
-
      protected void deadValidate(){
           if(!getCurrChar().isAlive()){
                System.out.println(getCurrChar() + " is already dead!");
@@ -64,6 +72,4 @@ public abstract class State {
      public BattleSystem getBs() {
           return bs;
      }
-
-     public abstract void Start();
 }

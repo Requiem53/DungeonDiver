@@ -11,15 +11,20 @@ public class ChoiceTurn extends State {
     @Override
     public void Start() {
         bs.incrementTurn();
-        if(bs.getCurrentTurn() >= bs.getCharacters().size()){
+        if(allCharactersHaveChosenActions()){
             bs.sortActions();
             bs.setState(new ActionTurn(bs));
         }
-        if(!(bs.getCurrChar() instanceof Character.Enemy)){
+
+        if(bs.currCharIsAlly()){
             bs.setState(new PlayerChoiceTurn(bs));
-        } else {
+        }
+        else {
             bs.setState(new EnemyChoiceTurn(bs));
         }
+    }
 
+    private boolean allCharactersHaveChosenActions(){
+        return bs.getCurrentTurn() >= bs.getCharacters().size();
     }
 }

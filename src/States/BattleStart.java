@@ -11,13 +11,6 @@ public class BattleStart extends State {
     @Override
     public void Start() {
         System.out.println("The battle is starting....");
-        for(Character chara : bs.getCharacters()){
-            if(chara instanceof Character.Enemy){
-                enemies.add(chara);
-            }else{
-                allies.add(chara);
-            }
-        }
         newChoiceTurn();
     }
 }

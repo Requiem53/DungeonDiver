@@ -1,6 +1,7 @@
 package States;
 
 import Attacks.*;
+import CharacterComponents.DoableActions;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
@@ -8,7 +9,9 @@ import Interfaces.Actionable;
 import Spells.DamagingSpell;
 import Spells.Spell;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class PlayerChoiceTurn extends State {
@@ -56,9 +59,10 @@ public class PlayerChoiceTurn extends State {
 
     private void attackSequence(){
         System.out.println("What attack?");
-            for(int i=0; i<getCurrChar().getAttacks().size(); i++){
-                System.out.println(i+1 + ". " + getCurrChar().getAttacks().get(i).getName());
-            }
+//            for(int i=0; i<getCurrChar().getAttacks().size(); i++){
+//                System.out.println(i+1 + ". " + getCurrChar().getAttacks().get(i).getName());
+//            }
+            listActions(getCurrChar().getAttacks());
             int attackChoice = sc.nextInt();
             Attack attackUsed = getCurrChar().getAttacks().get(attackChoice - 1);
             System.out.println("Attack who?");
@@ -128,6 +132,12 @@ public class PlayerChoiceTurn extends State {
 
     private void blockSequence(){
 
+    }
+
+    private void listActions(ArrayList<Actionable> actions){
+        for(int i=0; i < actions.size(); i++){
+            System.out.println(i+1 + ". " + actions.get(i));
+        }
     }
 }
 

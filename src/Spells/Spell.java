@@ -11,4 +11,8 @@ public abstract class Spell{
         this.name = name;
         this.manaCost = manaCost;
     }
+
+    public String toString(){
+        return name;
+    }
 }

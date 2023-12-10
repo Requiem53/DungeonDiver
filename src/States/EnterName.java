@@ -10,6 +10,11 @@ public class EnterName extends State {
 
     @Override
     public void Start() {
+        enterName();
+        bs.setState(new InitializeBattlers(bs));
+    }
+
+    private void enterName(){
         String name = null;
         while(true){
             System.out.print("Enter your name: ");
@@ -19,6 +24,5 @@ public class EnterName extends State {
             }else break;
         }
         bs.user = new User(name);
-        bs.setState(new BattleStart(bs));
     }
 }
