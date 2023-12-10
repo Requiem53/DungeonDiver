@@ -2,7 +2,7 @@ package Interfaces;
 
 import Characters.Character;
 
-public interface Actionable {
+public interface ActionType {
     default int getSpeed(){
         return 0;
     }

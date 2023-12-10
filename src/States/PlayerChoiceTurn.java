@@ -4,11 +4,10 @@ import Attacks.*;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
-import Interfaces.Actionable;
+import Interfaces.ActionType;
 import Spells.DamagingSpell;
 import Spells.Spell;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class PlayerChoiceTurn extends State {
@@ -76,7 +75,7 @@ public class PlayerChoiceTurn extends State {
         System.out.println("Use on who?");
         target = chooseSpellTarget(spellUsed);
 
-        bs.addAction(new Action((Actionable)spellUsed, getCurrChar(), target));
+        bs.addAction(new Action((ActionType)spellUsed, getCurrChar(), target));
 
         newChoiceTurn();
     }

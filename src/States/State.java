@@ -16,11 +16,8 @@ public abstract class State {
      protected static List<Character> allies = new ArrayList<>();
      protected static List<Character> enemies = new ArrayList<>();
 
-     protected ActionExecutor executor;
-
      public State(BattleSystem bs){
           this.bs = bs;
-          executor = new ActionExecutor();
 
           sc = new Scanner(System.in);
           random = new Random();
