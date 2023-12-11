@@ -28,10 +28,16 @@ public class Party {
         else System.out.println("Party is already full!");
     }
 
-    public int getGold() {
-        return gold;
-    }
     public void addGold(int gold){
         this.gold += gold;
     }
+
+    public void spendGold(int amount){
+        this.gold -= amount;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
 }
