@@ -35,6 +35,8 @@ public class ActionTurn extends State {
 
         if(victory){
             System.out.println("You have won the battle!");
+            System.out.println("You received 100 gold from the skirmish!");
+            bs.getParty().addGold(100);
             bs.setState(new DescendLevel(bs));
             return;
         }
