@@ -27,6 +27,8 @@ public abstract class State {
           dungeonLevel = 1;
 
           loopBreaker = 1;
+
+          System.out.println();
      }
 
      protected void newChoiceTurn(){

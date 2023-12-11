@@ -83,6 +83,10 @@ public abstract class Character implements Comparable<Character> {
         equipment.unequipArmor();
     }
 
+    public void removeFromList(List<Character> characters){
+        characters.remove(this);
+    }
+
     //Getters
     public String toString(){
         return name;

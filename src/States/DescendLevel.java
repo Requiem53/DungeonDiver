@@ -10,7 +10,6 @@ public class DescendLevel extends State{
     @Override
     public void Start() {
         dungeonLevel++;
-        System.out.println();
         System.out.println("You have descended a level");
 
         bs.setState(new InitializeBattlers(bs));

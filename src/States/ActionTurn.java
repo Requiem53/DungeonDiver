@@ -19,6 +19,7 @@ public class ActionTurn extends State {
             }
             newChoiceTurn();
         }
+
         assert currentAction != null;
         currentAction.execute();
         boolean victory = false;
