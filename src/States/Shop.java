@@ -11,6 +11,10 @@ public class Shop extends State{
     @Override
     public void Start() {
         System.out.println("This the shop yeah");
+        //Add small shop that sells weapons and armor
+        //Add option to learn new spells, attacks
+        //Add sell items
+        //Add revive allies option
         bs.setState(new DescendLevel(bs));
     }
 }
