@@ -17,6 +17,10 @@ public class Party {
         this.party = party;
     }
 
+    public ArrayList<Character> getParty() {
+        return party;
+    }
+
     public void addMember(Character character){
         if(party.size() < 4) party.add(character);
         else System.out.println("Party is already full!");

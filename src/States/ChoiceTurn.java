@@ -25,6 +25,6 @@ public class ChoiceTurn extends State {
     }
 
     private boolean allCharactersHaveChosenActions(){
-        return bs.getCurrentTurn() >= bs.getCharacters().size();
+        return bs.getCurrentTurn() >= bs.getPartyMembers().size();
     }
 }

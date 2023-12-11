@@ -3,7 +3,6 @@ package Interfaces;
 import Characters.Character;
 import GameSystems.BattleSystem;
 import States.State;
-import Statuses.Buff;
 
 import java.util.List;
 import java.util.Scanner;
@@ -26,11 +25,11 @@ public abstract class Actionable {
     }
 
     public Character chooseTarget(){
-        if(this instanceof Damaging) return chooseCharacter(State.getEnemies());
+        if(this instanceof Damaging) return chooseCharacter(State.getRandomEnemies());
         else if(this instanceof Healing) return chooseCharacter(State.getAllies());
         else if(this instanceof StatusInflicting)
             if (((StatusInflicting) this).isBuff()) return chooseCharacter(State.getAllies());
-            else return chooseCharacter(State.getEnemies());
+            else return chooseCharacter(State.getRandomEnemies());
         return null;
     }
 

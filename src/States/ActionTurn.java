@@ -14,7 +14,7 @@ public class ActionTurn extends State {
         Action currentAction = bs.dequeueActionsSorted();
         if(currentAction == null){
             bs.actionListsReset();
-            for(Character character : bs.getCharacters()){
+            for(Character character : bs.getPartyMembers()){
                 character.decrementStatusDuration();
             }
             newChoiceTurn();
@@ -24,7 +24,7 @@ public class ActionTurn extends State {
         boolean victory = false;
         boolean defeat = false;
 
-        for(Character enemy : enemies){
+        for(Character enemy : randomEnemies){
             if(enemy.isAlive()){
                 victory = false;
                 break;
@@ -44,6 +44,7 @@ public class ActionTurn extends State {
             System.out.println("You have won the battle!");
             //Add new battle diri ug file handling para record sa number of battles won niya sa
             //characters gigamit
+            bs.setState(new DescendLevel(bs));
             return;
         }
 

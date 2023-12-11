@@ -1,6 +1,7 @@
 package GameSystems;
 
 import Characters.Character;
+import Characters.Party;
 import Interfaces.*;
 import States.*;
 
@@ -8,20 +9,26 @@ import java.util.*;
 
 public class BattleSystem extends StateMachine{
     public User user;
-    private final List<Character> characters;
     private int currentTurn = -1;
+
+    private Party party;
 
     List<Action> actions = new ArrayList<>();
     Queue<Action> actionsSorted;
 
-    public BattleSystem(List<Character> characters){
-        this.characters = characters;
+    public BattleSystem(){
+        party = new Party();
         setState(new EnterName(this));
     }
 
+//    public BattleSystem(List<Character> characters){
+//        this.characters = characters;
+//        setState(new EnterName(this));
+//    }
+
     public List<Character> getAllies(){
         List<Character> allies = new ArrayList<>();
-        for(Character chara : getCharacters()){
+        for(Character chara : getPartyMembers()){
             if(chara instanceof Character.Ally){
                 allies.add(chara);
             }
@@ -29,15 +36,15 @@ public class BattleSystem extends StateMachine{
         return allies;
     }
 
-    public List<Character> getEnemies(){
-        List<Character> enemies = new ArrayList<>();
-        for(Character chara : getCharacters()){
-            if(chara instanceof Character.Enemy){
-                enemies.add(chara);
-            }
-        }
-        return enemies;
-    }
+//    public List<Character> getEnemies(){
+//        List<Character> enemies = new ArrayList<>();
+//        for(Character chara : getCharacters()){
+//            if(chara instanceof Character.Enemy){
+//                enemies.add(chara);
+//            }
+//        }
+//        return enemies;
+//    }
 
     public static void outputCharacters(List<Character> characters){
         for(int i=0; i < characters.size(); i++){
@@ -64,14 +71,26 @@ public class BattleSystem extends StateMachine{
         currentTurn = -1;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
+//    public List<Character> getCharacters() {
+//        return characters;
+//    }
+    public Queue<Action> getActionsSorted() {
+        return actionsSorted;
     }
+
     public Character getCurrChar(){
-        return characters.get(getCurrentTurn());
+        return getPartyMembers().get(getCurrentTurn());
     }
     public User getUser(){
         return user;
+    }
+
+    public Party getParty() {
+        return party;
+    }
+
+    public ArrayList<Character> getPartyMembers(){
+        return getParty().getParty();
     }
 
     public void incrementTurn(){

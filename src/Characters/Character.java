@@ -128,6 +128,10 @@ public abstract class Character implements Comparable<Character> {
         return charClass.getCurrMana();
     }
 
+    public String getClassName(){
+        return charClass.getName();
+    }
+
     //Doable Actions
     public ArrayList<Attack> getAttacks(){
         return doableActions.getAttacks();
