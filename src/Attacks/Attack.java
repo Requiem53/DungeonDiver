@@ -59,9 +59,25 @@ public abstract class Attack extends Actionable implements Damaging {
         }
     }
 
+    public static class QuickAttack extends Attack{
+        public QuickAttack(){
+            super(new AttackBuilder().setName("Quick Attack").setBasePower(0.5f).setSpeed(100));
+        }
+
+        @Override
+        public int getSpeed() {
+            return speed;
+        }
+
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " struck " + target + "!";
+        }
+    }
+
     public static class StrongAttack extends Attack{
         public StrongAttack(){
-            super(new AttackBuilder().setName("Strong Attack").setBasePower(1.5f).setSpeed(-20));
+            super(new AttackBuilder().setName("Strong Attack").setBasePower(1.5f).setSpeed(-100));
         }
         @Override
         public int getSpeed() {

@@ -11,7 +11,6 @@ public class ActionTurn extends State {
 
     @Override
     public void Start() {
-
         Action currentAction = bs.dequeueActionsSorted();
 
         if(actionTurnOver(currentAction)){
@@ -22,17 +21,6 @@ public class ActionTurn extends State {
         currentAction.execute();
 
         removeDeadCharacters();
-
-        //Sad momentz di mugana
-//        if(!currentAction.getActor().isAlive()){
-//            currentAction.removeFromList(livingAllies, currentAction.getActor());
-//            System.out.println("AH");
-//        }
-//
-//        if(!currentAction.getTarget().isAlive()){
-//            currentAction.removeFromList(randomEnemies, currentAction.getTarget());
-//            System.out.println("HA");
-//        }
 
         boolean victory = false;
         boolean defeat = false;
@@ -47,16 +35,13 @@ public class ActionTurn extends State {
 
         if(victory){
             System.out.println("You have won the battle!");
-            //Add new battle diri ug file handling para record sa number of battles won niya sa
-            //characters gigamit
             bs.setState(new DescendLevel(bs));
             return;
         }
 
         if(defeat){
             System.out.println("You have lost the battle!");
-            //Add new battle diri ug file handling para record sa number of battles won niya sa
-            //characters gigamit
+            bs.setState(new Defeat(bs));
             return;
         }
         System.out.println("-----------------------------");
@@ -73,6 +58,16 @@ public class ActionTurn extends State {
             if(!randomEnemies.get(i).isAlive())
                 randomEnemies.remove(i);
         }
+        //Sad momentz di mugana
+//        if(!currentAction.getActor().isAlive()){
+//            currentAction.removeFromList(livingAllies, currentAction.getActor());
+//            System.out.println("AH");
+//        }
+//
+//        if(!currentAction.getTarget().isAlive()){
+//            currentAction.removeFromList(randomEnemies, currentAction.getTarget());
+//            System.out.println("HA");
+//        }
     }
 
     private boolean actionTurnOver(Action currentAction){

@@ -43,6 +43,7 @@ public abstract class CharacterClass {
 
         ArrayList<Attack> attacks = new ArrayList<>(){{
             add(new Attack.NormalAttack());
+            add(new Attack.QuickAttack());
             add(new Attack.StrongAttack());
         }};
 
@@ -67,53 +68,6 @@ public abstract class CharacterClass {
         currHealth = Math.max(maxHealth, currHealth+amount);
     }
 
-    public int attack(Character character){
-        character.takeDamage(power);
-        return power;
-    }
-
-    public int getMaxHealth() {
-        return maxHealth;
-    }
-
-    public int getPower() {
-        return power;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getMagicPower() {
-        return magicPower;
-    }
-    public float getEvasion(){
-        return evasion;
-    }
-
-    public int getCurrHealth() {
-        return currHealth;
-    }
-
-    public int getCurrMana() {
-        return currMana;
-    }
-    public List<Status> getStatuses(){
-        return statuses;
-    }
-
-    public Equipment getEquipment() {
-        return equipment;
-    }
-
-    public void decreaseMana(int amount){
-        currMana -= amount;
-    }
-
     public void addSpell(Spell spell) {
         initialActions.addSpell(spell);
     }
@@ -123,6 +77,7 @@ public abstract class CharacterClass {
     public void addStatus(Status status){
         statuses.add(status);
     }
+
     public void equipWeapon(Weapon weapon){
         equipment.equipWeapon(weapon);
         equipment.addEquippable(weapon);
@@ -142,11 +97,44 @@ public abstract class CharacterClass {
         statuses.removeAll(toBeRemoved);
     }
 
-    public String toString(){
+    //Getters
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+    public int getPower() {
+        return power;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public int getDefense() {
+        return defense;
+    }
+    public int getMagicPower() {
+        return magicPower;
+    }
+    public float getEvasion(){
+        return evasion;
+    }
+    public int getCurrHealth() {
+        return currHealth;
+    }
+    public int getCurrMana() {
+        return currMana;
+    }
+    public List<Status> getStatuses(){
+        return statuses;
+    }
+    public Equipment getEquipment() {
+        return equipment;
+    }
+    public void decreaseMana(int amount){
+        currMana -= amount;
+    }
+    public String getName(){
         return name;
     }
-
-    public String getName(){
+    public String toString(){
         return name;
     }
 }

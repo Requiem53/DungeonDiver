@@ -15,45 +15,19 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class Character implements Comparable<Character> {
-    //pun an guro spells pero I guess sakto na ang weapons
-    //simple only
-    //Add AI to enemy too
-    //simply only as well
+
     private String name;
     private CharacterClass charClass;
-//    private getEquipment() getEquipment();
     private DoableActions doableActions;
 
     public Character(String name, CharacterClass charClass) {
         this.name = name;
         this.charClass = charClass;
 
-//        getEquipment() = new getEquipment()();
         doableActions = charClass.getInitialActions();
     }
 
-    //Debug Methods
-    public void currentDetails(){
-        System.out.println(name + "\n"
-        + "Health: " + " (" + getCurrHealth() + "/" + getMaxHealth() + ") \n"
-        + "Mana: "  + " (" + getCurrMana() + "/" + getMagicPower() + ") \n"
-        + "Power: " + getPower() + "\n"
-        + "Speed: " + getSpeed() + "\n"
-        + "Defense: " + getDefense() + "\n"
-        );
-    }
-
-    public void printCurrWeapon(){
-        System.out.println(name);
-
-        if(getEquipment().getWeapon() == null) System.out.println("You have no weapons equipped!");
-        else System.out.println(getEquipment().getWeapon());
-    }
-
     //Actions
-    public int attack(Character character){
-        return charClass.attack(character);
-    }
     public void takeDamage(int damage){
         Random random = new Random();
         if(random.nextFloat() < getEvasion()){
@@ -83,59 +57,6 @@ public abstract class Character implements Comparable<Character> {
         getEquipment().unequipArmor();
     }
 
-    //Getters
-    public String toString(){
-        return name;
-    }
-
-    public boolean isAlive(){
-        return getCurrHealth() > 0;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    //Character Class
-    public int getMaxHealth() {
-        return charClass.getMaxHealth() + getBonusMaxHealth();
-    }
-
-    public int getPower() {
-        return charClass.getPower() + getBonusPower();
-    }
-
-    public int getSpeed() {
-        return charClass.getSpeed() + getBonusSpeed();
-    }
-
-    public int getDefense() {
-        return charClass.getDefense() + getBonusDefense();
-    }
-
-    public int getMagicPower() {
-        return charClass.getMagicPower() + getBonusMagicPower();
-    }
-    public float getEvasion(){
-        return charClass.getEvasion() + getBonusEvasion();
-    }
-
-    public int getCurrHealth() {
-        return charClass.getCurrHealth();
-    }
-
-    public int getCurrMana(){
-        return charClass.getCurrMana();
-    }
-
-    public String getClassName(){
-        return charClass.getName();
-    }
-
-    public Equipment getEquipment() {
-        return charClass.getEquipment();
-    }
-
     //Doable Actions
     public ArrayList<Attack> getAttacks(){
         return doableActions.getAttacks();
@@ -162,7 +83,7 @@ public abstract class Character implements Comparable<Character> {
         doableActions.listActions(new ArrayList<>(getItems()));
     }
 
-    //Bonus from buffs and getEquipment()s
+    //Bonus from buffs and getEquipment()
     public int getBonusMaxHealth(){
         int total = 0;
         if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getMaxHealth();
@@ -239,6 +160,7 @@ public abstract class Character implements Comparable<Character> {
         }
         return total;
     }
+
     public boolean decreaseMana(int amount){        //returns boolean for spell usage checking
         if((charClass.getCurrMana() - amount) < 0){
             return false;
@@ -255,6 +177,49 @@ public abstract class Character implements Comparable<Character> {
     @Override
     public int compareTo(Character o){
         return Integer.compare(o.getSpeed(), this.getSpeed());
+    }
+
+    //Getters
+    //Character Class
+    public String getName() {
+        return name;
+    }
+    public int getMaxHealth() {
+        return charClass.getMaxHealth() + getBonusMaxHealth();
+    }
+    public int getPower() {
+        return charClass.getPower() + getBonusPower();
+    }
+    public int getSpeed() {
+        return charClass.getSpeed() + getBonusSpeed();
+    }
+    public int getDefense() {
+        return charClass.getDefense() + getBonusDefense();
+    }
+    public int getMagicPower() {
+        return charClass.getMagicPower() + getBonusMagicPower();
+    }
+    public float getEvasion(){
+        return charClass.getEvasion() + getBonusEvasion();
+    }
+    public int getCurrHealth() {
+        return charClass.getCurrHealth();
+    }
+    public int getCurrMana(){
+        return charClass.getCurrMana();
+    }
+    public String getClassName(){
+        return charClass.getName();
+    }
+    public Equipment getEquipment() {
+        return charClass.getEquipment();
+    }
+    public boolean isAlive(){
+        return getCurrHealth() > 0;
+    }
+
+    public String toString(){
+        return name;
     }
 
     public static class Ally extends Character{

@@ -12,14 +12,6 @@ public abstract class Actionable {
 
     public abstract void doAction(Character actor, Character target);
 
-    public String toString(){
-        return name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
     public int getSpeed(){
         return 0;
     }
@@ -41,5 +33,12 @@ public abstract class Actionable {
         actionChoice = sc.nextInt();
 
         return characters.get(actionChoice - 1);
+    }
+
+    public String toString(){
+        return name;
+    }
+    public String getName(){
+        return name;
     }
 }

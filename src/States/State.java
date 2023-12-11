@@ -7,7 +7,6 @@ import GameSystems.BattleSystem;
 import java.util.*;
 
 public abstract class State {
-
      protected int dungeonLevel;
 
      protected BattleSystem bs;
@@ -28,19 +27,17 @@ public abstract class State {
           System.out.println();
      }
 
+     public abstract void Start();
+
      protected void newChoiceTurn(){
           bs.setState(new ChoiceTurn(bs));
      }
-
-     public abstract void Start();
-
      public void initializeAllies(){
           State.livingAllies = bs.getPartyMembers();
      }
-
      public void initializeEnemies(){
-//          State.randomEnemies = bs.getEnemies();
           //temporary
+          //Add random enemy generator soon depending on dungeon level
           randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
           randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
      }
@@ -48,37 +45,10 @@ public abstract class State {
      public static List<Character> getLivingAllies() {
           return livingAllies;
      }
-
      public static List<Character> getRandomEnemies() {
           return randomEnemies;
      }
-
-     protected void listAllies(){
-          int list = 1;
-          for(Character enemy : randomEnemies){
-               if(enemy.isAlive()){
-                    System.out.println(list + ". " + enemy);
-                    list++;
-               }
-          }
-     }
-
-     protected void listEnemies(){
-          for(Character enemy : randomEnemies){
-               int list = 1;
-               if(enemy.isAlive()){
-                    System.out.println(list + ". " + enemy);
-                    list++;
-               }
-          }
-     }
-
      protected Character getCurrChar(){
-//          return bs.getCharacters().get(bs.getCurrentTurn());
           return bs.getCurrChar();
-     }
-
-     public BattleSystem getBs() {
-          return bs;
      }
 }

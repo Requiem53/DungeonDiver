@@ -7,6 +7,7 @@ import Statuses.Status;
 
 public abstract class StatusItem extends Item implements StatusInflicting {
     Status status;
+
     public StatusItem(ItemBuilder builder) {
         super(builder);
         this.status = builder.getStatus();

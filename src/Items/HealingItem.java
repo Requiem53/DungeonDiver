@@ -17,7 +17,6 @@ public abstract class HealingItem extends Item implements Healing {
 
     @Override
     public void heal(Character actor, Character target) {
-//        System.out.println(actor.getName() + " used " + name);
         System.out.println(flavorText(actor, target));
         System.out.println(target.getName() + " was healed by " + amount + " points.");
         target.heal(amount);

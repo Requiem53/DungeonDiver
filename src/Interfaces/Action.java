@@ -16,18 +16,10 @@ public class Action implements Comparable<Action>{
         this.target = target;
         actionSpeed = getActor().getSpeed() + getActionable().getSpeed();
     }
+
     public void execute(){
         if(actionable != null) actionable.doAction(actor, target);
         else System.out.println("Null action"); //not work. try catch soon
-    }
-    public Actionable getActionable(){
-        return actionable;
-    }
-    public Character getActor() {
-        return actor;
-    }
-    public Character getTarget() {
-        return target;
     }
 
     public void removeFromList(List<Character> characters, Character chara){
@@ -37,5 +29,14 @@ public class Action implements Comparable<Action>{
     @Override
     public int compareTo(Action o) {
         return Integer.compare(o.actionSpeed, this.actionSpeed);
+    }
+    public Actionable getActionable(){
+        return actionable;
+    }
+    public Character getActor() {
+        return actor;
+    }
+    public Character getTarget() {
+        return target;
     }
 }

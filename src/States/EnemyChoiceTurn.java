@@ -15,6 +15,7 @@ public class EnemyChoiceTurn extends State{
         Character allyTarget = livingAllies.get(random.nextInt(livingAllies.size()));
         Character currEnemy = getCurrChar();
 
+        //No random yet bruh
         //add timer in Strong attacks so enemies can use it but utilize random
         bs.addAction(new Action(new Attack.NormalAttack(), currEnemy, allyTarget));
         newChoiceTurn();
