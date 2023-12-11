@@ -1,6 +1,9 @@
 package Characters;
 
 import CharacterComponents.DoableActions;
+import Equipment.Equipment;
+import Equipment.Weapon;
+import Equipment.Armor;
 import Spells.*;
 import Statuses.*;
 import Attacks.*;
@@ -21,6 +24,7 @@ public abstract class CharacterClass {
     private int currHealth;
     private int currMana;
 
+    private Equipment equipment;
     private final DoableActions initialActions;
     private List<Status> statuses;
 
@@ -44,6 +48,8 @@ public abstract class CharacterClass {
 
         ArrayList<Spell> spells = new ArrayList<>();
         ArrayList<Item> items = new ArrayList<>();
+
+        equipment = new Equipment();
 
         initialActions = new DoableActions(attacks, spells, items);
         statuses = new ArrayList<>();
@@ -99,6 +105,11 @@ public abstract class CharacterClass {
     public List<Status> getStatuses(){
         return statuses;
     }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
     public void decreaseMana(int amount){
         currMana -= amount;
     }
@@ -111,6 +122,14 @@ public abstract class CharacterClass {
     }
     public void addStatus(Status status){
         statuses.add(status);
+    }
+    public void equipWeapon(Weapon weapon){
+        equipment.equipWeapon(weapon);
+        equipment.addEquippable(weapon);
+    }
+    public void equipArmor(Armor armor){
+        equipment.equipArmor(armor);
+        equipment.addEquippable(armor);
     }
     public void decrementStatusDuration(){
         List<Status> toBeRemoved = new ArrayList<>();

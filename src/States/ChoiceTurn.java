@@ -11,6 +11,7 @@ public class ChoiceTurn extends State {
     @Override
     public void Start() {
         bs.incrementTurn();
+
         if(allCharactersHaveChosenActions()){
             bs.sortActions();
             bs.setState(new ActionTurn(bs));

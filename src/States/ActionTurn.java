@@ -11,33 +11,37 @@ public class ActionTurn extends State {
 
     @Override
     public void Start() {
+
         Action currentAction = bs.dequeueActionsSorted();
-        if(currentAction == null){
-            bs.actionListsReset();
-            for(Character character : bs.getPartyMembers()){
-                character.decrementStatusDuration();
-            }
-            newChoiceTurn();
+
+        if(actionTurnOver(currentAction)){
+            newTurn();
         }
 
         assert currentAction != null;
         currentAction.execute();
+
+        removeDeadCharacters();
+
+        //Sad momentz di mugana
+//        if(!currentAction.getActor().isAlive()){
+//            currentAction.removeFromList(livingAllies, currentAction.getActor());
+//            System.out.println("AH");
+//        }
+//
+//        if(!currentAction.getTarget().isAlive()){
+//            currentAction.removeFromList(randomEnemies, currentAction.getTarget());
+//            System.out.println("HA");
+//        }
+
         boolean victory = false;
         boolean defeat = false;
 
-        for(Character enemy : randomEnemies){
-            if(enemy.isAlive()){
-                victory = false;
-                break;
-            }
+        if(randomEnemies.isEmpty()){
             victory = true;
         }
 
-        for(Character ally : allies){
-            if(ally.isAlive()){
-                defeat = false;
-                break;
-            }
+        if(livingAllies.isEmpty()){
             defeat = true;
         }
 
@@ -57,5 +61,29 @@ public class ActionTurn extends State {
         }
         System.out.println("-----------------------------");
         bs.setState(new ActionTurn(bs));
+    }
+
+    private void removeDeadCharacters(){
+        for(int i = 0; i < livingAllies.size(); i++){
+            if(!livingAllies.get(i).isAlive())
+                livingAllies.remove(i);
+        }
+
+        for(int i = 0; i < randomEnemies.size(); i++){
+            if(!randomEnemies.get(i).isAlive())
+                randomEnemies.remove(i);
+        }
+    }
+
+    private boolean actionTurnOver(Action currentAction){
+        return currentAction == null;
+    }
+
+    private void newTurn(){
+        bs.actionListsReset();
+        for(Character character : bs.getPartyMembers()){
+            character.decrementStatusDuration();
+        }
+        newChoiceTurn();
     }
 }

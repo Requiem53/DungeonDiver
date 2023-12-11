@@ -5,6 +5,7 @@ import Characters.Character;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
 import Interfaces.Actionable;
+import Items.Item;
 import Spells.DamagingSpell;
 import Spells.Spell;
 
@@ -23,34 +24,34 @@ public class PlayerChoiceTurn extends State {
 
     @Override
     public void Start() {
-        do {
-            loopStart();
+        chooseOptionSequnce();
+    }
+    private void chooseOptionSequnce(){
+        System.out.println("What will " + getCurrChar() + " do?");
+        System.out.println(
+                "1. Do Attack" + "\n" +
+                "2. Cast Spell" + "\n" +
+                "3. Use Item" + "\n" +
+                "4. Change Equipment"
+        );
 
-            System.out.println("What will " + getCurrChar() + " do?");
-            System.out.println(
-                    "1. Do Attack" + "\n" +
-                    "2. Cast Spell" + "\n" +
-                    "3. Use Item" + "\n" +
-                    "4. Block"
-            );
+        System.out.println("Type number: ");
+        actionChoice = sc.nextInt();
 
-            System.out.println("Type number: ");
-            actionChoice = sc.nextInt();
-
-            switch (actionChoice) {
-                case 1 -> attackSequence();
-                case 2 -> spellSequence();
-                case 3 -> itemSequence();
-                case 4 -> blockSequence();
-                default -> {
-                    System.out.println("NOT A VALID OPTION");
-                    redoLoop();
-                }
+        switch (actionChoice) {
+            case 1 -> attackSequence();
+            case 2 -> spellSequence();
+            case 3 -> itemSequence();
+            case 4 -> equipmentSequence();
+            default -> {
+                System.out.println("NOT A VALID OPTION");
+                chooseOptionSequnce();
             }
-        }while (invalidChoice());
+        }
 
         newChoiceTurn();
     }
+
 
     private void attackSequence(){
         System.out.println("What attack does " + getCurrChar().getName() + " want to use? Choose: ");
@@ -80,11 +81,23 @@ public class PlayerChoiceTurn extends State {
     }
 
     private void itemSequence(){
+        System.out.println("What item does " + getCurrChar().getName() + " want to use? Choose: ");
+        getCurrChar().listItems();
+        Item itemUsed = (Item) chooseAction(new ArrayList<>(getCurrChar().getItems()));
 
+        System.out.println("Use on who?");
+        target = itemUsed.chooseTarget();
+
+        bs.addAction(new Action(itemUsed, getCurrChar(), target));
+
+        newChoiceTurn();
     }
 
-    private void blockSequence(){
-
+    private void equipmentSequence(){
+        System.out.println("What equipment would you like to interact with?");
+        getCurrChar().getEquipment().viewEquipment();
+        actionChoice = sc.nextInt();
+        getCurrChar().getEquipment().processEquipment(actionChoice);
     }
 
     public Actionable chooseAction(ArrayList<Actionable> actionables){

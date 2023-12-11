@@ -10,4 +10,10 @@ public abstract class Armor extends Equippable{
             super(new EquippableBuilder().setName("Cloth Armor").setDefense(10));
         }
     }
+
+    public static class KnightsAmor extends Armor{
+        public KnightsAmor() {
+            super(new EquippableBuilder().setName("Knight's Armor").setDefense(20));
+        }
+    }
 }

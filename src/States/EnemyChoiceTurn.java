@@ -12,7 +12,7 @@ public class EnemyChoiceTurn extends State{
 
     @Override
     public void Start() {
-        Character allyTarget = allies.get(random.nextInt(allies.size()));
+        Character allyTarget = livingAllies.get(random.nextInt(livingAllies.size()));
         Character currEnemy = getCurrChar();
 
         //add timer in Strong attacks so enemies can use it but utilize random

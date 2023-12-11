@@ -26,9 +26,9 @@ public abstract class Actionable {
 
     public Character chooseTarget(){
         if(this instanceof Damaging) return chooseCharacter(State.getRandomEnemies());
-        else if(this instanceof Healing) return chooseCharacter(State.getAllies());
+        else if(this instanceof Healing) return chooseCharacter(State.getLivingAllies());
         else if(this instanceof StatusInflicting)
-            if (((StatusInflicting) this).isBuff()) return chooseCharacter(State.getAllies());
+            if (((StatusInflicting) this).isBuff()) return chooseCharacter(State.getLivingAllies());
             else return chooseCharacter(State.getRandomEnemies());
         return null;
     }

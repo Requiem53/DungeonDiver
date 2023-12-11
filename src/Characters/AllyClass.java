@@ -1,5 +1,7 @@
 package Characters;
 
+import Equipment.Armor;
+import Equipment.Weapon;
 import Items.HealingItem;
 import Items.StatusItem;
 import Spells.DamagingSpell;
@@ -19,6 +21,8 @@ public abstract class AllyClass extends CharacterClass{
             addSpell(new StatusSpell.LoyaltyHymn());
             addItem(new HealingItem.HealingPotion());
             addItem(new HealingItem.HealingPotion());
+            equipWeapon(new Weapon.Sword());
+            equipArmor(new Armor.KnightsAmor());
         }
     }
     public static class Mage extends AllyClass{
@@ -29,6 +33,8 @@ public abstract class AllyClass extends CharacterClass{
             addSpell(new DamagingSpell.IceBeam());
             addItem(new HealingItem.HealingPotion());
             addItem(new StatusItem.SmokeBomb());
+            equipWeapon(new Weapon.Staff());
+            equipArmor(new Armor.ClothArmor());
         }
     }
 }

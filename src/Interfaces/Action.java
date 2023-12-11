@@ -2,6 +2,8 @@ package Interfaces;
 
 import Characters.Character;
 
+import java.util.List;
+
 public class Action implements Comparable<Action>{
     Actionable actionable;
     Character actor;
@@ -26,6 +28,10 @@ public class Action implements Comparable<Action>{
     }
     public Character getTarget() {
         return target;
+    }
+
+    public void removeFromList(List<Character> characters, Character chara){
+        characters.remove(chara);
     }
 
     @Override

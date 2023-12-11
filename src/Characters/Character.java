@@ -21,14 +21,14 @@ public abstract class Character implements Comparable<Character> {
     //simply only as well
     private String name;
     private CharacterClass charClass;
-    private Equipment equipment;
+//    private getEquipment() getEquipment();
     private DoableActions doableActions;
 
     public Character(String name, CharacterClass charClass) {
         this.name = name;
         this.charClass = charClass;
 
-        equipment = new Equipment();
+//        getEquipment() = new getEquipment()();
         doableActions = charClass.getInitialActions();
     }
 
@@ -46,8 +46,8 @@ public abstract class Character implements Comparable<Character> {
     public void printCurrWeapon(){
         System.out.println(name);
 
-        if(equipment.getWeapon() == null) System.out.println("You have no weapons equipped!");
-        else System.out.println(equipment.getWeapon());
+        if(getEquipment().getWeapon() == null) System.out.println("You have no weapons equipped!");
+        else System.out.println(getEquipment().getWeapon());
     }
 
     //Actions
@@ -69,22 +69,18 @@ public abstract class Character implements Comparable<Character> {
 
     //Equip Stuff
     public void equipWeapon(Weapon weapon){
-        equipment.equipWeapon(weapon);
+        getEquipment().equipWeapon(weapon);
     }
     public void unequipWeapon(){
-        equipment.unequipWeapon();
+        getEquipment().unequipWeapon();
     }
 
     public void equipArmor(Armor armor){
-        equipment.equipArmor(armor);
+        getEquipment().equipArmor(armor);
     }
 
     public void unequipArmor(){
-        equipment.unequipArmor();
-    }
-
-    public void removeFromList(List<Character> characters){
-        characters.remove(this);
+        getEquipment().unequipArmor();
     }
 
     //Getters
@@ -136,6 +132,10 @@ public abstract class Character implements Comparable<Character> {
         return charClass.getName();
     }
 
+    public Equipment getEquipment() {
+        return charClass.getEquipment();
+    }
+
     //Doable Actions
     public ArrayList<Attack> getAttacks(){
         return doableActions.getAttacks();
@@ -162,11 +162,11 @@ public abstract class Character implements Comparable<Character> {
         doableActions.listActions(new ArrayList<>(getItems()));
     }
 
-    //Bonus from buffs and equipments
+    //Bonus from buffs and getEquipment()s
     public int getBonusMaxHealth(){
         int total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getMaxHealth();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getMaxHealth();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getMaxHealth();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getMaxHealth();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.HEALTH){
                 if(status instanceof Buff) total += (int) (status.getChangeAmount() * charClass.getMaxHealth());
@@ -178,8 +178,8 @@ public abstract class Character implements Comparable<Character> {
 
     public int getBonusPower(){
         int total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getPower();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getPower();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getPower();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getPower();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.POWER){
                 if(status instanceof Buff) total += (int) (status.getChangeAmount() * charClass.getPower());
@@ -191,8 +191,8 @@ public abstract class Character implements Comparable<Character> {
 
     public int getBonusSpeed(){
         int total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getSpeed();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getSpeed();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getSpeed();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getSpeed();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.SPEED){
                 if(status instanceof Buff) total += (int) (status.getChangeAmount() * charClass.getSpeed());
@@ -204,8 +204,8 @@ public abstract class Character implements Comparable<Character> {
 
     public int getBonusDefense(){
         int total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getDefense();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getDefense();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getDefense();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getDefense();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.DEFENSE){
                 if(status instanceof Buff) total += (int) (status.getChangeAmount() * charClass.getDefense());
@@ -217,8 +217,8 @@ public abstract class Character implements Comparable<Character> {
 
     public int getBonusMagicPower(){
         int total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getMagicPower();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getMagicPower();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getMagicPower();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getMagicPower();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.MAGIC_POWER){
                 if(status instanceof Buff) total += (int) (status.getChangeAmount() * charClass.getMagicPower());
@@ -229,8 +229,8 @@ public abstract class Character implements Comparable<Character> {
     }
     public float getBonusEvasion(){
         float total = 0;
-        if(equipment.getWeapon() != null) total += equipment.getWeapon().getEvasion();
-        if(equipment.getArmor() != null) total += equipment.getArmor().getEvasion();
+        if(getEquipment().getWeapon() != null) total += getEquipment().getWeapon().getEvasion();
+        if(getEquipment().getArmor() != null) total += getEquipment().getArmor().getEvasion();
         for(Status status : charClass.getStatuses()){
             if(status.getStatusStat() == StatusStat.EVASION){
                 if(status instanceof Buff) total += status.getChangeAmount();

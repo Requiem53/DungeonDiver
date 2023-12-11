@@ -9,6 +9,8 @@ public abstract class Equippable {
     protected int magicPower;
     protected float evasion;
 
+    private boolean isEquipped;
+
     Equippable(EquippableBuilder builder){
         name = builder.getName();
         maxHealth = builder.getMaxHealth();
@@ -49,5 +51,13 @@ public abstract class Equippable {
 
     public float getEvasion() {
         return evasion;
+    }
+
+    public boolean isEquipped() {
+        return isEquipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        isEquipped = equipped;
     }
 }

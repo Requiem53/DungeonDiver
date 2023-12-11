@@ -12,6 +12,9 @@ public class DescendLevel extends State{
         dungeonLevel++;
         System.out.println("You have descended a level");
 
-        bs.setState(new InitializeBattlers(bs));
+        if(dungeonLevel <= 2){
+            bs.setState(new InitializeBattlers(bs));
+        }
+
     }
 }
