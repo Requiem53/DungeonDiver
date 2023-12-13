@@ -22,6 +22,11 @@ public abstract class HealingSpell extends Spell implements Healing {
         target.heal(healingTaken);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "[baseAmount" + baseAmount + "]";
+    }
+
     public static class Healing_Pulse extends HealingSpell{
         public Healing_Pulse() {
             super(new SpellBuilder().setName("Healing Pulse").setManaCost(4).setBaseAmount(1));

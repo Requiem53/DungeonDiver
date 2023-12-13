@@ -13,15 +13,8 @@ public abstract class Spell extends Actionable{
         return manaCost;
     }
 
-//    public float getBasePower() {
-//        return basePower;
-//    }
-//
-//    public int getBaseAmount() {
-//        return baseAmount;
-//    }
-//
-//    public Status getStatus() {
-//        return status;
-//    }
+    @Override
+    public String toString() {
+        return name + "[MC: " + manaCost + "]";
+    }
 }
