@@ -10,15 +10,17 @@ public abstract class HealingSpell extends Spell implements Healing {
         this.baseAmount = builder.getBaseAmount();
     }
 
-    public void doAction(Character actor, Character target) {
+    public String doAction(Character actor, Character target) {
         heal(actor, target);
+        int healingTaken = (int)Math.ceil(actor.getMagicPower() * baseAmount);
+        return flavorText(actor, target) + "\n" +
+                target.getName() + " was healed by " + healingTaken + " points.";
+
     }
 
     @Override
     public void heal(Character actor, Character target) {
         int healingTaken = (int)Math.ceil(actor.getMagicPower() * baseAmount);
-        System.out.println(flavorText(actor, target));
-        System.out.println(target.getName() + " was healed by " + healingTaken + " points.");
         target.heal(healingTaken);
     }
 

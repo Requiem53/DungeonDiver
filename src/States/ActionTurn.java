@@ -18,9 +18,9 @@ public class ActionTurn extends State {
         }
 
         assert currentAction != null;
-        currentAction.execute();
+        System.out.println(currentAction.execute());
 
-        removeDeadCharacters();
+        removeDeadCharacters(currentAction);
 
         boolean victory = false;
         boolean defeat = false;
@@ -50,18 +50,32 @@ public class ActionTurn extends State {
         bs.setState(new ActionTurn(bs));
     }
 
-    private void removeDeadCharacters(){
-        for(int i = 0; i < State.livingAllies.size(); i++){
-            System.out.println(State.livingAllies.get(i).getCurrHealth() + " / " + State.livingAllies.get(i).getMaxHealth());
-            if(!State.livingAllies.get(i).isAlive())
-                State.livingAllies.remove(i);
+    private void removeDeadCharacters(Action currAction){
+        if(!currAction.getActor().isAlive()){
+            if(currAction.getActor() instanceof Character.Ally){
+                currAction.removeFromList(State.livingAllies, currAction.getActor());
+            }else{
+                currAction.removeFromList(State.randomEnemies, currAction.getActor());
+            }
         }
-
-        for(int i = 0; i < State.randomEnemies.size(); i++){
-            System.out.println(State.randomEnemies.get(i).getCurrHealth() + " / " + State.randomEnemies.get(i).getMaxHealth());
-            if(!State.randomEnemies.get(i).isAlive())
-                State.randomEnemies.remove(i);
+        if(!currAction.getTarget().isAlive()){
+            if(currAction.getTarget() instanceof Character.Ally){
+                currAction.removeFromList(State.livingAllies, currAction.getTarget());
+            }else{
+                currAction.removeFromList(State.randomEnemies, currAction.getTarget());
+            }
         }
+//        for(int i = 0; i < State.livingAllies.size(); i++){
+//            System.out.println(State.livingAllies.get(i).getCurrHealth() + " / " + State.livingAllies.get(i).getMaxHealth());
+//            if(!State.livingAllies.get(i).isAlive())
+//                State.livingAllies.remove(i);
+//        }
+//
+//        for(int i = 0; i < State.randomEnemies.size(); i++){
+//            System.out.println(State.randomEnemies.get(i).getCurrHealth() + " / " + State.randomEnemies.get(i).getMaxHealth());
+//            if(!State.randomEnemies.get(i).isAlive())
+//                State.randomEnemies.remove(i);
+//        }
     }
 
     private boolean actionTurnOver(Action currentAction){

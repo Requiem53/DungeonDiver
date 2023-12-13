@@ -10,7 +10,7 @@ import java.util.Scanner;
 public abstract class Actionable {
     protected String name;
 
-    public abstract void doAction(Character actor, Character target);
+    public abstract String doAction(Character actor, Character target);
 
     public int getSpeed(){
         return 0;

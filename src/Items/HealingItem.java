@@ -11,14 +11,14 @@ public abstract class HealingItem extends Item implements Healing {
         this.amount = builder.getAmount();
     }
 
-    public void doAction(Character actor, Character target){
+    public String doAction(Character actor, Character target){
         heal(actor, target);
+        return flavorText(actor, target) + "\n" +
+                target.getName() + " was healed by " + amount + " points.";
     }
 
     @Override
     public void heal(Character actor, Character target) {
-        System.out.println(flavorText(actor, target));
-        System.out.println(target.getName() + " was healed by " + amount + " points.");
         target.heal(amount);
     }
 
