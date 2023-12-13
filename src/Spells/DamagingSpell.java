@@ -4,7 +4,7 @@ import Characters.Character;
 import Interfaces.Damaging;
 
 public abstract class DamagingSpell extends Spell implements Damaging {
-    float basePower; //multiplier for the caster's MagicPower to determine damage
+    final float basePower; //multiplier for the caster's MagicPower to determine damage
 
     public DamagingSpell(SpellBuilder builder) {
         super(builder);

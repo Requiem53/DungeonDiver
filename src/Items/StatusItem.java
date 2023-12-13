@@ -6,7 +6,7 @@ import Statuses.Buff;
 import Statuses.Status;
 
 public abstract class StatusItem extends Item implements StatusInflicting {
-    Status status;
+    final Status status;
 
     public StatusItem(ItemBuilder builder) {
         super(builder);
@@ -37,6 +37,10 @@ public abstract class StatusItem extends Item implements StatusInflicting {
         return this.status instanceof Buff;
     }
 
+    @Override
+    public String toString() {
+        return name + "[Heal: " + status + "]";
+    }
     public static class SmokeBomb extends StatusItem{
         public SmokeBomb() {
             super(new ItemBuilder().setName("Smoke Bomb").setStatus(new Buff.Shrouded()));
@@ -45,6 +49,15 @@ public abstract class StatusItem extends Item implements StatusInflicting {
         @Override
         public String flavorText(Character actor, Character target) {
             return actor + " threw the smoke bomb on the ground!";
+        }
+    }
+    public static class HealthPlus extends StatusItem{
+        public HealthPlus() {
+            super(new ItemBuilder().setName("Health Plus").setStatus(new Buff.Vitality()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " used the latest vitamin Health Plus";
         }
     }
 }

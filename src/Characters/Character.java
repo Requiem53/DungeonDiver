@@ -4,14 +4,12 @@ import CharacterComponents.DoableActions;
 import Equipment.Equipment;
 import Equipment.Weapon;
 import Equipment.Armor;
-import Interfaces.Actionable;
 import Statuses.*;
 import Spells.*;
 import Attacks.*;
 import Items.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public abstract class Character implements Comparable<Character> {
@@ -30,7 +28,7 @@ public abstract class Character implements Comparable<Character> {
     //Actions
     public void takeDamage(int damage){
         Random random = new Random();
-        if(random.nextFloat() < getEvasion()){
+        if(random.nextFloat() > getEvasion()-1f){
             charClass.takeDamage(damage);
             System.out.println(name + " received " + damage + " pts of damage");
         }else{
@@ -170,6 +168,12 @@ public abstract class Character implements Comparable<Character> {
     }
     public void addStatus(Status status){
         charClass.addStatus(status);
+    }
+    public void addItem(Item item){
+        charClass.addItem(item);
+    }
+    public void addSpell(Spell spell){
+        charClass.addSpell(spell);
     }
     public void decrementStatusDuration(){
         charClass.decrementStatusDuration();

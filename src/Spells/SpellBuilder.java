@@ -6,7 +6,7 @@ public class SpellBuilder {
     private String name;
     private int manaCost;
     private float basePower;
-    private int baseAmount;
+    private float baseAmount;
     private Status status;
 
     public SpellBuilder(){
@@ -26,7 +26,7 @@ public class SpellBuilder {
     public float getBasePower() {
         return basePower;
     }
-    public int getBaseAmount() {
+    public float getBaseAmount() {
         return baseAmount;
     }
     public Status getStatus() {
@@ -45,7 +45,7 @@ public class SpellBuilder {
         this.basePower = basePower;
         return this;
     }
-    public SpellBuilder setBaseAmount(int baseAmount){
+    public SpellBuilder setBaseAmount(float baseAmount){
         this.baseAmount = baseAmount;
         return this;
     }

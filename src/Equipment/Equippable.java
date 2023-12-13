@@ -20,9 +20,13 @@ public abstract class Equippable {
         magicPower = builder.getMagicPower();
         evasion = builder.getEvasion();
     }
-
     public String toString(){
-        return getName();
+        return getName() + "[HP: " + getMaxHealth() +
+                "][P: " + getPower() +
+                "][S: " + getSpeed() +
+                "][D: " + getDefense() +
+                "][MP: " + getMagicPower() +
+                "][E: " + getEvasion();
     }
 
     public String getName() {

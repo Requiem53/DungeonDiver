@@ -24,9 +24,27 @@ public class Buff extends Status{
         }
     }
     public static class Shrouded extends Buff{
-
         public Shrouded() {
             super(new StatusBuilder().setName("Shrouded").setStatusStat(StatusStat.EVASION)
+                    .setChangeAmount(.5f));
+        }
+    }
+    public static class Brute_Force extends Buff{
+        public Brute_Force() {
+            super(new StatusBuilder().setName("Brute Force").setStatusStat(StatusStat.POWER)
+                    .setChangeAmount(.2f));
+        }
+    }
+    public static class Wise extends Buff{
+        public Wise() {
+            super(new StatusBuilder().setName("Wise").setStatusStat(StatusStat.MAGIC_POWER)
+                    .setChangeAmount(.3f));
+        }
+    }
+
+    public static class Vitality extends Buff{
+        public Vitality() {
+            super(new StatusBuilder().setName("Vitality").setStatusStat(StatusStat.HEALTH)
                     .setChangeAmount(.5f));
         }
     }
