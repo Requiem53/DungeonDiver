@@ -4,10 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StatPanel extends JPanel {
-    public StatPanel(int WINDOW_W, int WINDOW_H) {
-        super(null);
+    public StatPanel() {
+        super(new FlowLayout(FlowLayout.CENTER));
         setBackground(Color.BLACK);
-//        setPreferredSize(new Dimension(WINDOW_W, WINDOW_H / 4));
-
     }
 }
