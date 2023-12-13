@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BottomPanel extends JPanel {
-    public BottomPanel() {
+    public BottomPanel(int SCREEN_W, int SCREEN_H) {
         super(null);
-        setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(800, 300));
+        setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(SCREEN_W, SCREEN_H / 4));
     }
 }
