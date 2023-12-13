@@ -8,6 +8,6 @@ public class Display extends JPanel {
         super(null);
         setBackground(Color.BLACK);
 
-//        setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(100, 100));
     }
 }
