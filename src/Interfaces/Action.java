@@ -20,9 +20,9 @@ public class Action implements Comparable<Action>{
     public String execute(){
         if(actionable != null){
             if(!actor.isAlive())
-                return actor + " is already dead! They can't do the action anymore!";
+                return actor + " is already dead!";
             if(!target.isAlive())
-                return target + " is already dead! You can't target them anymore!";
+                return actor + " tried to do something, but " + target + " is already dead!";
             return actionable.doAction(actor, target);
         }
         else return "Null action"; //not work. try catch soon
