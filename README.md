@@ -6,4 +6,4 @@ Uses Builder Pattern:
 
 OOP Java Capstone new repository
 
-Reason: Maurice and Jorash ruined Slamm Khelmer Luab's hardwork, I apologize (I am Jorash) Slamm please forgive me
+Reason for relocation: Maurice and Jorash ruined Slamm Khelmer Luab's hardwork, I apologize (I am Jorash) Slamm please forgive me
