@@ -1,8 +1,8 @@
 package GameSystems;
 
 import Characters.Character;
-import Characters.EnemyClass;
 import Characters.Party;
+import GUI.GameWindow;
 import Interfaces.*;
 import States.*;
 
@@ -16,9 +16,11 @@ public class BattleSystem extends StateMachine{
 
     List<Action> actions = new ArrayList<>();
     Queue<Action> actionsSorted;
+    private GameWindow gameWindow;
 
     public BattleSystem(){
         party = new Party();
+        gameWindow = new GameWindow();
         setState(new EnterName(this));
     }
 

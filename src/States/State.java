@@ -17,7 +17,6 @@ public abstract class State {
      public static List<Character> randomEnemies = new ArrayList<>();
 
      public static Queue<Character> queueChoice = new LinkedList<>();
-
      public State(BattleSystem bs){
           this.bs = bs;
 
