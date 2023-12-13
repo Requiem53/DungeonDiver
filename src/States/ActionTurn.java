@@ -25,11 +25,11 @@ public class ActionTurn extends State {
         boolean victory = false;
         boolean defeat = false;
 
-        if(randomEnemies.isEmpty()){
+        if(State.randomEnemies.isEmpty()){
             victory = true;
         }
 
-        if(livingAllies.isEmpty()){
+        if(State.livingAllies.isEmpty()){
             defeat = true;
         }
 
@@ -65,17 +65,17 @@ public class ActionTurn extends State {
                 currAction.removeFromList(State.randomEnemies, currAction.getTarget());
             }
         }
-//        for(int i = 0; i < State.livingAllies.size(); i++){
-//            System.out.println(State.livingAllies.get(i).getCurrHealth() + " / " + State.livingAllies.get(i).getMaxHealth());
+        for(int i = 0; i < State.livingAllies.size(); i++){
+            System.out.println(State.livingAllies.get(i) + " " + State.livingAllies.get(i).getCurrHealth() + " / " + State.livingAllies.get(i).getMaxHealth());
 //            if(!State.livingAllies.get(i).isAlive())
 //                State.livingAllies.remove(i);
-//        }
-//
-//        for(int i = 0; i < State.randomEnemies.size(); i++){
-//            System.out.println(State.randomEnemies.get(i).getCurrHealth() + " / " + State.randomEnemies.get(i).getMaxHealth());
+        }
+
+        for(int i = 0; i < State.randomEnemies.size(); i++){
+            System.out.println(State.randomEnemies.get(i) + " " + State.randomEnemies.get(i).getCurrHealth() + " / " + State.randomEnemies.get(i).getMaxHealth());
 //            if(!State.randomEnemies.get(i).isAlive())
 //                State.randomEnemies.remove(i);
-//        }
+        }
     }
 
     private boolean actionTurnOver(Action currentAction){
@@ -87,9 +87,13 @@ public class ActionTurn extends State {
         for(Character character : bs.getPartyMembers()){
             character.decrementStatusDuration();
         }
-        queueChoice.add(null);
-        queueChoice.addAll(State.livingAllies);
-        queueChoice.addAll(State.randomEnemies);
+
+        bs.clearActions();
+        State.queueChoice.clear();
+
+        State.queueChoice.add(null);
+        State.queueChoice.addAll(State.livingAllies);
+        State.queueChoice.addAll(State.randomEnemies);
         newChoiceTurn();
     }
 }

@@ -43,11 +43,11 @@ public abstract class State {
      public void initializeEnemies(){
           //temporary
           //Add random enemy generator soon depending on dungeon level
-          randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
-          randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
+          State.randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
+          State.randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
      }
      public void initializeBoss(){
-          randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
+          State.randomEnemies.add(new Character.Enemy("Yuujin of Sico", new EnemyClass.FinalBoss()));
      }
 
      protected Character getCurrChar(){

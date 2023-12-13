@@ -25,6 +25,14 @@ public abstract class EnemyClass extends CharacterClass{
             equipArmor(new Armor.Elven_Robe());
             addSpell(new DamagingSpell.Meteors());
         }
+    }
 
+    public static class FinalBoss extends EnemyClass{
+        public FinalBoss(){
+            super("Final Boss", 1000, 100, 25, 20, 30);
+            equipWeapon(new Weapon.Executioner_Blade());
+            equipArmor(new Armor.Cleric_Garment());
+            addSpell(new DamagingSpell.EndOfTimes());
+        }
     }
 }

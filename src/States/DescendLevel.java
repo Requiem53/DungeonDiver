@@ -15,10 +15,12 @@ public class DescendLevel extends State{
 
         if(State.dungeonLevel == 1){
             bs.setState(new InitializeBattlers(bs));
-        }else if(State.dungeonLevel  == 2){
+        }else if(State.dungeonLevel == 2){
             bs.setState(new Shop(bs));
-        }else if(State.dungeonLevel  == 3){
+        }else if(State.dungeonLevel == 3){
             bs.setState(new InitializeBoss(bs));
+        }else if(State.dungeonLevel > 3){
+            bs.setState(new Victory(bs));
         }
 
     }

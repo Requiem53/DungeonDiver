@@ -12,16 +12,22 @@ public class BattleSystem extends StateMachine{
     public User user;
     private int currentTurn = -1;
 
-    private Party party;
+    private final Party party;
 
     List<Action> actions = new ArrayList<>();
-    Queue<Action> actionsSorted;
+    Queue<Action> actionsSorted = new LinkedList<>();
+
     public GameWindow gameWindow;
 
     public BattleSystem(){
         party = new Party();
         gameWindow = new GameWindow();
         setState(new EnterName(this));
+    }
+
+    public void clearActions(){
+        actions.clear();
+        actionsSorted.clear();
     }
 
     public String restParty(){

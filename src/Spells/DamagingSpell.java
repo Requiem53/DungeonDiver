@@ -72,4 +72,14 @@ public abstract class DamagingSpell extends Spell implements Damaging {
             return actor + " used the pinnacle of magic with 2.0 base Power, so powerful!";
         }
     }
+
+    public static class EndOfTimes extends DamagingSpell{
+        public EndOfTimes(){
+            super(new SpellBuilder().setName("Celestial Ray").setManaCost(20).setBasePower(5.0f));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return actor + " called the power of the Lich to bring forth the end of times!";
+        }
+    }
 }

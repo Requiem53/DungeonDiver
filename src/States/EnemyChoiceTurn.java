@@ -13,8 +13,8 @@ public class EnemyChoiceTurn extends State{
 
     @Override
     public void Start() {
-        Character allyTarget = livingAllies.get(random.nextInt(livingAllies.size()));
-        Character currEnemy = getCurrChar();
+        Character allyTarget = State.livingAllies.get(random.nextInt(State.livingAllies.size()));
+        Character currEnemy = State.queueChoice.peek();
 
         Actionable enemyAction;
 
@@ -22,10 +22,12 @@ public class EnemyChoiceTurn extends State{
 
         switch (randomIndex){
             case 0:
+                assert currEnemy != null;
                 randomIndex = random.nextInt(currEnemy.getAttacks().size());
                 enemyAction = currEnemy.getAttacks().get(randomIndex);
                 break;
             case 1:
+                assert currEnemy != null;
                 if(currEnemy.getSpells().isEmpty()) {
                     enemyAction = currEnemy.getAttacks().get(0); //if no spell
                     break;
