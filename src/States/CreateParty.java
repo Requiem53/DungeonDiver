@@ -29,6 +29,6 @@ public class CreateParty extends State{
             System.out.println(ally + " - " + ally.getClassName());
         }
 
-        bs.setState(new InitializeBattlers(bs));
+        bs.setState(new DescendLevel(bs));
     }
 }

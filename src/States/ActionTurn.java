@@ -11,6 +11,7 @@ public class ActionTurn extends State {
 
     @Override
     public void Start() {
+
         Action currentAction = bs.dequeueActionsSorted();
 
         if(actionTurnOver(currentAction)){
@@ -52,11 +53,13 @@ public class ActionTurn extends State {
 
     private void removeDeadCharacters(){
         for(int i = 0; i < livingAllies.size(); i++){
+            System.out.println(livingAllies.get(i).getCurrHealth() + " / " + livingAllies.get(i).getMaxHealth());
             if(!livingAllies.get(i).isAlive())
                 livingAllies.remove(i);
         }
 
         for(int i = 0; i < randomEnemies.size(); i++){
+            System.out.println(randomEnemies.get(i).getCurrHealth() + " / " + randomEnemies.get(i).getMaxHealth());
             if(!randomEnemies.get(i).isAlive())
                 randomEnemies.remove(i);
         }

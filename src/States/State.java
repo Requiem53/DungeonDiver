@@ -13,8 +13,8 @@ public abstract class State {
      protected Scanner sc;
      protected Random random;
 
-     protected static List<Character> livingAllies = new ArrayList<>();
-     protected static List<Character> randomEnemies = new ArrayList<>();
+     public static List<Character> livingAllies = new ArrayList<>();
+     public static List<Character> randomEnemies = new ArrayList<>();
 
      public State(BattleSystem bs){
           this.bs = bs;
@@ -22,24 +22,37 @@ public abstract class State {
           sc = new Scanner(System.in);
           random = new Random();
 
-          dungeonLevel = 1;
+          dungeonLevel = 0;
 
           System.out.println();
      }
 
      public abstract void Start();
 
+     protected void descendLevel(){
+          dungeonLevel++;
+     }
+
+     public int getDungeonLevel() {
+          return dungeonLevel;
+     }
+
      protected void newChoiceTurn(){
           bs.setState(new ChoiceTurn(bs));
      }
+
+
      public void initializeAllies(){
-          State.livingAllies = bs.getPartyMembers();
+          livingAllies = bs.getLivingAllies();
      }
      public void initializeEnemies(){
           //temporary
           //Add random enemy generator soon depending on dungeon level
-          randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
-          randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
+          getRandomEnemies().add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
+          getRandomEnemies().add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
+     }
+     public void initializeBoss(){
+          getRandomEnemies().add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
      }
 
      public static List<Character> getLivingAllies() {

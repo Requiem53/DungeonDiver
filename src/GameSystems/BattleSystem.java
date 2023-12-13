@@ -1,6 +1,7 @@
 package GameSystems;
 
 import Characters.Character;
+import Characters.EnemyClass;
 import Characters.Party;
 import Interfaces.*;
 import States.*;
@@ -55,6 +56,15 @@ public class BattleSystem extends StateMachine{
     }
     public boolean currCharIsAlly(){
         return getCurrChar() instanceof Character.Ally;
+    }
+    public ArrayList<Character> getLivingAllies(){
+        ArrayList<Character> livingAllies = new ArrayList<>();
+        for(Character chara : getPartyMembers()){
+            if(chara.isAlive()){
+                livingAllies.add(chara);
+            }
+        }
+        return livingAllies;
     }
 
     //Getters
