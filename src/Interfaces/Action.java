@@ -17,9 +17,10 @@ public class Action implements Comparable<Action>{
         actionSpeed = getActor().getSpeed() + getActionable().getSpeed();
     }
 
-    public void execute(){
-        if(actionable != null) actionable.doAction(actor, target);
-        else System.out.println("Null action"); //not work. try catch soon
+    public String execute(){
+        if(actionable != null)
+            return actionable.doAction(actor, target);
+        else return "Null action"; //not work. try catch soon
     }
 
     public void removeFromList(List<Character> characters, Character chara){

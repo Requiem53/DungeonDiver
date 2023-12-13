@@ -14,23 +14,26 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         this.status = builder.getStatus();
     }
 
-    public void doAction(Character actor, Character target){
+    public String doAction(Character actor, Character target){
         inflictStatus(actor, target);
+        StringBuilder string = new StringBuilder();
+        if(actor == target){
+            string.append(actor.getName()).append(" used ").append(name).append("onto himself").append("\n");
+        }else{
+            string.append(actor.getName()).append(" used ").append(name).append("onto ").append(target.getName()).append("\n");
+        }
+
+        if(status instanceof Buff){
+            string.append(target.getName()).append(" was blessed with ").append(status);
+        }else{
+            string.append(target.getName()).append(" was inflicted with ").append(status);
+        }
+
+        return string.toString();
     }
 
     @Override
     public void inflictStatus(Character actor, Character target) {
-        if(actor == target){
-            System.out.println(actor.getName() + " used " + name + " onto himself");
-        }else{
-            System.out.println(actor.getName() + " used " + name + " onto " + target.getName());
-        }
-
-        if(status instanceof Buff){
-            System.out.println(target.getName() + " was blessed with " + status);
-        }else{
-            System.out.println(target.getName() + " was inflicted with " + status);
-        }
         target.addStatus(status.clone());
     }
 

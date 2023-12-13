@@ -11,18 +11,18 @@ public abstract class DamagingSpell extends Spell implements Damaging {
         this.basePower = builder.getBasePower();
     }
 
-    public void doAction(Character actor, Character target){
-        damage(actor, target);
+    public String doAction(Character actor, Character target){
+        if(!actor.decreaseMana(getManaCost())){
+            return "No more mana"; //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
+        }else{
+            damage(actor, target);
+            return flavorText(actor, target);
+        }
     }
 
     @Override
     public void damage(Character actor, Character target) {       //Damaging Override
-        if(!actor.decreaseMana(getManaCost())){
-            System.out.println("No more mana"); //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
-        }
         int damageTaken = (int)Math.ceil(actor.getMagicPower() * basePower);
-//        System.out.println(actor.getName() + " used " + name);
-        System.out.println(flavorText(actor, target));
         target.takeDamage(damageTaken);
     }
 

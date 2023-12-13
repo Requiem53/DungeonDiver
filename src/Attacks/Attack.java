@@ -24,13 +24,13 @@ public abstract class Attack extends Actionable implements Damaging {
         status = builder.getStatus();
     }
 
-    public void doAction(Character actor, Character target){
+    public String doAction(Character actor, Character target){
         damage(actor, target);
+        return flavorText(actor, target);
     }
 
     @Override
     public void damage(Character actor, Character target) {
-        System.out.println(flavorText(actor, target));
         int damageTaken = totalPower(actor);
         target.takeDamage(damageTaken);
     }

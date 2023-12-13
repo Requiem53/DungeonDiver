@@ -13,8 +13,9 @@ public abstract class StatusItem extends Item implements StatusInflicting {
         this.status = builder.getStatus();
     }
 
-    public void doAction(Character actor, Character target){
+    public String doAction(Character actor, Character target){
         inflictStatus(actor, target);
+        return flavorText(actor, target);
     }
 
     @Override
