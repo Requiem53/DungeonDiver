@@ -20,6 +20,8 @@ public class ActionTurn extends State {
         assert currentAction != null;
         System.out.println(currentAction.execute());
 
+        updateEntitiesStats();
+
         removeDeadCharacters(currentAction);
 
         boolean victory = false;
