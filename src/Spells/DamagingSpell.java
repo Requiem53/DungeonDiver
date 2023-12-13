@@ -15,15 +15,15 @@ public abstract class DamagingSpell extends Spell implements Damaging {
         if(!actor.decreaseMana(getManaCost())){
             return "No more mana"; //TO BE IMPLEMENTED, FOR NOW STILL USE THE SPELL
         }else{
-            damage(actor, target);
-            return flavorText(actor, target);
+            return flavorText(actor, target) + "\n" +
+                damage(actor, target);
         }
     }
 
     @Override
-    public void damage(Character actor, Character target) {       //Damaging Override
+    public String damage(Character actor, Character target) {       //Damaging Override
         int damageTaken = (int)Math.ceil(actor.getMagicPower() * basePower);
-        target.takeDamage(damageTaken);
+        return target.takeDamage(damageTaken);
     }
 
     public static class Meteors extends DamagingSpell{

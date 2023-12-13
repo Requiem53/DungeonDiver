@@ -14,24 +14,27 @@ public abstract class StatusItem extends Item implements StatusInflicting {
     }
 
     public String doAction(Character actor, Character target){
-        inflictStatus(actor, target);
-        return flavorText(actor, target);
+        return flavorText(actor, target) + "\n" +
+                inflictStatus(actor, target);
     }
 
     @Override
-    public void inflictStatus(Character actor, Character target) {
+    public String inflictStatus(Character actor, Character target) {
+        StringBuilder string = new StringBuilder();
         if(actor == target){
-            System.out.println(actor.getName() + " used " + name + " onto himself");
+            string.append(actor.getName()).append(" used ").append(name).append("onto himself").append("\n");
         }else{
-            System.out.println(actor.getName() + " used " + name + " onto " + target.getName());
+            string.append(actor.getName()).append(" used ").append(name).append("onto ").append(target.getName()).append("\n");
         }
 
         if(status instanceof Buff){
-            System.out.println(target.getName() + " was blessed with " + status);
+            string.append(target.getName()).append(" was blessed with ").append(status);
         }else{
-            System.out.println(target.getName() + " was inflicted with " + status);
+            string.append(target.getName()).append(" was inflicted with ").append(status);
         }
         target.addStatus(status.clone());
+
+        return string.toString();
     }
 
     public boolean isBuff(){

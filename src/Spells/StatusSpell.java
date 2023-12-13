@@ -14,7 +14,12 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
     }
 
     public String doAction(Character actor, Character target){
-        inflictStatus(actor, target);
+        return flavorText(actor, target) + "\n" +
+                inflictStatus(actor, target);
+    }
+
+    @Override
+    public String inflictStatus(Character actor, Character target) {
         StringBuilder string = new StringBuilder();
         if(actor == target){
             string.append(actor.getName()).append(" used ").append(name).append("onto himself").append("\n");
@@ -27,13 +32,9 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }else{
             string.append(target.getName()).append(" was inflicted with ").append(status);
         }
+        target.addStatus(status.clone());
 
         return string.toString();
-    }
-
-    @Override
-    public void inflictStatus(Character actor, Character target) {
-        target.addStatus(status.clone());
     }
 
     public boolean isBuff(){

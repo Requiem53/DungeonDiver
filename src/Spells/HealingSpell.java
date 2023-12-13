@@ -11,17 +11,14 @@ public abstract class HealingSpell extends Spell implements Healing {
     }
 
     public String doAction(Character actor, Character target) {
-        heal(actor, target);
-        int healingTaken = (int)Math.ceil(actor.getMagicPower() * baseAmount);
         return flavorText(actor, target) + "\n" +
-                target.getName() + " was healed by " + healingTaken + " points.";
-
+                heal(actor, target);
     }
 
     @Override
-    public void heal(Character actor, Character target) {
+    public String heal(Character actor, Character target) {
         int healingTaken = (int)Math.ceil(actor.getMagicPower() * baseAmount);
-        target.heal(healingTaken);
+        return target.heal(healingTaken);
     }
 
     public static class Healing_Pulse extends HealingSpell{

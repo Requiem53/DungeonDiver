@@ -26,17 +26,18 @@ public abstract class Character implements Comparable<Character> {
     }
 
     //Actions
-    public void takeDamage(int damage){
+    public String takeDamage(int damage){
         Random random = new Random();
         if(random.nextFloat() > getEvasion()-1f){
             charClass.takeDamage(damage);
-            System.out.println(name + " received " + damage + " pts of damage");
+            return name + " received " + damage + " pts of damage";
         }else{
-            System.out.println(name + " evaded the hit!");
+            return name + " evaded the hit!";
         }
     }
-    public void heal(int amount){
+    public String heal(int amount){
         charClass.heal(amount);
+        return getName() + " was healed by " + amount + " points.";
     }
 
     //Equip Stuff
