@@ -7,14 +7,14 @@ public class GameWindow extends JFrame {
     public BottomPanel bottomPanel;
     public Display display;
     public StatPanel statPanel;
-    public final int SCREEN_W;
-    public final int SCREEN_H;
+    public final int WINDOW_W;
+    public final int WINDOW_H;
     public GameWindow(){
         super("Slumm RPG");
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        SCREEN_H = (int) size.getHeight();
-        SCREEN_W = SCREEN_H;
+        WINDOW_H = (int) size.getHeight();
+        WINDOW_W = WINDOW_H;
 
         display = new Display();
         JPanel displayBG = new JPanel(new BorderLayout());
@@ -22,12 +22,12 @@ public class GameWindow extends JFrame {
         displayBG.setBackground(Color.WHITE);
         displayBG.add(display, BorderLayout.CENTER);
 
-        bottomPanel = new BottomPanel(SCREEN_W, SCREEN_H);
+        bottomPanel = new BottomPanel(WINDOW_W, WINDOW_H);
 
-        statPanel = new StatPanel(SCREEN_W, SCREEN_H);
+        statPanel = new StatPanel(WINDOW_W, WINDOW_H);
 
         //Self Default
-        setSize(SCREEN_W,SCREEN_H);
+        setSize(WINDOW_W,WINDOW_H);
         setResizable(false);
         setLocationRelativeTo(null);
         setBackground(Color.gray);
