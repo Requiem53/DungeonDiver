@@ -6,7 +6,6 @@ import GameSystems.BattleSystem;
 import Interfaces.Action;
 import Interfaces.Actionable;
 import Items.Item;
-import Spells.DamagingSpell;
 import Spells.Spell;
 
 import java.util.ArrayList;
@@ -23,9 +22,9 @@ public class PlayerChoiceTurn extends State {
 
     @Override
     public void Start() {
-        chooseOptionSequnce();
+        chooseOptionSequence();
     }
-    private void chooseOptionSequnce(){
+    private void chooseOptionSequence(){
         System.out.println("What will " + getCurrChar() + " do?");
         System.out.println(
                 "1. Do Attack" + "\n" +
@@ -44,7 +43,7 @@ public class PlayerChoiceTurn extends State {
             case 4 -> equipmentSequence();
             default -> {
                 System.out.println("NOT A VALID OPTION");
-                chooseOptionSequnce();
+                chooseOptionSequence();
             }
         }
 
@@ -59,7 +58,7 @@ public class PlayerChoiceTurn extends State {
         Attack attackUsed = (Attack) chooseAction(new ArrayList<>(getCurrChar().getAttacks())); //naa nis pinaka ubos
 
         System.out.println("Attack who?");
-        target = attackUsed.chooseTarget(); //naa ni i print
+        System.out.println(target = attackUsed.chooseTarget());
 
         bs.addAction(new Action(attackUsed, getCurrChar(), target));
 
@@ -72,7 +71,7 @@ public class PlayerChoiceTurn extends State {
         Spell spellUsed = (Spell) chooseAction(new ArrayList<>(getCurrChar().getSpells()));
 
         System.out.println("Use on who?");
-        target = spellUsed.chooseTarget();
+        System.out.println(target = spellUsed.chooseTarget());
 
         bs.addAction(new Action(spellUsed, getCurrChar(), target));
 
@@ -85,7 +84,7 @@ public class PlayerChoiceTurn extends State {
         Item itemUsed = (Item) chooseAction(new ArrayList<>(getCurrChar().getItems()));
 
         System.out.println("Use on who?");
-        target = itemUsed.chooseTarget();
+        System.out.println(target = itemUsed.chooseTarget());
 
         bs.addAction(new Action(itemUsed, getCurrChar(), target));
 

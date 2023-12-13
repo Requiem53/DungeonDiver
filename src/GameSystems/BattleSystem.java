@@ -24,7 +24,7 @@ public class BattleSystem extends StateMachine{
     public static String outputCharacters(List<Character> characters){
         StringBuilder string = new StringBuilder();
         for(int i=0; i < characters.size(); i++){
-            string.append(i + 1).append(". ").append(characters.get(i));
+            string.append(i + 1).append(". ").append(characters.get(i)).append("\n");
         }
         return string.toString();
     }
