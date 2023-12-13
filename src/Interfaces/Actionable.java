@@ -17,11 +17,11 @@ public abstract class Actionable {
     }
 
     public Character chooseTarget(){
-        if(this instanceof Damaging) return chooseCharacter(State.getRandomEnemies());
-        else if(this instanceof Healing) return chooseCharacter(State.getLivingAllies());
+        if(this instanceof Damaging) return chooseCharacter(State.randomEnemies);
+        else if(this instanceof Healing) return chooseCharacter(State.livingAllies);
         else if(this instanceof StatusInflicting)
-            if (((StatusInflicting) this).isBuff()) return chooseCharacter(State.getLivingAllies());
-            else return chooseCharacter(State.getRandomEnemies());
+            if (((StatusInflicting) this).isBuff()) return chooseCharacter(State.livingAllies);
+            else return chooseCharacter(State.randomEnemies);
         return null;
     }
 

@@ -9,14 +9,15 @@ public class DescendLevel extends State{
 
     @Override
     public void Start() {
-        descendLevel();
+        State.dungeonLevel++;
         System.out.println("You have descended a level");
+        System.out.println(State.dungeonLevel);
 
-        if(getDungeonLevel() == 1){
+        if(State.dungeonLevel == 1){
             bs.setState(new InitializeBattlers(bs));
-        }else if(getDungeonLevel()  == 2){
+        }else if(State.dungeonLevel  == 2){
             bs.setState(new Shop(bs));
-        }else if(getDungeonLevel()  == 3){
+        }else if(State.dungeonLevel  == 3){
             bs.setState(new InitializeBoss(bs));
         }
 

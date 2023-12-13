@@ -14,6 +14,10 @@ public class InitializeBattlers extends State{
         initializeAllies();
         initializeEnemies();
 
+        queueChoice.add(null);
+        queueChoice.addAll(livingAllies);
+        queueChoice.addAll(randomEnemies);
+
         bs.setState(new BattleStart(bs));
     }
 }

@@ -11,13 +11,14 @@ public class ChoiceTurn extends State {
     @Override
     public void Start() {
         bs.incrementTurn();
+        queueChoice.remove();
 
         if(allCharactersHaveChosenActions()){
             bs.sortActions();
             bs.setState(new ActionTurn(bs));
         }
 
-        if(bs.currCharIsAlly()){
+        if(queueChoice.peek() instanceof Character.Ally){
             bs.setState(new PlayerChoiceTurn(bs));
         }
         else {
@@ -26,6 +27,6 @@ public class ChoiceTurn extends State {
     }
 
     private boolean allCharactersHaveChosenActions(){
-        return bs.getCurrentTurn() >= bs.getPartyMembers().size();
+        return queueChoice.isEmpty();
     }
 }

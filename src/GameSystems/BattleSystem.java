@@ -72,7 +72,8 @@ public class BattleSystem extends StateMachine{
         return actionsSorted;
     }
     public Character getCurrChar(){
-        return getPartyMembers().get(getCurrentTurn());
+//        return getPartyMembers().get(getCurrentTurn());
+        return State.queueChoice.peek();
     }
     public User getUser(){
         return user;

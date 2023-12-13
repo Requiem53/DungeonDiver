@@ -7,7 +7,7 @@ import GameSystems.BattleSystem;
 import java.util.*;
 
 public abstract class State {
-     protected int dungeonLevel;
+     public static int dungeonLevel = 0;
 
      protected BattleSystem bs;
      protected Scanner sc;
@@ -16,13 +16,13 @@ public abstract class State {
      public static List<Character> livingAllies = new ArrayList<>();
      public static List<Character> randomEnemies = new ArrayList<>();
 
+     public static Queue<Character> queueChoice = new LinkedList<>();
+
      public State(BattleSystem bs){
           this.bs = bs;
 
           sc = new Scanner(System.in);
           random = new Random();
-
-          dungeonLevel = 0;
 
           System.out.println();
      }
@@ -30,11 +30,7 @@ public abstract class State {
      public abstract void Start();
 
      protected void descendLevel(){
-          dungeonLevel++;
-     }
-
-     public int getDungeonLevel() {
-          return dungeonLevel;
+          State.dungeonLevel++;
      }
 
      protected void newChoiceTurn(){
@@ -48,19 +44,13 @@ public abstract class State {
      public void initializeEnemies(){
           //temporary
           //Add random enemy generator soon depending on dungeon level
-          getRandomEnemies().add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
-          getRandomEnemies().add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
+          randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
+          randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
      }
      public void initializeBoss(){
-          getRandomEnemies().add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
+          randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
      }
 
-     public static List<Character> getLivingAllies() {
-          return livingAllies;
-     }
-     public static List<Character> getRandomEnemies() {
-          return randomEnemies;
-     }
      protected Character getCurrChar(){
           return bs.getCurrChar();
      }

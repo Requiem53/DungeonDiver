@@ -11,7 +11,6 @@ public class ActionTurn extends State {
 
     @Override
     public void Start() {
-
         Action currentAction = bs.dequeueActionsSorted();
 
         if(actionTurnOver(currentAction)){
@@ -52,16 +51,16 @@ public class ActionTurn extends State {
     }
 
     private void removeDeadCharacters(){
-        for(int i = 0; i < livingAllies.size(); i++){
-            System.out.println(livingAllies.get(i).getCurrHealth() + " / " + livingAllies.get(i).getMaxHealth());
-            if(!livingAllies.get(i).isAlive())
-                livingAllies.remove(i);
+        for(int i = 0; i < State.livingAllies.size(); i++){
+            System.out.println(State.livingAllies.get(i).getCurrHealth() + " / " + State.livingAllies.get(i).getMaxHealth());
+            if(!State.livingAllies.get(i).isAlive())
+                State.livingAllies.remove(i);
         }
 
-        for(int i = 0; i < randomEnemies.size(); i++){
-            System.out.println(randomEnemies.get(i).getCurrHealth() + " / " + randomEnemies.get(i).getMaxHealth());
-            if(!randomEnemies.get(i).isAlive())
-                randomEnemies.remove(i);
+        for(int i = 0; i < State.randomEnemies.size(); i++){
+            System.out.println(State.randomEnemies.get(i).getCurrHealth() + " / " + State.randomEnemies.get(i).getMaxHealth());
+            if(!State.randomEnemies.get(i).isAlive())
+                State.randomEnemies.remove(i);
         }
     }
 
@@ -74,6 +73,9 @@ public class ActionTurn extends State {
         for(Character character : bs.getPartyMembers()){
             character.decrementStatusDuration();
         }
+        queueChoice.add(null);
+        queueChoice.addAll(State.livingAllies);
+        queueChoice.addAll(State.randomEnemies);
         newChoiceTurn();
     }
 }
