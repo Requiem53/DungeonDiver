@@ -26,12 +26,12 @@ public class DoableActions {
         inventory.add(item);
     }
 
-    public void listActions(ArrayList<Actionable> actionables){
+    public String listActions(ArrayList<Actionable> actionables){
         StringBuilder string = new StringBuilder();
         for(int i=0; i < actionables.size(); i++){
             string.append("[").append(i + 1).append("] ").append(actionables.get(i)).append(" ");
         }
-        System.out.println(string);
+        return string.toString();
     }
 
     public ArrayList<Attack> getAttacks() {

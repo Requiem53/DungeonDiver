@@ -60,16 +60,6 @@ public class ActionTurn extends State {
             if(!randomEnemies.get(i).isAlive())
                 randomEnemies.remove(i);
         }
-        //Sad momentz di mugana
-//        if(!currentAction.getActor().isAlive()){
-//            currentAction.removeFromList(livingAllies, currentAction.getActor());
-//            System.out.println("AH");
-//        }
-//
-//        if(!currentAction.getTarget().isAlive()){
-//            currentAction.removeFromList(randomEnemies, currentAction.getTarget());
-//            System.out.println("HA");
-//        }
     }
 
     private boolean actionTurnOver(Action currentAction){

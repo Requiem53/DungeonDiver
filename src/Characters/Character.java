@@ -68,19 +68,19 @@ public abstract class Character implements Comparable<Character> {
         return doableActions.getInventory();
     }
 
-    public void listAttacks(){
-        System.out.println(name + "'s attacks: ");
-        doableActions.listActions(new ArrayList<>(getAttacks()));
+    public String listAttacks(){
+        return name + "'s attacks: " + "\n" +
+                doableActions.listActions(new ArrayList<>(getAttacks()));
     }
 
-    public void listSpells(){
-        System.out.println(name + "'s spells: ");
-        doableActions.listActions(new ArrayList<>(getSpells()));
+    public String listSpells(){
+        return name + "'s spells: " + "\n" +
+                doableActions.listActions(new ArrayList<>(getSpells()));
     }
 
-    public void listItems(){
-        System.out.println(name + "'s items: ");
-        doableActions.listActions(new ArrayList<>(getItems()));
+    public String listItems(){
+        return name + "'s items: " + "\n" +
+                doableActions.listActions(new ArrayList<>(getItems()));
     }
 
     //Bonus from buffs and getEquipment()

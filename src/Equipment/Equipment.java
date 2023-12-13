@@ -79,13 +79,15 @@ public class Equipment {
         return "";
     }
 
-    public void viewEquipment(){
+    public String viewEquipment(){
+        StringBuilder string = new StringBuilder();
         int index = 1;
         for(Equippable equippable : equipmentList){
-            System.out.println(index + ". " + equippable + equipMessage(equippable));
+            string.append(index).append(". ").append(equippable).append(equipMessage(equippable));
             index++;
         }
-        System.out.println(index + ". Exit");
+        string.append(index).append(". Exit");
+        return string.toString();
     }
 
     public void processEquipment(int choice){

@@ -21,10 +21,12 @@ public class BattleSystem extends StateMachine{
         setState(new EnterName(this));
     }
 
-    public static void outputCharacters(List<Character> characters){
+    public static String outputCharacters(List<Character> characters){
+        StringBuilder string = new StringBuilder();
         for(int i=0; i < characters.size(); i++){
-            System.out.println(i+1 + ". " + characters.get(i));
+            string.append(i + 1).append(". ").append(characters.get(i));
         }
+        return string.toString();
     }
 
     public void addAction(Action action){

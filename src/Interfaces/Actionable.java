@@ -28,10 +28,9 @@ public abstract class Actionable {
     private Character chooseCharacter(List<Character> characters){
         int actionChoice;
         Scanner sc = new Scanner(System.in);
-        BattleSystem.outputCharacters(characters);
+        System.out.println(BattleSystem.outputCharacters(characters));
         System.out.println("Enter number: ");
         actionChoice = sc.nextInt();
-
         return characters.get(actionChoice - 1);
     }
 
