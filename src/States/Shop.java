@@ -30,8 +30,8 @@ public class Shop extends State{
         //Add option to learn new spells, attacks
         //Add sell items
         //Add revive allies option
-        System.out.println("Welcome to the Dungeon Shop! What do you want to buy?");
-        System.out.println("1. Weapons\n2. Armors\n3. Items\n4. Spell Scrolls\n5. Nothing");
+        System.out.println("Welcome to the Dungeon Shop! What do you want to buy? Or would you like to rest?");
+        System.out.println("1. Weapons\n2. Armors\n3. Items\n4. Spell Scrolls\n5. Rest\n6. Nothing");
         int shopChoice = sc.nextInt();
         boolean doneShopping;
         switch (shopChoice) {
@@ -39,12 +39,20 @@ public class Shop extends State{
             case 2 -> doneShopping = armorsShop();
             case 3 -> doneShopping = itemsShop();
             case 4 -> doneShopping = spellsShop();
-            case 5 -> doneShopping = true;
-            default -> doneShopping = false;
+            case 5 -> doneShopping = fullyRest();
+            case 6 -> doneShopping = false;
+            default -> doneShopping = true;
         }
-        if(!doneShopping) bs.setState(new Shop(bs));
+        if(doneShopping) bs.setState(new Shop(bs));
 
         bs.setState(new DescendLevel(bs));
+    }
+
+    private boolean fullyRest(){
+        System.out.println(bs.restParty());
+        State.livingAllies.clear();
+        initializeAllies();
+        return true;
     }
 
     private boolean weaponsShop(){          //return true if done shopping, false if switched shop
@@ -79,7 +87,9 @@ public class Shop extends State{
         }
         Character recipient = chooseRecipient();
         if(recipient == null) return weaponsShop(); //they chose to go back so recusively let them
-        recipient.equipWeapon(chosenWeapon);
+        if(chosenWeapon != null){
+            recipient.equipWeapon(chosenWeapon);
+        }
         return true;
     }
 
@@ -107,7 +117,7 @@ public class Shop extends State{
         }
         Character recipient = chooseRecipient();
         if(recipient == null) return armorsShop(); //they chose to go back so recusively let them
-        recipient.equipArmor(chosenArmor);
+        if(chosenArmor != null) recipient.equipArmor(chosenArmor);
         return true;
     }
     private boolean itemsShop(){
@@ -133,7 +143,7 @@ public class Shop extends State{
         }
         Character recipient = chooseRecipient();
         if(recipient == null) return itemsShop(); //they chose to go back so recusively let them
-        recipient.addItem(chosenItem);
+        if(chosenItem != null) recipient.addItem(chosenItem);
         return true;
     }
     private boolean spellsShop(){
@@ -165,7 +175,7 @@ public class Shop extends State{
         }
         Character recipient = chooseRecipient();
         if(recipient == null) return spellsShop(); //they chose to go back so recusively let them
-        recipient.addSpell(chosenSpell);
+        if(chosenSpell != null) recipient.addSpell(chosenSpell);
         return true;
     }
 
@@ -191,13 +201,19 @@ public class Shop extends State{
             bs.getParty().spendGold(price);
             return item;
         }
-        else return null;
+        else{
+            System.out.println("You can't afford this item");
+            return null;
+        }
     }
     private Actionable validateMoney(Actionable item, int price){
         if(bs.getParty().getGold() >= price){
             bs.getParty().spendGold(price);
             return item;
         }
-        else return null;
+        else{
+            System.out.println("You can't afford this item");
+            return null;
+        }
     }
 }

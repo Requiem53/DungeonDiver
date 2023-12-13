@@ -38,7 +38,7 @@ public abstract class State {
 
 
      public void initializeAllies(){
-          livingAllies = bs.getLivingAllies();
+          State.livingAllies = bs.getLivingAllies();
      }
      public void initializeEnemies(){
           //temporary

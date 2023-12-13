@@ -26,6 +26,11 @@ public class EnemyChoiceTurn extends State{
                 enemyAction = currEnemy.getAttacks().get(randomIndex);
                 break;
             case 1:
+                if(currEnemy.getSpells().isEmpty()) {
+                    enemyAction = currEnemy.getAttacks().get(0); //if no spell
+                    break;
+                }
+
                 randomIndex = random.nextInt(currEnemy.getSpells().size());
                 enemyAction = currEnemy.getSpells().get(randomIndex);
                 break;

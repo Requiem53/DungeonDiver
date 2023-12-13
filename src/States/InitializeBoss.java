@@ -13,6 +13,10 @@ public class InitializeBoss extends State{
         initializeAllies();
         initializeBoss();
 
+        queueChoice.add(null);
+        queueChoice.addAll(livingAllies);
+        queueChoice.addAll(randomEnemies);
+
         bs.setState(new BattleStart(bs));
     }
 }
