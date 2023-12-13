@@ -2,9 +2,6 @@ package States;
 
 import GameSystems.BattleSystem;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class InitializeBattlers extends State{
     //extends State
     //Generates random enemies and descends party member down a level
