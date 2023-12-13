@@ -18,10 +18,6 @@ public class GameWindow extends JFrame {
         WINDOW_W = WINDOW_H;
 
         display = new Display();
-//        JPanel displayBG = new JPanel(new BorderLayout());
-//        displayBG.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-//        displayBG.setBackground(Color.WHITE);
-//        displayBG.add(display, BorderLayout.CENTER);
 
         bottomPanel = new BottomPanel(WINDOW_W, WINDOW_H);
         JPanel bottomPanelBG = new JPanel(new BorderLayout());
@@ -47,5 +43,16 @@ public class GameWindow extends JFrame {
         add(bottomPanelBG, BorderLayout.SOUTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void setBackgroundBlack(Component[] comps){
+        for(Component comp : comps){
+            comp.setBackground(Color.BLACK);
+        }
+    }
+    public void setForegroundWhite(Component[] comps){
+        for(Component comp : comps){
+            comp.setForeground(Color.WHITE);
+        }
     }
 }

@@ -59,7 +59,7 @@ public class ActionPanel extends JLayeredPane {
         btnName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bs.getUser().name = tfName.getText();
+                bs.getUser().setName(tfName.getText());
                 signIn(signOutPanel);
                 switchPanel(mainActionsPanel);
             }
@@ -149,7 +149,7 @@ public class ActionPanel extends JLayeredPane {
     private void signIn(JPanel signOutPanel){
         isSignedIn = true;
         signOutPanel.remove(1);
-        JLabel lblCurrUser = new JLabel("<html>Logged in as:<br/>" + bs.getUser().name + "</html>");
+        JLabel lblCurrUser = new JLabel("<html>Logged in as:<br/>" + bs.getUser().getName() + "</html>");
         lblCurrUser.setBackground(Color.BLACK);
         lblCurrUser.setForeground(Color.WHITE);
         lblCurrUser.setBounds(0, 0, 150, 60);
