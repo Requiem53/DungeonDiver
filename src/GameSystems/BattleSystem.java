@@ -16,7 +16,7 @@ public class BattleSystem extends StateMachine{
 
     List<Action> actions = new ArrayList<>();
     Queue<Action> actionsSorted;
-    private GameWindow gameWindow;
+    public GameWindow gameWindow;
 
     public BattleSystem(){
         party = new Party();
