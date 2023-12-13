@@ -30,7 +30,7 @@ public class GameWindow extends JFrame {
         bottomPanelBG.add(bottomPanel, BorderLayout.CENTER);
         bottomPanelBG.setPreferredSize(new Dimension(WINDOW_W, WINDOW_H / 3));
 
-        statPanel = new StatPanel(WINDOW_W, WINDOW_H);
+        statPanel = new StatPanel();
         JPanel statPanellBG = new JPanel(new BorderLayout());
         statPanellBG.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         statPanellBG.setBackground(Color.GRAY);
