@@ -9,6 +9,8 @@ import Interfaces.Actionable;
 import Items.HealingItem;
 import Items.Item;
 import Items.StatusItem;
+import Spells.DamagingSpell;
+import Spells.StatusSpell;
 
 import java.util.List;
 import java.util.Scanner;
@@ -134,7 +136,30 @@ public class Shop extends State{
         return true;
     }
     private boolean spellsShop(){
-        return false;
+        System.out.println("What spell do you want to buy?");
+        System.out.println("(200G) 1. "+new DamagingSpell.Hyper_Beam());
+        System.out.println("(400G) 2. "+new DamagingSpell.Celestial_Ray());
+        System.out.println("(150G) 3. "+new StatusSpell.Strength());
+        System.out.println("(150G) 4. "+new StatusSpell.Wisdom());  //continue unya wa pa nahuman
+        System.out.println("5. Go back");
+        int itemChoice = sc.nextInt();
+        Item chosenItem = null;                        //choose the weapon
+        switch(itemChoice){
+            case 1 -> chosenItem = (Item) validateMoney(new HealingItem.HealingPotion(), 50);
+            case 2 -> chosenItem = (Item) validateMoney(new HealingItem.GreaterHealingPotion(), 100);
+            case 3 -> chosenItem = (Item) validateMoney(new StatusItem.SmokeBomb(), 50);
+            case 4 -> chosenItem = (Item) validateMoney(new StatusItem.HealthPlus(), 150);
+            case 5 -> {                         //they chose to go back
+                return false;
+            }
+            default -> {
+                return itemsShop();
+            }
+        }
+        Character recipient = chooseRecipient();
+        if(recipient == null) return itemsShop(); //they chose to go back so recusively let them
+        recipient.addItem(chosenItem);
+        return true;
     }
 
     private Character chooseRecipient(){
