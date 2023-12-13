@@ -56,6 +56,11 @@ public abstract class CharacterClass {
         statuses = new ArrayList<>();
     }
 
+    public void regenerateToFull(){
+        currHealth = maxHealth;
+        currMana = magicPower;
+    }
+
     public DoableActions getInitialActions(){
         return initialActions;
     }

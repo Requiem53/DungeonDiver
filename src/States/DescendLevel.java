@@ -9,7 +9,7 @@ public class DescendLevel extends State{
 
     @Override
     public void Start() {
-        State.dungeonLevel++;
+        descendLevel();
         System.out.println("You have descended a level");
         System.out.println(State.dungeonLevel);
 

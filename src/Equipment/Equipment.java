@@ -30,12 +30,18 @@ public class Equipment {
     }
 
     public void equipWeapon(Weapon weapon){
+        if(this.weapon != null){
+            equipmentList.add(this.weapon);
+        }
         this.weapon = weapon;
         weapon.setEquipped(true);
         System.out.println("Equipped weapon");
     }
 
     public void equipArmor(Armor armor){
+        if(this.armor != null){
+            equipmentList.add(this.armor);
+        }
         this.armor = armor;
         armor.setEquipped(true);
         System.out.println("Equipped armor");
@@ -83,7 +89,7 @@ public class Equipment {
         StringBuilder string = new StringBuilder();
         int index = 1;
         for(Equippable equippable : equipmentList){
-            string.append(index).append(". ").append(equippable).append(equipMessage(equippable));
+            string.append(index).append(". ").append(equippable).append(equipMessage(equippable)).append("\n");
             index++;
         }
         string.append(index).append(". Exit");

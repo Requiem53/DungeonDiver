@@ -25,6 +25,11 @@ public abstract class Character implements Comparable<Character> {
         doableActions = charClass.getInitialActions();
     }
 
+    public String fullyRest(){
+        charClass.regenerateToFull();
+        return this + " was fully rested..";
+    }
+
     //Actions
     public String takeDamage(int damage){
         Random random = new Random();

@@ -24,6 +24,13 @@ public class BattleSystem extends StateMachine{
         setState(new EnterName(this));
     }
 
+    public String restParty(){
+        for (Character partyMember : getPartyMembers()){
+            System.out.println(partyMember.fullyRest());
+        }
+        return "The whole party is rejuvenated!";
+    }
+
     public static String outputCharacters(List<Character> characters){
         StringBuilder string = new StringBuilder();
         for(int i=0; i < characters.size(); i++){
