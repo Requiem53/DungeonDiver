@@ -10,6 +10,7 @@ import Items.HealingItem;
 import Items.Item;
 import Items.StatusItem;
 import Spells.DamagingSpell;
+import Spells.Spell;
 import Spells.StatusSpell;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class Shop extends State{
         System.out.println("9. Go back");
 
         int weaponChoice = sc.nextInt();
-        Weapon chosenWeapon = null;                        //choose the weapon
+        Weapon chosenWeapon;                        //choose the weapon
         switch(weaponChoice){
             case 1 -> chosenWeapon = (Weapon) validateMoney(new Weapon.Steel_Sword(), 200);
             case 2 -> chosenWeapon = (Weapon) validateMoney(new Weapon.Sword_Of_Light(), 400);
@@ -91,7 +92,7 @@ public class Shop extends State{
         System.out.println("5. Go back");
 
         int armorChoice = sc.nextInt();
-        Armor chosenArmor = null;                        //choose the weapon
+        Armor chosenArmor;                        //choose the weapon
         switch(armorChoice){
             case 1 -> chosenArmor = (Armor) validateMoney(new Armor.Steel_Chestplate(), 300);
             case 2 -> chosenArmor = (Armor) validateMoney(new Armor.Dark_Cloak(), 300);
@@ -117,7 +118,7 @@ public class Shop extends State{
         System.out.println("(150G) 4. "+new StatusItem.HealthPlus());
         System.out.println("5. Go back");
         int itemChoice = sc.nextInt();
-        Item chosenItem = null;                        //choose the weapon
+        Item chosenItem;                        //choose the weapon
         switch(itemChoice){
             case 1 -> chosenItem = (Item) validateMoney(new HealingItem.HealingPotion(), 50);
             case 2 -> chosenItem = (Item) validateMoney(new HealingItem.GreaterHealingPotion(), 100);
@@ -139,26 +140,32 @@ public class Shop extends State{
         System.out.println("What spell do you want to buy?");
         System.out.println("(200G) 1. "+new DamagingSpell.Hyper_Beam());
         System.out.println("(400G) 2. "+new DamagingSpell.Celestial_Ray());
-        System.out.println("(150G) 3. "+new StatusSpell.Strength());
-        System.out.println("(150G) 4. "+new StatusSpell.Wisdom());  //continue unya wa pa nahuman
-        System.out.println("5. Go back");
+        System.out.println("(150G) 3. "+new StatusSpell.Momentum());
+        System.out.println("(250G) 4. "+new StatusSpell.Armor_Shred());
+        System.out.println("(150G) 5. "+new StatusSpell.Lazy());
+        System.out.println("(150G) 6. "+new StatusSpell.Truce());
+        System.out.println("(150G) 7. "+new StatusSpell.Anti_Magic());
+        System.out.println("8. Go back");
         int itemChoice = sc.nextInt();
-        Item chosenItem = null;                        //choose the weapon
+        Spell chosenSpell;                        //choose the weapon
         switch(itemChoice){
-            case 1 -> chosenItem = (Item) validateMoney(new HealingItem.HealingPotion(), 50);
-            case 2 -> chosenItem = (Item) validateMoney(new HealingItem.GreaterHealingPotion(), 100);
-            case 3 -> chosenItem = (Item) validateMoney(new StatusItem.SmokeBomb(), 50);
-            case 4 -> chosenItem = (Item) validateMoney(new StatusItem.HealthPlus(), 150);
-            case 5 -> {                         //they chose to go back
+            case 1 -> chosenSpell = (Spell) validateMoney(new DamagingSpell.Hyper_Beam(), 200);
+            case 2 -> chosenSpell = (Spell) validateMoney(new DamagingSpell.Celestial_Ray(), 400);
+            case 3 -> chosenSpell = (Spell) validateMoney(new StatusSpell.Momentum(), 150);
+            case 4 -> chosenSpell = (Spell) validateMoney(new StatusSpell.Armor_Shred(), 250);
+            case 5 -> chosenSpell = (Spell) validateMoney(new StatusSpell.Lazy(), 150);
+            case 6 -> chosenSpell = (Spell) validateMoney(new StatusSpell.Truce(), 150);
+            case 7 -> chosenSpell = (Spell) validateMoney(new StatusSpell.Anti_Magic(), 150);
+            case 8 -> {                         //they chose to go back
                 return false;
             }
             default -> {
-                return itemsShop();
+                return spellsShop();
             }
         }
         Character recipient = chooseRecipient();
-        if(recipient == null) return itemsShop(); //they chose to go back so recusively let them
-        recipient.addItem(chosenItem);
+        if(recipient == null) return spellsShop(); //they chose to go back so recusively let them
+        recipient.addSpell(chosenSpell);
         return true;
     }
 

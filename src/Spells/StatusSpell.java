@@ -3,6 +3,7 @@ package Spells;
 import Characters.Character;
 import Interfaces.StatusInflicting;
 import Statuses.Buff;
+import Statuses.Debuff;
 import Statuses.Status;
 
 public abstract class StatusSpell extends Spell implements StatusInflicting {
@@ -79,6 +80,51 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         @Override
         public String flavorText(Character actor, Character target) {
             return actor + " will now share knowledge to their teammate";
+        }
+    }
+    public static class Momentum extends StatusSpell{
+        public Momentum() {
+            super(new SpellBuilder().setManaCost(5).setName("Momentum").setStatus(new Buff.Haste()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return "fast as sonic bro";
+        }
+    }
+    public static class Armor_Shred extends StatusSpell{
+        public Armor_Shred() {
+            super(new SpellBuilder().setManaCost(10).setName("Armor Shred").setStatus(new Debuff.Shred()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return "Armor shred less defense";
+        }
+    }
+    public static class Lazy extends StatusSpell{
+        public Lazy() {
+            super(new SpellBuilder().setManaCost(5).setName("Lazy").setStatus(new Debuff.Slow()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return "the lazy hehe";
+        }
+    }
+    public static class Truce extends StatusSpell{
+        public Truce() {
+            super(new SpellBuilder().setManaCost(5).setName("Truce").setStatus(new Debuff.Disarm()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return "enemy attack debuff";
+        }
+    }
+    public static class Anti_Magic extends StatusSpell{
+        public Anti_Magic() {
+            super(new SpellBuilder().setManaCost(5).setName("Anti Magic").setStatus(new Debuff.Amnesia()));
+        }
+        @Override
+        public String flavorText(Character actor, Character target) {
+            return "enemy magic power debuff";
         }
     }
 }
