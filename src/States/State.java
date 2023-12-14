@@ -1,12 +1,10 @@
 package States;
 
 import Characters.Character;
-import Characters.CharacterClass;
 import Characters.EnemyClass;
 import GameSystems.BattleSystem;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -63,13 +61,12 @@ public abstract class State {
 
           JPanel statPanel = bs.gameWindow.statPanel;
 
+          statPanel.add(Box.createHorizontalGlue());
+
           for (Characters.Character livingAlly : livingAllies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
-
-               container.setBorder(new EmptyBorder(10, 10, 10, 10));
-
 
                JLabel allyName = new JLabel(livingAlly.getName());
                Font existingFont = allyName.getFont();
@@ -108,7 +105,7 @@ public abstract class State {
 
           for (Characters.Character enemy : randomEnemies) {
                JPanel container = new JPanel();
-               container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+               container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
 
                JLabel enemyName = new JLabel(enemy.getName());
@@ -157,13 +154,14 @@ public abstract class State {
           JPanel display = bs.gameWindow.display;
 
           for (Characters.Character enemy : randomEnemies) {
+               System.out.println(enemy.getName());
+
                ImageIcon enemySprite = new ImageIcon(enemy.charClass.sprite);
                Image origImg = enemySprite.getImage();
                int NEW_IMG_W = enemySprite.getIconWidth() * 4;
                int NEW_IMG_H = enemySprite.getIconHeight() * 4;
                Image scaledImage = origImg.getScaledInstance(NEW_IMG_W, NEW_IMG_H, Image.SCALE_SMOOTH);
                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-
 
                JLabel enemySpriteCont = new JLabel(scaledIcon);
                display.add(enemySpriteCont);

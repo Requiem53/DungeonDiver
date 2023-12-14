@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class StatPanel extends JPanel {
     public StatPanel() {
-        super(new FlowLayout(FlowLayout.CENTER));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.BLACK);
     }
 }
