@@ -1,13 +1,11 @@
 package States;
 
-import Attacks.Attack;
 import Characters.Character;
 import Equipment.Armor;
 import Equipment.Equippable;
 import Equipment.Weapon;
 import GUI.BottomPanel;
 import GameSystems.BattleSystem;
-import Interfaces.Action;
 import Interfaces.Actionable;
 import Items.HealingItem;
 import Items.Item;
@@ -21,7 +19,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,6 +36,8 @@ public class Shop extends State{
         //Add option to learn new spells, attacks
         //Add sell items
         //Add revive allies option
+        fullyRest();
+
         bs.removeAllNotBPSP();
         JLabel lblShop = new JLabel("Welcome to the Dungeon Shop! What do you want to buy?", SwingConstants.CENTER);
         lblShop.setMaximumSize(new Dimension(400, 30));
@@ -184,7 +183,7 @@ public class Shop extends State{
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(validateMoney(weapon, price)){
+                    if(validateMoney(price)){
                         chooseRecipient(weapon, price);
                     }
                 }
@@ -263,7 +262,7 @@ public class Shop extends State{
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(validateMoney(armor, price)){
+                    if(validateMoney(price)){
                         chooseRecipient(armor, price);
                     }
                 }
@@ -334,7 +333,7 @@ public class Shop extends State{
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(validateMoney(item, price)){
+                    if(validateMoney(price)){
                         chooseRecipient(item, price);
                     }
                 }
@@ -410,7 +409,7 @@ public class Shop extends State{
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(validateMoney(spell, price)){
+                    if(validateMoney(price)){
                         chooseRecipient(spell, price);
                     }
                 }
@@ -568,17 +567,7 @@ public class Shop extends State{
         bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
     }
-
-    private boolean validateMoney(Equippable item, int price){
-        if(bs.getParty().getGold() >= price){
-            return true;
-        }
-        else{
-            System.out.println("You can't afford this item");
-            return false;
-        }
-    }
-    private boolean validateMoney(Actionable item, int price){
+    private boolean validateMoney(int price){
         if(bs.getParty().getGold() >= price){
             return true;
         }
