@@ -71,10 +71,12 @@ public abstract class State {
 
                // name
                JLabel allyName = new JLabel(livingAlly.getName());
+               allyName.setForeground(new Color(64, 193, 64)); // RGB values for light green
 
                // hp
-               String hpText = "H: " + livingAlly.getCurrHealth() + "/" + livingAlly.getMaxHealth();
+               String hpText = "HP: " + livingAlly.getCurrHealth() + "/" + livingAlly.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
+
 
                // mana
                String manaText = "M: " + livingAlly.getCurrMana();
@@ -94,8 +96,7 @@ public abstract class State {
 
 
                bs.gameWindow.setBackgroundBlack(new Component[]{container});
-               bs.gameWindow.setForegroundWhite(new Component[]{
-                       allyName, hpLabel, manaLabel, powerLabel, mpLabel, speedLabel});
+               bs.gameWindow.setForegroundWhite(new Component[]{hpLabel, manaLabel, powerLabel, mpLabel, speedLabel});
 
                container.add(Box.createVerticalGlue());
                container.add(allyName);
@@ -128,7 +129,7 @@ public abstract class State {
                enemyName.setForeground(Color.RED);
 
                // hp
-               String hpText = "H: " + enemy.getCurrHealth() + "/" + enemy.getMaxHealth();
+               String hpText = "HP: " + enemy.getCurrHealth() + "/" + enemy.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
 
                // mana
