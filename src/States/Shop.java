@@ -112,6 +112,8 @@ public class Shop extends State{
                 firstBtnPanel, secondBtnPanel, btnExit});
         bs.gameWindow.setForegroundWhite(new Component[]{lblShop, btnWeapons, btnArmors, btnItems, btnSpells,
                 btnExit});
+        bs.gameWindow.setBiggerFonts(new Component[]{lblShop, btnWeapons, btnArmors, btnItems, btnSpells,
+                btnExit});
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/36)));
@@ -124,24 +126,6 @@ public class Shop extends State{
         secondBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
-
-
-//        System.out.println("Welcome to the Dungeon Shop! What do you want to buy? Or would you like to rest?");
-//        System.out.println("1. Weapons\n2. Armors\n3. Items\n4. Spell Scrolls\n5. Rest\n6. Nothing");
-//        int shopChoice = sc.nextInt();
-//        boolean doneShopping;
-//        switch (shopChoice) {
-//            case 1 -> doneShopping = weaponsShop();
-//            case 2 -> doneShopping = armorsShop();
-//            case 3 -> doneShopping = itemsShop();
-//            case 4 -> doneShopping = spellsShop();
-//            case 5 -> doneShopping = fullyRest();
-//            case 6 -> doneShopping = false;
-//            default -> doneShopping = true;
-//        }
-//        if(doneShopping) bs.setState(new Shop(bs));
-//
-//        bs.setState(new DescendLevel(bs));
     }
 
     private void fullyRest(){
@@ -159,7 +143,7 @@ public class Shop extends State{
         int[] prices = new int[]{200, 400, 200, 400, 200, 400, 200, 400};
 
         JLabel lblWhatWeapon = new JLabel("What weapon do you want to buy?", SwingConstants.CENTER);
-        lblWhatWeapon.setMaximumSize(new Dimension(200, 30));
+        lblWhatWeapon.setMaximumSize(new Dimension(400, 30));
 
         JPanel firstBtnPanel = new JPanel();
         firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
@@ -177,14 +161,13 @@ public class Shop extends State{
             Weapon weapon = weapons.get(i);
             int price = prices[i];
             JButton button = new JButton(weapon.getName() + "(" + prices[i] + ")");
-//            button.setFont(new Font("Arial", Font.PLAIN, 10));
             button.setFocusable(false);
             button.setMaximumSize(new Dimension(200, 30));
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(validateMoney(price)){
-                        chooseRecipient(weapon, price);
+                        examineEquippable(weapon, price);
                     }
                 }
             });
@@ -218,6 +201,7 @@ public class Shop extends State{
         bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatWeapon, firstBtnPanel, secondBtnPanel,
             thirdBtnPanel});
         lblWhatWeapon.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblWhatWeapon);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
@@ -243,7 +227,7 @@ public class Shop extends State{
         int price = 300;
 
         JLabel lblWhatArmor = new JLabel("What weapon do you want to buy?", SwingConstants.CENTER);
-        lblWhatArmor.setMaximumSize(new Dimension(200, 30));
+        lblWhatArmor.setMaximumSize(new Dimension(400, 30));
 
         JPanel firstBtnPanel = new JPanel();
         firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
@@ -263,7 +247,7 @@ public class Shop extends State{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(validateMoney(price)){
-                        chooseRecipient(armor, price);
+                        examineEquippable(armor, price);
                     }
                 }
             });
@@ -292,6 +276,7 @@ public class Shop extends State{
 
         bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatArmor, firstBtnPanel, secondBtnPanel});
         lblWhatArmor.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblWhatArmor);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
@@ -313,7 +298,7 @@ public class Shop extends State{
         int[] prices = new int[] {50, 100, 50, 150};
 
         JLabel lblWhatItem = new JLabel("What item do you want to buy?", SwingConstants.CENTER);
-        lblWhatItem.setMaximumSize(new Dimension(200, 30));
+        lblWhatItem.setMaximumSize(new Dimension(400, 30));
 
         JPanel firstBtnPanel = new JPanel();
         firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
@@ -334,7 +319,7 @@ public class Shop extends State{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(validateMoney(price)){
-                        chooseRecipient(item, price);
+                        examineActionable(item, price);
                     }
                 }
             });
@@ -363,6 +348,7 @@ public class Shop extends State{
 
         bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatItem, firstBtnPanel, secondBtnPanel});
         lblWhatItem.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblWhatItem);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
@@ -385,7 +371,7 @@ public class Shop extends State{
         int[] prices = new int[] {200, 400, 150, 250, 150, 150, 150};
 
         JLabel lblWhatSpell = new JLabel("What spell scroll do you want to buy?", SwingConstants.CENTER);
-        lblWhatSpell.setMaximumSize(new Dimension(200, 30));
+        lblWhatSpell.setMaximumSize(new Dimension(400, 30));
 
         JPanel firstBtnPanel = new JPanel();
         firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
@@ -410,7 +396,7 @@ public class Shop extends State{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(validateMoney(price)){
-                        chooseRecipient(spell, price);
+                        examineActionable(spell, price);
                     }
                 }
             });
@@ -444,6 +430,7 @@ public class Shop extends State{
         bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatSpell, firstBtnPanel, secondBtnPanel,
                 thirdBtnPanel});
         lblWhatSpell.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblWhatSpell);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
@@ -461,6 +448,115 @@ public class Shop extends State{
         bp.add(thirdBtnPanel);
         bs.panelRevalRepaint(bp);
     }
+
+    private void examineActionable(Actionable actionable, int price){
+        JLabel lblStats = new JLabel(actionable.toString());
+        lblStats.setMaximumSize(new Dimension(400, 60));
+
+        JLabel lblConfirm = new JLabel("Do you want to buy " + actionable.getName() + "?");
+        lblStats.setMaximumSize(new Dimension(200, 60));
+
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
+        btnPanel.setMaximumSize(new Dimension(230, 30));
+
+        JButton btnYes = new JButton("Yes");
+        btnYes.setFocusable(false);
+        btnYes.setMaximumSize(new Dimension(100, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnYes);
+        btnYes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooseRecipient(actionable, price);
+            }
+        });
+        btnPanel.add(btnYes);
+        btnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+
+        JButton btnNo = new JButton("No");
+        btnNo.setFocusable(false);
+        btnNo.setMaximumSize(new Dimension(100, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnNo);
+        btnNo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bs.setState(new Shop(bs));
+            }
+        });
+        btnPanel.add(btnNo);
+
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblStats, lblConfirm, btnPanel, btnYes, btnNo});
+        bs.gameWindow.setForegroundWhite(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
+        bs.gameWindow.setBiggerFonts(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
+
+        BottomPanel bp = bs.gameWindow.bottomPanel;
+        bs.removeAllNotBPSP();
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/36)));
+        lblStats.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblStats);
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        lblConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblConfirm);
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        btnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(btnPanel);
+        bs.panelRevalRepaint(bp);
+    }
+    private void examineEquippable(Equippable equippable, int price){
+        JLabel lblStats = new JLabel(equippable.toStringHTML());
+        lblStats.setMaximumSize(new Dimension(400, 90));
+        lblStats.setFont(new Font("Arial", Font.PLAIN, 15));
+
+        JLabel lblConfirm = new JLabel("Do you want to buy " + equippable.getName() + "?");
+        lblStats.setMaximumSize(new Dimension(200, 60));
+
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
+        btnPanel.setMaximumSize(new Dimension(230, 30));
+
+        JButton btnYes = new JButton("Yes");
+        btnYes.setFocusable(false);
+        btnYes.setMaximumSize(new Dimension(100, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnYes);
+        btnYes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooseRecipient(equippable, price);
+            }
+        });
+        btnPanel.add(btnYes);
+        btnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+
+        JButton btnNo = new JButton("No");
+        btnNo.setFocusable(false);
+        btnNo.setMaximumSize(new Dimension(100, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnNo);
+        btnNo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bs.setState(new Shop(bs));
+            }
+        });
+        btnPanel.add(btnNo);
+
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblStats, lblConfirm, btnPanel, btnYes, btnNo});
+        bs.gameWindow.setForegroundWhite(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
+        bs.gameWindow.setBiggerFonts(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
+
+        BottomPanel bp = bs.gameWindow.bottomPanel;
+        bs.removeAllNotBPSP();
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/36)));
+        lblStats.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblStats);
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        lblConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblConfirm);
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        btnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(btnPanel);
+        bs.panelRevalRepaint(bp);
+    }
+
     private void chooseRecipient(Actionable actionable, int price){
         List<Character> partyMembers = bs.getPartyMembers();
         JLabel lblBindActionbleWho = new JLabel("Bind " + actionable.getName() + " on who?", SwingConstants.CENTER);
@@ -489,6 +585,7 @@ public class Shop extends State{
                 }
             });
             bs.gameWindow.setBGBlackFGWhite(button);
+            bs.gameWindow.setBiggerFont(button);
             if(i < 2) {
                 firstBtnPanel.add(button);
                 if(i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
@@ -500,6 +597,7 @@ public class Shop extends State{
         }
         bs.gameWindow.setBackgroundBlack(new Component[]{lblBindActionbleWho, firstBtnPanel, secondBtnPanel});
         lblBindActionbleWho.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblBindActionbleWho);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
@@ -542,6 +640,7 @@ public class Shop extends State{
                 }
             });
             bs.gameWindow.setBGBlackFGWhite(button);
+            bs.gameWindow.setBiggerFont(button);
             if(i < 2) {
                 firstBtnPanel.add(button);
                 if(i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
@@ -553,6 +652,7 @@ public class Shop extends State{
         }
         bs.gameWindow.setBackgroundBlack(new Component[]{lblEquipWho ,firstBtnPanel, secondBtnPanel});
         lblEquipWho.setForeground(Color.WHITE);
+        bs.gameWindow.setBiggerFont(lblEquipWho);
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();

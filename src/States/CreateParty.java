@@ -1,7 +1,6 @@
 package States;
 
 import Characters.AllyClass;
-import Characters.AllyClassList;
 import Characters.Character;
 import GUI.BottomPanel;
 import GameSystems.BattleSystem;
@@ -122,6 +121,9 @@ public class CreateParty extends State{
                 btnRogue, btnMage, btnHealer});
         bs.gameWindow.setForegroundWhite(new Component[]{lblEnterName, tfCharaName, btnWarrior, btnRogue,
                 btnMage, btnHealer});
+        bs.gameWindow.setBiggerFonts(new Component[]{lblEnterName, tfCharaName, btnWarrior, btnRogue, btnMage,
+                btnHealer});
+
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bp.add(Box.createRigidArea(new Dimension(0, height/8)));
         lblEnterName.setAlignmentX(Component.CENTER_ALIGNMENT);

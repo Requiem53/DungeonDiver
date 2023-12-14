@@ -2,14 +2,11 @@ package GameSystems;
 
 import Characters.Character;
 import Characters.Party;
-import GUI.BottomPanel;
 import GUI.GameWindow;
-import Interfaces.*;
 import Interfaces.Action;
 import States.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -24,6 +21,7 @@ public class BattleSystem extends StateMachine{
 
     public GameWindow gameWindow;
     public JPanel bottomPanel_topPart;
+    public JPanel dungeonLevelPanel;
 
     public BattleSystem(){
         user = new User();

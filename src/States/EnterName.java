@@ -2,7 +2,6 @@ package States;
 
 import GUI.BottomPanel;
 import GameSystems.BattleSystem;
-import GameSystems.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,28 +28,38 @@ public class EnterName extends State {
             @Override
             public void actionPerformed(ActionEvent e) {
                 bs.getUser().setName(tfName.getText());
-                JPanel topPart = new JPanel(null);
+                JPanel topPart = new JPanel(new GridLayout(1, 3));
                 topPart.setMaximumSize(new Dimension(width, 30));
-                topPart.setLayout(new BoxLayout(topPart, BoxLayout.LINE_AXIS));
+
+                JPanel userPanel = new JPanel();
+                JPanel scorePanel = new JPanel();
+
                 JLabel lblUser = new JLabel("Logged in as: " + bs.getUser().getName());
+                lblUser.setHorizontalAlignment(SwingConstants.LEFT);
                 JLabel lblScore = new JLabel("Score: 0");
+                lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 
-                topPart.add(lblUser);
-                topPart.add(Box.createRigidArea(new Dimension(width/4, 0)));
-                topPart.add(lblScore);
-                topPart.add(Box.createRigidArea(new Dimension(width/4, 0)));
+                userPanel.add(lblUser);
+                scorePanel.add(lblScore);
 
-                bs.gameWindow.setBackgroundBlack(new Component[]{topPart, lblUser});
+                topPart.add(userPanel);
+                topPart.add(scorePanel);
+
+                bs.gameWindow.setBackgroundBlack(new Component[]{topPart, userPanel, lblUser, scorePanel, lblScore});
                 bs.gameWindow.setForegroundWhite(new Component[]{lblUser, lblScore});
+                bs.gameWindow.setBiggerFonts(new Component[]{lblUser, lblScore});
 
                 bs.bottomPanel_topPart = topPart;
                 bs.gameWindow.bottomPanel.add(topPart);
+                bs.dungeonLevelPanel = new JPanel();
                 bs.removeAllNotBPSP();
                 bs.setState(new CreateParty(bs));
             }
         });
         bs.gameWindow.setBackgroundBlack(new Component[]{lblName, tfName, btnName});
         bs.gameWindow.setForegroundWhite(new Component[]{lblName, tfName, btnName});
+        bs.gameWindow.setBiggerFonts(new Component[]{lblName, tfName, btnName});
+
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bp.add(Box.createRigidArea(new Dimension(0, height/6)));
         lblName.setAlignmentX(Component.CENTER_ALIGNMENT);

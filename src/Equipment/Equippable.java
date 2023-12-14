@@ -21,12 +21,20 @@ public abstract class Equippable {
         evasion = builder.getEvasion();
     }
     public String toString(){
-        return getName() + "[HP: " + getMaxHealth() +
-                "][P: " + getPower() +
-                "][S: " + getSpeed() +
-                "][D: " + getDefense() +
-                "][MP: " + getMagicPower() +
-                "][E: " + getEvasion();
+        return getName() + " (HP: " + getMaxHealth() +
+                "; POW: " + getPower() +
+                "; SPD: " + getSpeed() +
+                "; DEF: " + getDefense() +
+                "; MP: " + getMagicPower() +
+                "; EVA: " + getEvasion() + ")";
+    }
+    public String toStringHTML(){
+        return "<html>" + getName() + " (Max Health: " + getMaxHealth() +
+                "; Power: " + getPower() +
+                "; </br>Speed: " + getSpeed() +
+                "; Defense: " + getDefense() +
+                "; </br>Magic Power: " + getMagicPower() +
+                "; Evasion: " + getEvasion() + ")</html>";
     }
 
     public String getName() {

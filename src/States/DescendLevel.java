@@ -15,16 +15,24 @@ public class DescendLevel extends State{
         descendLevel();
         System.out.println("You have descended a level");
         System.out.println(State.dungeonLevel);
+
         JPanel topPart = bs.bottomPanel_topPart;
+        JPanel dungeonLevelPanel = bs.dungeonLevelPanel;
+
         try{
-            topPart.remove(4);
-        }catch(ArrayIndexOutOfBoundsException e){
-            //bruh nothing
+            dungeonLevelPanel.removeAll();
+        }catch (IndexOutOfBoundsException e){
+            //nothing
         }
+
         JLabel lblDungeonLvl = new JLabel("Dungeon Level: " + State.dungeonLevel);
-        lblDungeonLvl.setBackground(Color.BLACK);
+        lblDungeonLvl.setHorizontalAlignment(SwingConstants.RIGHT);
+        bs.gameWindow.setBiggerFont(lblDungeonLvl);
+        dungeonLevelPanel.add(lblDungeonLvl);
+
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblDungeonLvl, dungeonLevelPanel});
         lblDungeonLvl.setForeground(Color.WHITE);
-        bs.bottomPanel_topPart.add(lblDungeonLvl);
+        topPart.add(dungeonLevelPanel);
         bs.removeAllNotBPSP();
         bs.panelRevalRepaint(bs.gameWindow.bottomPanel);
 

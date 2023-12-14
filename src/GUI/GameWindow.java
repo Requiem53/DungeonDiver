@@ -55,9 +55,16 @@ public class GameWindow extends JFrame {
             comp.setForeground(Color.WHITE);
         }
     }
-
     public void setBGBlackFGWhite(Component comp){
         comp.setBackground(Color.BLACK);
         comp.setForeground(Color.WHITE);
+    }
+    public void setBiggerFont(Component comp){
+        comp.setFont(new Font("Arial", Font.PLAIN, 15));
+    }
+    public void setBiggerFonts(Component[] comps){
+        for(Component comp: comps){
+            comp.setFont(new Font("Arial", Font.PLAIN, 15));
+        }
     }
 }
