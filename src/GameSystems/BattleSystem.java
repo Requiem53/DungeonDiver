@@ -2,11 +2,16 @@ package GameSystems;
 
 import Characters.Character;
 import Characters.Party;
+import GUI.BottomPanel;
 import GUI.GameWindow;
 import Interfaces.*;
+import Interfaces.Action;
 import States.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class BattleSystem extends StateMachine{
     public User user;
@@ -18,9 +23,12 @@ public class BattleSystem extends StateMachine{
     Queue<Action> actionsSorted = new LinkedList<>();
 
     public GameWindow gameWindow;
+    public JPanel bottomPanel_topPart;
 
     public BattleSystem(){
+        user = new User();
         party = new Party();
+        bottomPanel_topPart = null;
         gameWindow = new GameWindow();
         setState(new EnterName(this));
     }
@@ -80,6 +88,16 @@ public class BattleSystem extends StateMachine{
             }
         }
         return livingAllies;
+    }
+    public void removeAllNotBPSP(){
+        JPanel bp = gameWindow.bottomPanel;
+        bp.removeAll();
+        if(bottomPanel_topPart == null) return;
+        bp.add(bottomPanel_topPart);
+    }
+    public void panelRevalRepaint(JPanel panel){
+        panel.revalidate();
+        panel.repaint();
     }
 
     //Getters
