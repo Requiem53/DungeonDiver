@@ -63,7 +63,7 @@ public abstract class State {
 
           JPanel statPanel = bs.gameWindow.statPanel;
 
-          for (Characters.Character livingAlly : livingAllies) {
+          for (Characters.Character livingAlly : State.livingAllies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
@@ -106,7 +106,7 @@ public abstract class State {
      public void displayEnemyStats() {
           JPanel statPanel = bs.gameWindow.statPanel;
 
-          for (Characters.Character enemy : randomEnemies) {
+          for (Characters.Character enemy : State.randomEnemies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
