@@ -30,6 +30,8 @@ public class Shop extends State{
         //Add option to learn new spells, attacks
         //Add sell items
         //Add revive allies option
+
+
         System.out.println("Welcome to the Dungeon Shop! What do you want to buy? Or would you like to rest?");
         System.out.println("1. Weapons\n2. Armors\n3. Items\n4. Spell Scrolls\n5. Rest\n6. Nothing");
         int shopChoice = sc.nextInt();

@@ -229,13 +229,24 @@ public abstract class Character implements Comparable<Character> {
         return getCurrHealth() > 0;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return name;
     }
 
     public static class Ally extends Character{
         public Ally(String name, CharacterClass charClass) {
             super(name, charClass);
+        }
+
+        @Override
+        public String toString() {
+            String allyClass = null;
+            if(this.charClass instanceof AllyClass.Warrior) allyClass = "(Warrior)";
+            else if(this.charClass instanceof AllyClass.Rogue) allyClass = "(Rogue)";
+            else if(this.charClass instanceof AllyClass.Mage) allyClass = "(Mage)";
+            else if(this.charClass instanceof AllyClass.Healer) allyClass = "(Healer)";
+            return super.toString() + " " + allyClass;
         }
     }
 
