@@ -1,12 +1,10 @@
 package States;
 
 import Characters.Character;
-import Characters.CharacterClass;
 import Characters.EnemyClass;
 import GameSystems.BattleSystem;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -60,16 +58,13 @@ public abstract class State {
      }
 
      public void displayAllyStats() {
-
           JPanel statPanel = bs.gameWindow.statPanel;
 
           for (Characters.Character livingAlly : State.livingAllies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-               container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
-
-               container.setBorder(new EmptyBorder(10, 10, 10, 10));
-
+//               container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
+//               container.setPreferredSize(new Dimension(statPanel.getHeight(), statPanel.getWidth()/7));
 
                JLabel allyName = new JLabel(livingAlly.getName());
                Font existingFont = allyName.getFont();
@@ -109,7 +104,7 @@ public abstract class State {
           for (Characters.Character enemy : State.randomEnemies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-               container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
+//               container.setPreferredSize(new Dimension(statPanel.getHeight(), statPanel.getWidth()/7));
 
                JLabel enemyName = new JLabel(enemy.getName());
                enemyName.setForeground(Color.RED);
