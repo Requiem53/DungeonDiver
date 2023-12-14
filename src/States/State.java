@@ -6,6 +6,7 @@ import Characters.EnemyClass;
 import GameSystems.BattleSystem;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -64,25 +65,27 @@ public abstract class State {
 
           for (Characters.Character livingAlly : livingAllies) {
                JPanel container = new JPanel();
-               container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-               container.setBackground(Color.BLACK);
+               container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
 
+               container.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+
                JLabel allyName = new JLabel(livingAlly.getName());
-               allyName.setForeground(Color.WHITE);
                Font existingFont = allyName.getFont();
-               Font newFont = existingFont.deriveFont(18.0f);
+               Font newFont = existingFont.deriveFont(15.0f);
                allyName.setFont(newFont);
 
                String hpText = "H: " + livingAlly.getCurrHealth() + "/" + livingAlly.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
-               hpLabel.setForeground(Color.WHITE);
                hpLabel.setFont(newFont);
 
                String manaText = "M: " + livingAlly.getCurrMana();
                JLabel manaLabel = new JLabel(manaText);
-               manaLabel.setForeground(Color.WHITE);
                manaLabel.setFont(newFont);
+
+               bs.gameWindow.setBackgroundBlack(new Component[]{container});
+               bs.gameWindow.setForegroundWhite(new Component[]{allyName, hpLabel, manaLabel});
 
                container.add(Box.createVerticalGlue());
                container.add(allyName);
@@ -105,25 +108,25 @@ public abstract class State {
 
           for (Characters.Character enemy : randomEnemies) {
                JPanel container = new JPanel();
-               container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-               container.setBackground(Color.BLACK);
+               container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
                container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
 
                JLabel enemyName = new JLabel(enemy.getName());
                enemyName.setForeground(Color.RED);
                Font existingFont = enemyName.getFont();
-               Font newFont = existingFont.deriveFont(18.0f);
+               Font newFont = existingFont.deriveFont(15.0f);
                enemyName.setFont(newFont);
 
                String hpText = "H: " + enemy.getCurrHealth() + "/" + enemy.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
-               hpLabel.setForeground(Color.WHITE);
                hpLabel.setFont(newFont);
 
                String manaText = "M: " + enemy.getCurrMana();
                JLabel manaLabel = new JLabel(manaText);
-               manaLabel.setForeground(Color.WHITE);
                manaLabel.setFont(newFont);
+
+               bs.gameWindow.setBackgroundBlack(new Component[]{container});
+               bs.gameWindow.setForegroundWhite(new Component[]{hpLabel, manaLabel});
 
                container.add(Box.createVerticalGlue());
                container.add(enemyName);
@@ -154,7 +157,15 @@ public abstract class State {
           JPanel display = bs.gameWindow.display;
 
           for (Characters.Character enemy : randomEnemies) {
-               JLabel enemySpriteCont = new JLabel(new ImageIcon(enemy.charClass.sprite));
+               ImageIcon enemySprite = new ImageIcon(enemy.charClass.sprite);
+               Image origImg = enemySprite.getImage();
+               int NEW_IMG_W = enemySprite.getIconWidth() * 4;
+               int NEW_IMG_H = enemySprite.getIconHeight() * 4;
+               Image scaledImage = origImg.getScaledInstance(NEW_IMG_W, NEW_IMG_H, Image.SCALE_SMOOTH);
+               ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+
+               JLabel enemySpriteCont = new JLabel(scaledIcon);
                display.add(enemySpriteCont);
           }
 
