@@ -134,7 +134,7 @@ public class CreateParty extends State{
         bp.add(classButtonArea);
         bs.panelRevalRepaint(bp);
 
-        System.out.println("TEST");
+        System.out.println("reachable?");
 
 //        String nameInput;
 //        AllyClass allyClass;
