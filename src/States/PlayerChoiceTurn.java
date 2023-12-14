@@ -308,11 +308,10 @@ public class PlayerChoiceTurn extends State {
             JButton button = new JButton(chara.getName());
             button.setFocusable(false);
             button.setMaximumSize(new Dimension(125, 30));
-            int finalI = i;
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    bs.addAction(new Action(actionable, getCurrChar(), characters.get(finalI)));
+                    bs.addAction(new Action(actionable, getCurrChar(), chara));
                     newChoiceTurn();
                 }
             });
