@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Display extends JPanel {
     public Display() {
-        super(new FlowLayout(FlowLayout.CENTER, 50, 50));
+        super(new FlowLayout(FlowLayout.CENTER, 80, 50));
         setBackground(Color.BLACK);
 
         setPreferredSize(new Dimension(100, 100));
