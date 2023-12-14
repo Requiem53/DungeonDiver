@@ -9,11 +9,15 @@ import Statuses.*;
 import Attacks.*;
 import Items.*;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CharacterClass {
     private String name;
+
+    public BufferedImage sprite;
+    public abstract void loadSprites();
 
     private int maxHealth;
     private int power;

@@ -9,13 +9,14 @@ import Spells.*;
 import Attacks.*;
 import Items.*;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Character implements Comparable<Character> {
 
     private String name;
-    private CharacterClass charClass;
+    public CharacterClass charClass;
     private DoableActions doableActions;
 
     public Character(String name, CharacterClass charClass) {

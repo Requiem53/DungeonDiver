@@ -1,6 +1,7 @@
 package States;
 
 import Characters.Character;
+import Characters.CharacterClass;
 import Characters.EnemyClass;
 import GameSystems.BattleSystem;
 
@@ -57,7 +58,7 @@ public abstract class State {
           return bs.getCurrChar();
      }
 
-     public void showAlliesStats() {
+     public void displayAllyStats() {
 
           JPanel statPanel = bs.gameWindow.statPanel;
 
@@ -99,7 +100,7 @@ public abstract class State {
           statPanel.repaint();
      }
 
-     public void showEnemiesStats() {
+     public void displayEnemyStats() {
           JPanel statPanel = bs.gameWindow.statPanel;
 
           for (Characters.Character enemy : randomEnemies) {
@@ -145,7 +146,19 @@ public abstract class State {
 
           statPanel.removeAll();
 
-          showAlliesStats();
-          showEnemiesStats();
+          displayAllyStats();
+          displayEnemyStats();
+     }
+
+     public void displayEnemySprites() {
+          JPanel display = bs.gameWindow.display;
+
+          for (Characters.Character enemy : randomEnemies) {
+               JLabel enemySpriteCont = new JLabel(new ImageIcon(enemy.charClass.sprite));
+               display.add(enemySpriteCont);
+          }
+
+          display.revalidate();
+          display.repaint();
      }
 }

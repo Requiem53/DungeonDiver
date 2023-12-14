@@ -23,6 +23,12 @@ public abstract class AllyClass extends CharacterClass{
             equipWeapon(new Weapon.Sword());
             equipArmor(new Armor.KnightsArmor());
         }
+
+
+        @Override
+        public void loadSprites() {
+
+        }
     }
     public static class Rogue extends AllyClass{
         public Rogue() {
@@ -32,6 +38,11 @@ public abstract class AllyClass extends CharacterClass{
             addItem(new StatusItem.SmokeBomb());
             equipWeapon(new Weapon.Dagger());
             equipArmor(new Armor.ClothArmor());
+        }
+
+        @Override
+        public void loadSprites() {
+
         }
     }
 
@@ -46,6 +57,11 @@ public abstract class AllyClass extends CharacterClass{
             equipWeapon(new Weapon.Wand());
             equipArmor(new Armor.ClothArmor());
         }
+
+        @Override
+        public void loadSprites() {
+
+        }
     }
     public static class Healer extends AllyClass{
         public Healer() {
@@ -57,6 +73,11 @@ public abstract class AllyClass extends CharacterClass{
             addItem(new HealingItem.HealingPotion());
             equipWeapon(new Weapon.Staff());
             equipArmor(new Armor.KnightsArmor());
+        }
+
+        @Override
+        public void loadSprites() {
+
         }
     }
 }
