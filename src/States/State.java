@@ -60,30 +60,50 @@ public abstract class State {
      public void displayAllyStats() {
           JPanel statPanel = bs.gameWindow.statPanel;
 
+//          HP
+//          Mana
+//          POW
+//          MP
+//          SPD
           for (Characters.Character livingAlly : State.livingAllies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
+               // name
                JLabel allyName = new JLabel(livingAlly.getName());
-               Font existingFont = allyName.getFont();
-               Font newFont = existingFont.deriveFont(15.0f);
-               allyName.setFont(newFont);
 
+               // hp
                String hpText = "H: " + livingAlly.getCurrHealth() + "/" + livingAlly.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
-               hpLabel.setFont(newFont);
 
+               // mana
                String manaText = "M: " + livingAlly.getCurrMana();
                JLabel manaLabel = new JLabel(manaText);
-               manaLabel.setFont(newFont);
+
+               // power
+               String powerText = "POW: " + livingAlly.getPower();
+               JLabel powerLabel = new JLabel(powerText);
+
+               // magic power
+               String mpText = "MP: " + livingAlly.getMagicPower();
+               JLabel mpLabel = new JLabel(mpText);
+
+               // speed
+               String speedText = "SPD: " + livingAlly.getSpeed();
+               JLabel speedLabel = new JLabel(speedText);
+
 
                bs.gameWindow.setBackgroundBlack(new Component[]{container});
-               bs.gameWindow.setForegroundWhite(new Component[]{allyName, hpLabel, manaLabel});
+               bs.gameWindow.setForegroundWhite(new Component[]{
+                       allyName, hpLabel, manaLabel, powerLabel, mpLabel, speedLabel});
 
                container.add(Box.createVerticalGlue());
                container.add(allyName);
                container.add(hpLabel);
                container.add(manaLabel);
+               container.add(powerLabel);
+               container.add(mpLabel);
+               container.add(speedLabel);
                container.add(Box.createVerticalGlue());
 
                container.revalidate();
@@ -103,27 +123,40 @@ public abstract class State {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
+               // name
                JLabel enemyName = new JLabel(enemy.getName());
                enemyName.setForeground(Color.RED);
-               Font existingFont = enemyName.getFont();
-               Font newFont = existingFont.deriveFont(15.0f);
-               enemyName.setFont(newFont);
 
+               // hp
                String hpText = "H: " + enemy.getCurrHealth() + "/" + enemy.getMaxHealth();
                JLabel hpLabel = new JLabel(hpText);
-               hpLabel.setFont(newFont);
 
+               // mana
                String manaText = "M: " + enemy.getCurrMana();
                JLabel manaLabel = new JLabel(manaText);
-               manaLabel.setFont(newFont);
+
+               // power
+               String powerText = "POW: " + enemy.getPower();
+               JLabel powerLabel = new JLabel(powerText);
+
+               // magic power
+               String mpText = "MP: " + enemy.getMagicPower();
+               JLabel mpLabel = new JLabel(mpText);
+
+               // speed
+               String speedText = "SPD: " + enemy.getSpeed();
+               JLabel speedLabel = new JLabel(speedText);
 
                bs.gameWindow.setBackgroundBlack(new Component[]{container});
-               bs.gameWindow.setForegroundWhite(new Component[]{hpLabel, manaLabel});
+               bs.gameWindow.setForegroundWhite(new Component[]{hpLabel, manaLabel, powerLabel, mpLabel, speedLabel});
 
                container.add(Box.createVerticalGlue());
                container.add(enemyName);
                container.add(hpLabel);
                container.add(manaLabel);
+               container.add(powerLabel);
+               container.add(mpLabel);
+               container.add(speedLabel);
                container.add(Box.createVerticalGlue());
 
                container.revalidate();
