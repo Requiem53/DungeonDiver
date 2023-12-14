@@ -55,4 +55,9 @@ public class GameWindow extends JFrame {
             comp.setForeground(Color.WHITE);
         }
     }
+
+    public void setBGBlackFGWhite(Component comp){
+        comp.setBackground(Color.BLACK);
+        comp.setForeground(Color.WHITE);
+    }
 }

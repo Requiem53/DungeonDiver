@@ -90,7 +90,7 @@ public class BattleSystem extends StateMachine{
         return livingAllies;
     }
     public void removeAllNotBPSP(){
-        BottomPanel bp = gameWindow.bottomPanel;
+        JPanel bp = gameWindow.bottomPanel;
         bp.removeAll();
         if(bottomPanel_topPart == null) return;
         bp.add(bottomPanel_topPart);
