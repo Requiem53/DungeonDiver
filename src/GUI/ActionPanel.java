@@ -39,7 +39,6 @@ public class ActionPanel extends JLayeredPane {
             @Override
             public void actionPerformed(ActionEvent e) {
                 signOut(signOutPanel, enterNamePanel);
-                return null;
             }
         });
         setBackgroundBlack(new Component[]{signOutPanel, lblCurrUser, btnSignOut});
@@ -63,7 +62,6 @@ public class ActionPanel extends JLayeredPane {
                 bs.getUser().setName(tfName.getText());
                 signIn(signOutPanel);
                 switchPanel(mainActionsPanel);
-                return null;
             }
         });
         setBackgroundBlack(new Component[]{enterNamePanel, lblName, tfName, btnName});
@@ -85,8 +83,6 @@ public class ActionPanel extends JLayeredPane {
         btnFight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                return null;
             }
         });
         JButton btnSpell = new JButton("Spell");
@@ -96,7 +92,6 @@ public class ActionPanel extends JLayeredPane {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                return null;
             }
         });
         JButton btnParry = new JButton("Parry");
@@ -105,8 +100,6 @@ public class ActionPanel extends JLayeredPane {
         btnParry.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                return null;
             }
         });
         JButton btnItem = new JButton("Item");
@@ -116,7 +109,6 @@ public class ActionPanel extends JLayeredPane {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                return null;
             }
         });
         setBackgroundBlack(new Component[]{mainActionsPanel, lblActionMaker, btnFight, btnSpell, btnParry, btnItem});
@@ -188,7 +180,6 @@ public class ActionPanel extends JLayeredPane {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            return null;
                         }
                     });
                 }
