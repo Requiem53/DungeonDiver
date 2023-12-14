@@ -63,8 +63,6 @@ public abstract class State {
           for (Characters.Character livingAlly : State.livingAllies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-//               container.setPreferredSize(new Dimension(statPanel.getHeight(), 100));
-//               container.setPreferredSize(new Dimension(statPanel.getHeight(), statPanel.getWidth()/7));
 
                JLabel allyName = new JLabel(livingAlly.getName());
                Font existingFont = allyName.getFont();
@@ -104,7 +102,6 @@ public abstract class State {
           for (Characters.Character enemy : State.randomEnemies) {
                JPanel container = new JPanel();
                container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-//               container.setPreferredSize(new Dimension(statPanel.getHeight(), statPanel.getWidth()/7));
 
                JLabel enemyName = new JLabel(enemy.getName());
                enemyName.setForeground(Color.RED);
