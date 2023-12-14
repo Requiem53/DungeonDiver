@@ -72,6 +72,9 @@ public class BattleSystem extends StateMachine{
     public void incrementTurn(){
         currentTurn++;
     }
+    public void decrementTurn(){
+        currentTurn--;
+    }
     public int getCurrentTurn(){
         return currentTurn;
     }

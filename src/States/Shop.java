@@ -450,11 +450,11 @@ public class Shop extends State{
     }
 
     private void examineActionable(Actionable actionable, int price){
-        JLabel lblStats = new JLabel(actionable.toString());
-        lblStats.setMaximumSize(new Dimension(400, 60));
+        JLabel lblStats = new JLabel(actionable.toStringHTML(), SwingConstants.CENTER);
+        lblStats.setMaximumSize(new Dimension(800, 60));
 
-        JLabel lblConfirm = new JLabel("Do you want to buy " + actionable.getName() + "?");
-        lblStats.setMaximumSize(new Dimension(200, 60));
+        JLabel lblConfirm = new JLabel("Do you want to buy " + actionable.getName() + "?", SwingConstants.CENTER);
+        lblConfirm.setMaximumSize(new Dimension(400, 30));
 
         JPanel btnPanel = new JPanel();
         btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
@@ -475,7 +475,7 @@ public class Shop extends State{
 
         JButton btnNo = new JButton("No");
         btnNo.setFocusable(false);
-        btnNo.setMaximumSize(new Dimension(100, 30));
+        btnNo.setMaximumSize(new Dimension(400, 100));
         bs.gameWindow.setBGBlackFGWhite(btnNo);
         btnNo.addActionListener(new ActionListener() {
             @Override
@@ -503,12 +503,11 @@ public class Shop extends State{
         bs.panelRevalRepaint(bp);
     }
     private void examineEquippable(Equippable equippable, int price){
-        JLabel lblStats = new JLabel(equippable.toStringHTML());
-        lblStats.setMaximumSize(new Dimension(400, 90));
-        lblStats.setFont(new Font("Arial", Font.PLAIN, 15));
+        JLabel lblStats = new JLabel(equippable.toStringHTML(), SwingConstants.CENTER);
+        lblStats.setMaximumSize(new Dimension(800, 60));
 
-        JLabel lblConfirm = new JLabel("Do you want to buy " + equippable.getName() + "?");
-        lblStats.setMaximumSize(new Dimension(200, 60));
+        JLabel lblConfirm = new JLabel("Do you want to buy " + equippable.getName() + "?", SwingConstants.CENTER);
+        lblConfirm.setMaximumSize(new Dimension(400, 30));
 
         JPanel btnPanel = new JPanel();
         btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));

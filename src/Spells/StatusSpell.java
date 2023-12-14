@@ -37,9 +37,18 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
 
         return string.toString();
     }
-
     public boolean isBuff(){
         return this.status instanceof Buff;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "[Status: " + status;
+    }
+
+    @Override
+    public String toStringHTML() {
+        return "<html>" + super.toString() + "<br/>(Status: " + status + ")</html>";
     }
 
     public static class LoyaltyHymn extends StatusSpell{

@@ -38,6 +38,9 @@ public abstract class State {
      protected void newChoiceTurn(){
           bs.setState(new ChoiceTurn(bs));
      }
+     protected void sameChoiceTurn(){
+          bs.setState(new ChoiceTurn(bs, true));
+     }
 
 
      public void initializeAllies(){

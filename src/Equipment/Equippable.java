@@ -22,19 +22,19 @@ public abstract class Equippable {
     }
     public String toString(){
         return getName() + " (HP: " + getMaxHealth() +
-                "; POW: " + getPower() +
-                "; SPD: " + getSpeed() +
-                "; DEF: " + getDefense() +
-                "; MP: " + getMagicPower() +
-                "; EVA: " + getEvasion() + ")";
+                ";; POW: " + getPower() +
+                ";; SPD: " + getSpeed() +
+                ";; DEF: " + getDefense() +
+                ";; MP: " + getMagicPower() +
+                ";; EVA: " + getEvasion() + ")";
     }
     public String toStringHTML(){
-        return "<html>" + getName() + " (Max Health: " + getMaxHealth() +
-                "; Power: " + getPower() +
-                "; </br>Speed: " + getSpeed() +
-                "; Defense: " + getDefense() +
-                "; </br>Magic Power: " + getMagicPower() +
-                "; Evasion: " + getEvasion() + ")</html>";
+        return "<html>" + getName() + "<br/>(Max Health: " + getMaxHealth() +
+                ";; Power: " + getPower() +
+                ";; Speed: " + getSpeed() +
+                ";; <br/>Defense: " + getDefense() +
+                ";; Magic Power: " + getMagicPower() +
+                ";; Evasion: " + getEvasion() + ")</html>";
     }
 
     public String getName() {

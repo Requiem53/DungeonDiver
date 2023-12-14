@@ -23,7 +23,12 @@ public abstract class HealingSpell extends Spell implements Healing {
 
     @Override
     public String toString() {
-        return super.toString() + "[baseAmount" + baseAmount + "]";
+        return super.toString() + "[baseAmount: " + baseAmount + "]";
+    }
+
+    @Override
+    public String toStringHTML() {
+        return "<html>" + super.toString() + "<br/>(baseAmount: " + baseAmount + ")</html>";
     }
 
     public static class Healing_Pulse extends HealingSpell{

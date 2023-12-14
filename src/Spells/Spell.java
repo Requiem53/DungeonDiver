@@ -15,6 +15,6 @@ public abstract class Spell extends Actionable{
 
     @Override
     public String toString() {
-        return name + "[MC: " + manaCost + "]";
+        return name + " (Mana Cost: " + manaCost + ")";
     }
 }

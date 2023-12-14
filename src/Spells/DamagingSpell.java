@@ -28,7 +28,11 @@ public abstract class DamagingSpell extends Spell implements Damaging {
 
     @Override
     public String toString() {
-        return super.toString() + "[basePower: " + basePower + "]";
+        return super.toString() + "(basePower: " + basePower + ")";
+    }
+    @Override
+    public String toStringHTML(){
+        return "<html>" + super.toString() + "<br/>(basePower: " + basePower + ")</html>";
     }
 
     public static class Meteors extends DamagingSpell{

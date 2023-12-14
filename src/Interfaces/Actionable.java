@@ -1,15 +1,9 @@
 package Interfaces;
 
-import Attacks.Attack;
 import Characters.Character;
-import GUI.BottomPanel;
 import GameSystems.BattleSystem;
 import States.State;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,6 +45,9 @@ public abstract class Actionable {
     public String toString(){
         return name;
     }
+    public String toStringHTML(){
+        return toString();
+    };
     public String getName(){
         return name;
     }

@@ -33,9 +33,9 @@ public class PlayerChoiceTurn extends State {
         JLabel lblActionMaker = new JLabel("What will " + getCurrChar() + " do?", SwingConstants.CENTER);
         lblActionMaker.setMaximumSize(new Dimension(400, 30));
 
-        JPanel firstTwoBtnPanel = new JPanel();
-        firstTwoBtnPanel.setLayout(new BoxLayout(firstTwoBtnPanel, BoxLayout.LINE_AXIS));
-        firstTwoBtnPanel.setMaximumSize(new Dimension(230, 30));
+        JPanel firstBtnPanel = new JPanel();
+        firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
+        firstBtnPanel.setMaximumSize(new Dimension(230, 30));
 
         JButton btnAttack = new JButton("Attack");
         btnAttack.setFocusable(false);
@@ -46,8 +46,8 @@ public class PlayerChoiceTurn extends State {
                 attackSequence();
             }
         });
-        firstTwoBtnPanel.add(btnAttack);
-        firstTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        firstBtnPanel.add(btnAttack);
+        firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 
         JButton btnSpell = new JButton("Spell");
         btnSpell.setFocusable(false);
@@ -58,7 +58,7 @@ public class PlayerChoiceTurn extends State {
                 spellSequence();
             }
         });
-        firstTwoBtnPanel.add(btnSpell);
+        firstBtnPanel.add(btnSpell);
 
         JPanel secondTwoBtnPanel = new JPanel();
         secondTwoBtnPanel.setLayout(new BoxLayout(secondTwoBtnPanel, BoxLayout.LINE_AXIS));
@@ -88,7 +88,7 @@ public class PlayerChoiceTurn extends State {
         secondTwoBtnPanel.add(btnEquip);
 
         bs.gameWindow.setBackgroundBlack(new Component[]{lblActionMaker, btnAttack, btnSpell, btnItem, btnEquip,
-            firstTwoBtnPanel, secondTwoBtnPanel});
+            firstBtnPanel, secondTwoBtnPanel});
         bs.gameWindow.setForegroundWhite(new Component[]{lblActionMaker, btnAttack, btnSpell, btnItem, btnEquip});
         bs.gameWindow.setBiggerFonts(new Component[]{lblActionMaker, btnAttack, btnSpell, btnItem, btnEquip});
 
@@ -97,14 +97,12 @@ public class PlayerChoiceTurn extends State {
         lblActionMaker.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(lblActionMaker);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        firstTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(firstTwoBtnPanel);
+        firstBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(firstBtnPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
         secondTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(secondTwoBtnPanel);
         bs.panelRevalRepaint(bp);
-
-//        newChoiceTurn();
     }
 
 
@@ -112,16 +110,18 @@ public class PlayerChoiceTurn extends State {
         JLabel lblWhatAttack = new JLabel("What attack does " + getCurrChar() + " want to use?", SwingConstants.CENTER);
         lblWhatAttack.setMaximumSize(new Dimension(400, 30));
 
-        JPanel firstTwoBtnPanel = new JPanel();
-        firstTwoBtnPanel.setLayout(new BoxLayout(firstTwoBtnPanel, BoxLayout.LINE_AXIS));
-        firstTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel firstBtnPanel = new JPanel();
+        firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
+        firstBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        JPanel secondTwoBtnPanel = new JPanel();
-        secondTwoBtnPanel.setLayout(new BoxLayout(secondTwoBtnPanel, BoxLayout.LINE_AXIS));
-        secondTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel secondBtnPanel = new JPanel();
+        secondBtnPanel.setLayout(new BoxLayout(secondBtnPanel, BoxLayout.LINE_AXIS));
+        secondBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        for(int i=0; i<getCurrChar().getAttacks().size(); i++){
-            Attack attack = getCurrChar().getAttacks().get(i);
+        List<Attack> attacks = getCurrChar().getAttacks();
+
+        for(int i=0; i<attacks.size(); i++){
+            Attack attack = attacks.get(i);
             JButton button = new JButton(attack.getName());
             button.setFocusable(false);
             button.setMaximumSize(new Dimension(135, 30));
@@ -143,16 +143,33 @@ public class PlayerChoiceTurn extends State {
             });
             bs.gameWindow.setBGBlackFGWhite(button);
             if(i < 2) {
-                firstTwoBtnPanel.add(button);
-                if(i == 0) firstTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                firstBtnPanel.add(button);
+                if(i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
             else {
-                secondTwoBtnPanel.add(button);
-                if(i == 2) secondTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                secondBtnPanel.add(button);
+                if(i == 2) secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
         }
+        if(attacks.size() > 3){
+            secondBtnPanel.setMaximumSize(new Dimension(300 + 135 + 30, 30));
+            secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        }
 
-        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatAttack, firstTwoBtnPanel, secondTwoBtnPanel});
+        JButton btnExit = new JButton("Exit");
+        btnExit.setFocusable(false);
+        btnExit.setMaximumSize(new Dimension(135, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnExit);
+        bs.gameWindow.setBiggerFont(btnExit);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sameChoiceTurn();
+            }
+        });
+        secondBtnPanel.add(btnExit);
+
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatAttack, firstBtnPanel, secondBtnPanel});
         lblWhatAttack.setForeground(Color.WHITE);
         bs.gameWindow.setBiggerFont(lblWhatAttack);
 
@@ -162,11 +179,11 @@ public class PlayerChoiceTurn extends State {
         lblWhatAttack.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(lblWhatAttack);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        firstTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(firstTwoBtnPanel);
+        firstBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(firstBtnPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        secondTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(secondTwoBtnPanel);
+        secondBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
     }
 
@@ -174,16 +191,18 @@ public class PlayerChoiceTurn extends State {
         JLabel lblWhatSpell = new JLabel("What spell does " + getCurrChar() + " want to use?", SwingConstants.CENTER);
         lblWhatSpell.setMaximumSize(new Dimension(400, 30));
 
-        JPanel firstTwoBtnPanel = new JPanel();
-        firstTwoBtnPanel.setLayout(new BoxLayout(firstTwoBtnPanel, BoxLayout.LINE_AXIS));
-        firstTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel firstBtnPanel = new JPanel();
+        firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
+        firstBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        JPanel secondTwoBtnPanel = new JPanel();
-        secondTwoBtnPanel.setLayout(new BoxLayout(secondTwoBtnPanel, BoxLayout.LINE_AXIS));
-        secondTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel secondBtnPanel = new JPanel();
+        secondBtnPanel.setLayout(new BoxLayout(secondBtnPanel, BoxLayout.LINE_AXIS));
+        secondBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        for(int i=0; i<getCurrChar().getSpells().size(); i++) {
-            Spell spell = getCurrChar().getSpells().get(i);
+        List<Spell> spells = getCurrChar().getSpells();
+
+        for(int i=0; i<spells.size(); i++) {
+            Spell spell = spells.get(i);
             JButton button = new JButton(spell.getName());
             button.setFocusable(false);
             button.setMaximumSize(new Dimension(135, 30));
@@ -203,17 +222,36 @@ public class PlayerChoiceTurn extends State {
                     chooseCharacter(spell);
                 }
             });
+
+
             bs.gameWindow.setBGBlackFGWhite(button);
             bs.gameWindow.setBiggerFont(button);
             if (i < 2) {
-                firstTwoBtnPanel.add(button);
-                if (i == 0) firstTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                firstBtnPanel.add(button);
+                if (i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             } else {
-                secondTwoBtnPanel.add(button);
-                if (i == 2) secondTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                secondBtnPanel.add(button);
+                if (i == 2) secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
         }
-        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatSpell, firstTwoBtnPanel, secondTwoBtnPanel});
+        if(spells.size() > 3){
+            secondBtnPanel.setMaximumSize(new Dimension(300 + 135 + 30, 30));
+            secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        }
+
+        JButton btnExit = new JButton("Exit");
+        btnExit.setFocusable(false);
+        btnExit.setMaximumSize(new Dimension(135, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnExit);
+        bs.gameWindow.setBiggerFont(btnExit);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sameChoiceTurn();
+            }
+        });
+        secondBtnPanel.add(btnExit);
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatSpell, firstBtnPanel, secondBtnPanel});
         lblWhatSpell.setForeground(Color.WHITE);
         bs.gameWindow.setBiggerFont(lblWhatSpell);
 
@@ -223,11 +261,11 @@ public class PlayerChoiceTurn extends State {
         lblWhatSpell.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(lblWhatSpell);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        firstTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(firstTwoBtnPanel);
+        firstBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(firstBtnPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        secondTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(secondTwoBtnPanel);
+        secondBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
     }
 
@@ -235,16 +273,18 @@ public class PlayerChoiceTurn extends State {
         JLabel lblWhatItem = new JLabel("What item does " + getCurrChar() + " want to use?", SwingConstants.CENTER);
         lblWhatItem.setMaximumSize(new Dimension(400, 30));
 
-        JPanel firstTwoBtnPanel = new JPanel();
-        firstTwoBtnPanel.setLayout(new BoxLayout(firstTwoBtnPanel, BoxLayout.LINE_AXIS));
-        firstTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel firstBtnPanel = new JPanel();
+        firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
+        firstBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        JPanel secondTwoBtnPanel = new JPanel();
-        secondTwoBtnPanel.setLayout(new BoxLayout(secondTwoBtnPanel, BoxLayout.LINE_AXIS));
-        secondTwoBtnPanel.setMaximumSize(new Dimension(300, 30));
+        JPanel secondBtnPanel = new JPanel();
+        secondBtnPanel.setLayout(new BoxLayout(secondBtnPanel, BoxLayout.LINE_AXIS));
+        secondBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        for(int i=0; i<getCurrChar().getItems().size(); i++) {
-            Item item = getCurrChar().getItems().get(i);
+        List<Item> items = getCurrChar().getItems();
+
+        for(int i=0; i<items.size(); i++) {
+            Item item = items.get(i);
             JButton button = new JButton(item.getName());
             button.setFocusable(false);
             button.setMaximumSize(new Dimension(135, 30));
@@ -267,14 +307,31 @@ public class PlayerChoiceTurn extends State {
             bs.gameWindow.setBGBlackFGWhite(button);
             bs.gameWindow.setBiggerFont(button);
             if (i < 2) {
-                firstTwoBtnPanel.add(button);
-                if (i == 0) firstTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                firstBtnPanel.add(button);
+                if (i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             } else {
-                secondTwoBtnPanel.add(button);
-                if (i == 2) secondTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                secondBtnPanel.add(button);
+                if (i == 2) secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
         }
-        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatItem, firstTwoBtnPanel, secondTwoBtnPanel});
+        if(items.size() > 3){
+            secondBtnPanel.setMaximumSize(new Dimension(300 + 135 + 30, 30));
+            secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        }
+
+        JButton btnExit = new JButton("Exit");
+        btnExit.setFocusable(false);
+        btnExit.setMaximumSize(new Dimension(135, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnExit);
+        bs.gameWindow.setBiggerFont(btnExit);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sameChoiceTurn();
+            }
+        });
+        secondBtnPanel.add(btnExit);
+        bs.gameWindow.setBackgroundBlack(new Component[]{lblWhatItem, firstBtnPanel, secondBtnPanel});
         lblWhatItem.setForeground(Color.WHITE);
         bs.gameWindow.setBiggerFont(lblWhatItem);
 
@@ -284,11 +341,11 @@ public class PlayerChoiceTurn extends State {
         lblWhatItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(lblWhatItem);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        firstTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(firstTwoBtnPanel);
+        firstBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(firstBtnPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        secondTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(secondTwoBtnPanel);
+        secondBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
     }
 
@@ -302,19 +359,19 @@ public class PlayerChoiceTurn extends State {
     private void chooseCharacter(Actionable actionable){
         List<Character> characters = actionable.chooseTargets();
 
-        JPanel firstTwoBtnPanel = new JPanel();
-        firstTwoBtnPanel.setLayout(new BoxLayout(firstTwoBtnPanel, BoxLayout.LINE_AXIS));
-        firstTwoBtnPanel.setMaximumSize(new Dimension(280, 30));
+        JPanel firstBtnPanel = new JPanel();
+        firstBtnPanel.setLayout(new BoxLayout(firstBtnPanel, BoxLayout.LINE_AXIS));
+        firstBtnPanel.setMaximumSize(new Dimension(300, 30));
 
-        JPanel secondTwoBtnPanel = new JPanel();
-        secondTwoBtnPanel.setLayout(new BoxLayout(secondTwoBtnPanel, BoxLayout.LINE_AXIS));
-        secondTwoBtnPanel.setMaximumSize(new Dimension(280, 30));
+        JPanel secondBtnPanel = new JPanel();
+        secondBtnPanel.setLayout(new BoxLayout(secondBtnPanel, BoxLayout.LINE_AXIS));
+        secondBtnPanel.setMaximumSize(new Dimension(300, 30));
 
         for(int i=0; i<characters.size(); i++){
             Character chara = characters.get(i);
             JButton button = new JButton(chara.getName());
             button.setFocusable(false);
-            button.setMaximumSize(new Dimension(125, 30));
+            button.setMaximumSize(new Dimension(135, 30));
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -325,25 +382,40 @@ public class PlayerChoiceTurn extends State {
             bs.gameWindow.setBGBlackFGWhite(button);
             bs.gameWindow.setBiggerFont(button);
             if(i < 2) {
-                firstTwoBtnPanel.add(button);
-                if(i == 0) firstTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                firstBtnPanel.add(button);
+                if(i == 0) firstBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
             else {
-                secondTwoBtnPanel.add(button);
-                if(i == 2) secondTwoBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+                secondBtnPanel.add(button);
+                if(i == 2) secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
             }
         }
+        if(characters.size() > 3){
+            secondBtnPanel.setMaximumSize(new Dimension(300 + 135 + 30, 30));
+            secondBtnPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        }
 
-        bs.gameWindow.setBackgroundBlack(new Component[]{firstTwoBtnPanel, secondTwoBtnPanel});
+        JButton btnExit = new JButton("Exit");
+        btnExit.setFocusable(false);
+        btnExit.setMaximumSize(new Dimension(135, 30));
+        bs.gameWindow.setBGBlackFGWhite(btnExit);
+        bs.gameWindow.setBiggerFont(btnExit);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sameChoiceTurn();
+            }
+        });
+        secondBtnPanel.add(btnExit);
+        bs.gameWindow.setBackgroundBlack(new Component[]{firstBtnPanel, secondBtnPanel});
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
-        bs.removeAllNotBPSP();
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        firstTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(firstTwoBtnPanel);
+        firstBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(firstBtnPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
-        secondTwoBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(secondTwoBtnPanel);
+        secondBtnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(secondBtnPanel);
         bs.panelRevalRepaint(bp);
     }
 
