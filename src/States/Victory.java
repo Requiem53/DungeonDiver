@@ -15,17 +15,22 @@ public class Victory extends State {
     @Override
     public void Start(){
         System.out.println("You win boy");
+
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("../HallOfLegends.txt", true));
+            FileWriter fw = new FileWriter("C:\\Users\\User\\IdeaProjects\\DungeonDiver\\src\\HallOfLegends.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
             StringBuilder string = new StringBuilder();
             int index = 0;
-            string.append("\n\n").append(bs.getUser()).append("'s party: ");
+            string.append("\n\n").append(bs.getUser().getName()).append("'s party: ");
             for(Character chara : bs.getPartyMembers()){
                 index++;
                 string.append(index).append(". ").append(chara).append("\n");
             }
             bw.write(string.toString());
-        }catch(Exception e){
+            bw.newLine();
+            bw.close();
+            fw.close();
+        }catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
