@@ -54,6 +54,8 @@ public abstract class State {
      }
      public void initializeBoss(){
           State.randomEnemies.add(new Character.Enemy("Yuujin of Sico", new EnemyClass.FinalBoss()));
+          displayEnemyStats();
+          displayEnemySprites();
      }
 
      protected Character getCurrChar(){
