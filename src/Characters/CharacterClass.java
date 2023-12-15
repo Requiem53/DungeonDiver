@@ -74,7 +74,7 @@ public abstract class CharacterClass {
     }
 
     public void heal(int amount){
-        currHealth = Math.max(maxHealth, currHealth+amount);
+        currHealth = Math.min(maxHealth, currHealth+amount);
     }
 
     public void addSpell(Spell spell) {
