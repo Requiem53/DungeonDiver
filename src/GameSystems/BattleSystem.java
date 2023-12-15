@@ -21,12 +21,15 @@ public class BattleSystem extends StateMachine{
 
     public GameWindow gameWindow;
     public JPanel bottomPanel_topPart;
+    public JPanel scorePanel;
     public JPanel dungeonLevelPanel;
 
     public BattleSystem(){
         user = new User();
         party = new Party();
-        bottomPanel_topPart = null;
+        scorePanel = new JPanel();
+        dungeonLevelPanel = new JPanel();
+        bottomPanel_topPart = new JPanel();
         gameWindow = new GameWindow();
         setState(new EnterName(this));
     }
@@ -96,9 +99,10 @@ public class BattleSystem extends StateMachine{
         if(bottomPanel_topPart == null) return;
         bp.add(bottomPanel_topPart);
     }
-    public void panelRevalRepaint(JPanel panel){
+    public boolean panelRevalRepaint(JPanel panel){
         panel.revalidate();
         panel.repaint();
+        return true;
     }
 
     //Getters

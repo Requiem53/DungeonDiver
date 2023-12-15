@@ -503,8 +503,22 @@ public class Shop extends State{
         bs.panelRevalRepaint(bp);
     }
     private void examineEquippable(Equippable equippable, int price){
-        JLabel lblStats = new JLabel(equippable.toStringHTML(), SwingConstants.CENTER);
-        lblStats.setMaximumSize(new Dimension(800, 60));
+        String equipmentString = equippable.toString();
+        String[] lines = equipmentString.split("\n");
+
+        JPanel statsPanel = new JPanel();
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.PAGE_AXIS));
+        statsPanel.setMaximumSize(new Dimension(800, 60));
+
+        for(int i=0; i<lines.length; i++){
+            String line = lines[i];
+            JLabel lblLine = new JLabel(line, SwingConstants.CENTER);
+            lblLine.setMaximumSize(new Dimension(600, 30));
+            bs.gameWindow.setBiggerFont(lblLine);
+            bs.gameWindow.setBGBlackFGWhite(lblLine);
+            lblLine.setAlignmentX(Component.CENTER_ALIGNMENT);
+            statsPanel.add(lblLine);
+        }
 
         JLabel lblConfirm = new JLabel("Do you want to buy " + equippable.getName() + "?", SwingConstants.CENTER);
         lblConfirm.setMaximumSize(new Dimension(400, 30));
@@ -538,15 +552,15 @@ public class Shop extends State{
         });
         btnPanel.add(btnNo);
 
-        bs.gameWindow.setBackgroundBlack(new Component[]{lblStats, lblConfirm, btnPanel, btnYes, btnNo});
-        bs.gameWindow.setForegroundWhite(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
-        bs.gameWindow.setBiggerFonts(new Component[]{lblStats, lblConfirm, btnYes, btnNo});
+        bs.gameWindow.setBackgroundBlack(new Component[]{statsPanel, lblConfirm, btnPanel, btnYes, btnNo});
+        bs.gameWindow.setForegroundWhite(new Component[]{lblConfirm, btnYes, btnNo});
+        bs.gameWindow.setBiggerFonts(new Component[]{statsPanel, lblConfirm, btnYes, btnNo});
 
         BottomPanel bp = bs.gameWindow.bottomPanel;
         bs.removeAllNotBPSP();
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/36)));
-        lblStats.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bp.add(lblStats);
+        statsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(statsPanel);
         bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
         lblConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
         bp.add(lblConfirm);

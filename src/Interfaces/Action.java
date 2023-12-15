@@ -20,7 +20,7 @@ public class Action implements Comparable<Action>{
     public String execute(){
         if(actionable != null){
             if(!actor.isAlive())
-                return actor + " is already dead!";
+                return actor + " cannot make a move because they are already dead!";
             if(!target.isAlive())
                 return actor + " tried to do something, but " + target + " is already dead!";
             return actionable.doAction(actor, target);
@@ -44,5 +44,10 @@ public class Action implements Comparable<Action>{
     }
     public Character getTarget() {
         return target;
+    }
+
+    @Override
+    public String toString() {
+        return actionable.name + "; actor: " + actor + "; target: " + target;
     }
 }

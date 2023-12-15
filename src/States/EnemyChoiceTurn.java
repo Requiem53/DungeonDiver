@@ -20,6 +20,10 @@ public class EnemyChoiceTurn extends State{
 
         int randomIndex = random.nextInt(2);
 
+        if(currEnemy == null) {
+            return;
+        }
+
         switch (randomIndex){
             case 0:
                 assert currEnemy != null;

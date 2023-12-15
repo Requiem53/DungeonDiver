@@ -79,12 +79,6 @@ public class PlayerChoiceTurn extends State {
         JButton btnEquip = new JButton("Equip");
         btnEquip.setFocusable(false);
         btnEquip.setMaximumSize(new Dimension(100, 30));
-        btnEquip.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                equipmentSequence();
-            }
-        });
         secondTwoBtnPanel.add(btnEquip);
 
         bs.gameWindow.setBackgroundBlack(new Component[]{lblActionMaker, btnAttack, btnSpell, btnItem, btnEquip,
@@ -107,6 +101,7 @@ public class PlayerChoiceTurn extends State {
 
 
     private void attackSequence(){
+
         JLabel lblWhatAttack = new JLabel("What attack does " + getCurrChar() + " want to use?", SwingConstants.CENTER);
         lblWhatAttack.setMaximumSize(new Dimension(400, 30));
 

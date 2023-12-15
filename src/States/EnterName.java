@@ -32,26 +32,20 @@ public class EnterName extends State {
                 topPart.setMaximumSize(new Dimension(width, 30));
 
                 JPanel userPanel = new JPanel();
-                JPanel scorePanel = new JPanel();
 
                 JLabel lblUser = new JLabel("Logged in as: " + bs.getUser().getName());
                 lblUser.setHorizontalAlignment(SwingConstants.LEFT);
-                JLabel lblScore = new JLabel("Score: 0");
-                lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 
                 userPanel.add(lblUser);
-                scorePanel.add(lblScore);
 
                 topPart.add(userPanel);
-                topPart.add(scorePanel);
 
-                bs.gameWindow.setBackgroundBlack(new Component[]{topPart, userPanel, lblUser, scorePanel, lblScore});
-                bs.gameWindow.setForegroundWhite(new Component[]{lblUser, lblScore});
-                bs.gameWindow.setBiggerFonts(new Component[]{lblUser, lblScore});
+                bs.gameWindow.setBackgroundBlack(new Component[]{topPart, userPanel, lblUser});
+                lblUser.setForeground(Color.WHITE);
+                bs.gameWindow.setBiggerFont(lblUser);
 
                 bs.bottomPanel_topPart = topPart;
                 bs.gameWindow.bottomPanel.add(topPart);
-                bs.dungeonLevelPanel = new JPanel();
                 bs.removeAllNotBPSP();
                 bs.setState(new CreateParty(bs));
             }

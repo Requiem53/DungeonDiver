@@ -10,7 +10,13 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+    public void addScore(int add){
+        score += add;
+    }
     public String getName() {
         return name;
+    }
+    public int getScore(){
+        return score;
     }
 }

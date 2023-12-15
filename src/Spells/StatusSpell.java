@@ -58,7 +58,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
 
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " used " + name + " as the loyal protector of their party";
+            return actor.getName() + " used " + name + " as the loyal protector of their party";
         }
     }
 
@@ -69,7 +69,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
 
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " produced a " + name + " to lurk away from the enemies";
+            return actor.getName() + " produced a " + name + " to lurk away from the enemies";
         }
     }
 
@@ -79,7 +79,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " will now strengthen their teammate's power";
+            return actor.getName() + " will now strengthen their teammate's power";
         }
     }
     public static class Wisdom extends StatusSpell{
@@ -88,7 +88,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " will now share knowledge to their teammate";
+            return actor.getName() + " will now share knowledge to their teammate";
         }
     }
     public static class Momentum extends StatusSpell{
@@ -115,7 +115,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return "the lazy hehe";
+            return "The lazy hehe";
         }
     }
     public static class Truce extends StatusSpell{
@@ -124,7 +124,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return "enemy attack debuff";
+            return "Enemy attack debuff, \"It's a truce, don\'t fire!\"";
         }
     }
     public static class Anti_Magic extends StatusSpell{
@@ -133,7 +133,7 @@ public abstract class StatusSpell extends Spell implements StatusInflicting {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return "enemy magic power debuff";
+            return "Enemy magic power debuff, \"Unsay nindot MP debuff? Anti magic hehe\"";
         }
     }
 }

@@ -37,7 +37,7 @@ public abstract class HealingSpell extends Spell implements Healing {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " boosts their team's morale by using " + name;
+            return actor.getName() + " boosts their team's morale by using " + name;
         }
     }
 }

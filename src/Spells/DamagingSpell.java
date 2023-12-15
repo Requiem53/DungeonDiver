@@ -42,7 +42,7 @@ public abstract class DamagingSpell extends Spell implements Damaging {
 
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " invoked the power of the Gods to bring down meteors from the sky!";
+            return actor.getName() + " invoked the power of the Gods to bring down meteors from the sky!";
         }
     }
 
@@ -52,7 +52,7 @@ public abstract class DamagingSpell extends Spell implements Damaging {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return "From the cold in the north, " + actor + " casted Ice Beam!";
+            return "From the cold in the north, " + actor.getName() + " casted Ice Beam!";
         }
     }
 
@@ -62,7 +62,7 @@ public abstract class DamagingSpell extends Spell implements Damaging {
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " definitely not just used the pokemon move Hyper Beam";
+            return actor.getName() + " definitely not just used the pokemon move Hyper Beam";
         }
     }
 
@@ -73,17 +73,17 @@ public abstract class DamagingSpell extends Spell implements Damaging {
 
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " used the pinnacle of magic with 2.0 base Power, so powerful!";
+            return actor.getName() + " used the pinnacle of magic with 2.0 base Power, so powerful!";
         }
     }
 
     public static class EndOfTimes extends DamagingSpell{
         public EndOfTimes(){
-            super(new SpellBuilder().setName("Celestial Ray").setManaCost(20).setBasePower(5.0f));
+            super(new SpellBuilder().setName("End Of Times").setManaCost(20).setBasePower(5.0f));
         }
         @Override
         public String flavorText(Character actor, Character target) {
-            return actor + " called the power of the Lich to bring forth the end of times!";
+            return actor.getName() + " called the power of the Lich to bring forth the end of times!";
         }
     }
 }

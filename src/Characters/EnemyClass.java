@@ -42,7 +42,6 @@ public abstract class EnemyClass extends CharacterClass{
             equipWeapon(new Weapon.Staff());
             equipArmor(new Armor.Elven_Robe());
             addSpell(new DamagingSpell.Meteors());
-
             loadSprites();
         }
 

@@ -1,8 +1,14 @@
 package States;
 
 import Characters.Character;
+import GUI.BottomPanel;
 import GameSystems.BattleSystem;
 import Interfaces.Action;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ActionTurn extends State {
     public ActionTurn(BattleSystem bs) {
@@ -17,39 +23,66 @@ public class ActionTurn extends State {
             newTurn();
         }
 
+        if(currentAction == null){
+            return;     //unknown yet why this happen
+        }
+
         assert currentAction != null;
-        System.out.println(currentAction.execute());
 
-        updateEntitiesStats();
+        showActionGUI(currentAction.execute());
 
-        removeDeadCharacters(currentAction);
+        Timer mainTimer = new Timer();
+        mainTimer.schedule(new TimerTask() {
 
-        boolean victory = false;
-        boolean defeat = false;
+            @Override
+            public void run() {
 
-        if(State.randomEnemies.isEmpty()){
-            victory = true;
-        }
+                removeDeadCharacters(currentAction);
+                updateEntitiesStats();
+                updateEntitySprites();
 
-        if(State.livingAllies.isEmpty()){
-            defeat = true;
-        }
+                boolean victory = false;
+                boolean defeat = false;
 
-        if(victory){
-            System.out.println("You have won the battle!");
-            System.out.println("You received 1000 gold from the skirmish!");
-            bs.getParty().addGold(1000);
-            bs.setState(new DescendLevel(bs));
-            return;
-        }
+                if(State.randomEnemies.isEmpty()){
+                    victory = true;
+                }
 
-        if(defeat){
-            System.out.println("You have lost the battle!");
-            bs.setState(new Defeat(bs));
-            return;
-        }
-        System.out.println("-----------------------------");
-        bs.setState(new ActionTurn(bs));
+                if(State.livingAllies.isEmpty()){
+                    defeat = true;
+                }
+
+                if(victory){
+                    showVictoryGUI();
+
+                    Timer victoryTimer = new Timer();
+                    victoryTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            bs.getParty().addGold(1000);
+                            bs.user.addScore(100);
+                            bs.setState(new DescendLevel(bs));
+                        }
+                    }, 3000);
+                    return;
+                }
+
+                if(defeat){
+                    showDefeatGUI();
+
+                    Timer defeatTimer = new Timer();
+                    defeatTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            bs.setState(new Defeat(bs));
+                        }
+                    }, 3000);
+                    return;
+                }
+                System.out.println("-----------------------------");
+                bs.setState(new ActionTurn(bs));
+            }
+        }, 3000);
     }
 
     private void removeDeadCharacters(Action currAction){
@@ -97,5 +130,61 @@ public class ActionTurn extends State {
         State.queueChoice.addAll(State.livingAllies);
         State.queueChoice.addAll(State.randomEnemies);
         newChoiceTurn();
+    }
+
+    private void showActionGUI(String string){
+        String[] lines = string.split("\n");
+
+        BottomPanel bp = bs.gameWindow.bottomPanel;
+        bs.removeAllNotBPSP();
+
+        for(int i=0; i<lines.length; i++){
+            String line = lines[i];
+            JLabel lblLine = new JLabel(line, SwingConstants.CENTER);
+            lblLine.setMaximumSize(new Dimension(600, 30));
+            bs.gameWindow.setBiggerFont(lblLine);
+            bs.gameWindow.setBGBlackFGWhite(lblLine);
+            if(i == 0) bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+            else bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/36)));
+            lblLine.setAlignmentX(Component.CENTER_ALIGNMENT);
+            bp.add(lblLine);
+        }
+        bs.panelRevalRepaint(bp);
+    }
+
+    private void showVictoryGUI(){
+        JLabel lblVictory = new JLabel("You have won the battle!", SwingConstants.CENTER);
+        lblVictory.setMaximumSize(new Dimension(600, 30));
+        bs.gameWindow.setBiggerFont(lblVictory);
+        bs.gameWindow.setBGBlackFGWhite(lblVictory);
+
+        JLabel lblRewards = new JLabel("You received 1000 gold and 100 score points from the skirmish!", SwingConstants.CENTER);
+        lblRewards.setMaximumSize(new Dimension(800, 30));
+        bs.gameWindow.setBiggerFont(lblRewards);
+        bs.gameWindow.setBGBlackFGWhite(lblRewards);
+
+        BottomPanel bp = bs.gameWindow.bottomPanel;
+        bs.removeAllNotBPSP();
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        lblVictory.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblVictory);
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        lblRewards.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblRewards);
+        bs.panelRevalRepaint(bp);
+    }
+
+    private void showDefeatGUI(){
+        JLabel lblVictory = new JLabel("You have lost the battle!", SwingConstants.CENTER);
+        lblVictory.setMaximumSize(new Dimension(600, 30));
+        bs.gameWindow.setBiggerFont(lblVictory);
+        bs.gameWindow.setBGBlackFGWhite(lblVictory);
+
+        BottomPanel bp = bs.gameWindow.bottomPanel;
+        bs.removeAllNotBPSP();
+        bp.add(Box.createRigidArea(new Dimension(5, bs.gameWindow.WINDOW_H/18)));
+        lblVictory.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bp.add(lblVictory);
+        bs.panelRevalRepaint(bp);
     }
 }

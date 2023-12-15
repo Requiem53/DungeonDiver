@@ -49,8 +49,8 @@ public abstract class State {
      public void initializeEnemies(){
           //temporary
           //Add random enemy generator soon depending on dungeon level
-          State.randomEnemies.add(new Character.Enemy("Roden", new EnemyClass.Goblin()));
-          State.randomEnemies.add(new Character.Enemy("Bernus", new EnemyClass.EvilMage()));
+          State.randomEnemies.add(new Character.Enemy("Rude Den", new EnemyClass.Goblin()));
+          State.randomEnemies.add(new Character.Enemy("Bear nose", new EnemyClass.EvilMage()));
      }
      public void initializeBoss(){
           State.randomEnemies.add(new Character.Enemy("Yuujin of Sico", new EnemyClass.FinalBoss()));
@@ -180,6 +180,13 @@ public abstract class State {
 
           displayAllyStats();
           displayEnemyStats();
+     }
+     public void updateEntitySprites() {
+          JPanel display = bs.gameWindow.display;
+
+          display.removeAll();
+
+          displayEnemySprites();
      }
 
      public void displayEnemySprites() {
